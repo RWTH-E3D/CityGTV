@@ -1,4 +1,4 @@
-![E3D - Institute of Energy Efficiency and Sustainable Building, RWTH Aachen University](./pictures/e3dHeader_1.png)
+![E3D - Institute of Energy Efficiency and Sustainable Building, RWTH Aachen University](./pictures/e3dHeader__1_.png)
 
 # CityGTV - CityGML Geometrical Transformation and Validation Tool 
 
