@@ -454,7 +454,7 @@ def areInnerRingsOutside(polygon):
             ray_casting(pt,exteriorRing,"y") and\
             ray_casting(pt,exteriorRing,"z"):
             # only when all projections return INSIDE, then pt is inside of polygon
-            continu
+            continue
         else:
             return True
     return False
@@ -526,10 +526,8 @@ def isPolyValid(polygon):
     # But still possible to have one external and multiple inner rings
     for i in range(len(polygon.ring)):
         polypoints = ringConverter(polygon.ring[i].posList)
-
         #-- Number of points of the polygon (including the doubled first/last point)
-        npolypoints = len(polypoints)
-        
+        npolypoints = len(polypoints)      
         # 101 - TOO_FEW_POINTS
         # Four because the first point is doubled as the last one in the ring
         if npolypoints < 4:

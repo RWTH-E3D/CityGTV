@@ -5,1108 +5,12 @@
       <gml:upperCorner srsDimension="3">339000.0 5678000.0 56.391</gml:upperCorner>
     </gml:Envelope>
   </gml:boundedBy><core:cityObjectMember>
-    <bldg:Building gml:id="DENW32AL00001Kun">
+    <bldg:Building gml:id="DENW32AL00001NDa">
       <core:creationDate>2018-12-30</core:creationDate>
       <core:externalReference>
         <core:informationSystem>http://repository.gdi-de.org/schemas/adv/citygml/fdv/art.htm#_9100</core:informationSystem>
         <core:externalObject>
-          <core:name>DENW32AL00001Kun</core:name>
-        </core:externalObject>
-      </core:externalReference>
-      <gen:stringAttribute name="Gemeindeschluessel">
-        <gen:value>05162024</gen:value>
-      </gen:stringAttribute>
-      <bldg:function>31001_2100</bldg:function>
-      <bldg:consistsOfBuildingPart>
-        <bldg:BuildingPart gml:id="UUID_5fb9ad52-66df-4bcc-9503-5b42d7c307af">
-          <core:creationDate>2018-12-30</core:creationDate>
-          <gen:stringAttribute name="DatenquelleDachhoehe">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleBodenhoehe">
-            <gen:value>1100</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleLage">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <bldg:roofType>5000</bldg:roofType>
-          <bldg:measuredHeight uom="urn:adv:uom:m">7.884</bldg:measuredHeight>
-          <bldg:lod2Solid>
-            <gml:Solid>
-              <gml:exterior>
-                <gml:CompositeSurface>
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_11" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_6" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_7" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_3" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_13" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_15" />
-                  <gml:surfaceMember xlink:href="#UUID_52869724-b880-4f88-ae3e-96d0eb8789d6" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_9" />
-                  <gml:surfaceMember xlink:href="#UUID_6107d9d8-0035-4157-b564-d925dc03ef2a" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_5" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_8" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_2" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_10" />
-                  <gml:surfaceMember xlink:href="#UUID_44ec70fe-f8af-4fc5-97ff-6e75c8892031" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_0" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_1" />
-                  <gml:surfaceMember xlink:href="#UUID_33cc0884-794c-4f6c-aaf3-d324ef05536e" />
-                  <gml:surfaceMember xlink:href="#UUID_3f7bf1d6-696c-4ca6-98b4-251d1c30930f" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_16" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_17" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037333_2_12" />
-                </gml:CompositeSurface>
-              </gml:exterior>
-            </gml:Solid>
-          </bldg:lod2Solid>
-          <bldg:lod2TerrainIntersection>
-            <gml:MultiCurve>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338480.064 5677228.387 34.136 338480.077 5677228.077 34.124 338480.08 5677228.0 34.12 338480.117 5677227.117 34.102 338480.121 5677227.0 34.101 338480.156 5677226.156 34.102 338480.163 5677226.0 34.098 338480.196 5677225.196 34.098 338480.204 5677225.0 34.1 338480.236 5677224.236 34.1 338480.245 5677224.0 34.1 338480.275 5677223.275 34.1 338480.287 5677223.0 34.1 338480.315 5677222.315 34.107 338480.328 5677222.0 34.11 338480.355 5677221.355 34.11 338480.37 5677221.0 34.11 338480.395 5677220.395 34.122 338480.411 5677220.0 34.126 338480.434 5677219.434 34.131 338480.452 5677219.0 34.135 338480.474 5677218.474 34.13 338480.494 5677218.0 34.13 338480.514 5677217.514 34.135 338480.535 5677217.0 34.135 338480.553 5677216.553 34.134 338480.576 5677216.0 34.134 338480.585 5677215.782 34.13</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.836 5677228.375 34.132 338480.0 5677228.384 34.135 338480.064 5677228.387 34.136</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.594 5677231.46 34.201 338479.63 5677231.0 34.196 338479.657 5677230.657 34.193 338479.709 5677230.0 34.194 338479.73 5677229.73 34.184 338479.787 5677229.0 34.156 338479.802 5677228.802 34.148 338479.836 5677228.375 34.132</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.085 5677237.954 34.258 338479.148 5677237.148 34.241 338479.159 5677237.0 34.242 338479.221 5677236.221 34.227 338479.238 5677236.0 34.225 338479.293 5677235.293 34.219 338479.316 5677235.0 34.216 338479.366 5677234.366 34.211 338479.395 5677234.0 34.212 338479.439 5677233.439 34.213 338479.473 5677233.0 34.205 338479.512 5677232.512 34.2 338479.552 5677232.0 34.201 338479.584 5677231.584 34.202 338479.594 5677231.46 34.201</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.085 5677237.954 34.258 338479.59 5677238.0 34.254 338480.0 5677238.037 34.251 338480.041 5677238.041 34.252 338481.0 5677238.127 34.255 338481.14 5677238.14 34.26 338482.0 5677238.218 34.304 338482.239 5677238.239 34.307 338483.0 5677238.308 34.309 338483.339 5677238.339 34.317 338484.0 5677238.399 34.338 338484.163 5677238.413 34.343</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338484.163 5677238.413 34.343 338484.438 5677238.438 34.352 338485.0 5677238.489 34.36 338485.538 5677238.538 34.383 338486.0 5677238.579 34.395 338486.261 5677238.603 34.399</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338486.261 5677238.603 34.399 338486.637 5677238.637 34.405 338487.0 5677238.67 34.417 338487.737 5677238.737 34.449 338488.0 5677238.761 34.448 338488.66 5677238.821 34.48</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338488.66 5677238.821 34.48 338488.667 5677238.667 34.467 338488.695 5677238.0 34.352 338488.707 5677237.707 34.319 338488.737 5677237.0 34.226 338488.748 5677236.748 34.213 338488.779 5677236.0 34.204 338488.788 5677235.788 34.198 338488.821 5677235.0 34.174 338488.829 5677234.829 34.168 338488.864 5677234.0 34.143 338488.869 5677233.869 34.14 338488.906 5677233.0 34.122 338488.91 5677232.91 34.122 338488.948 5677232.0 34.131 338488.95 5677231.95 34.131 338488.99 5677231.0 34.17 338488.991 5677230.991 34.17 338489.0 5677230.769 34.172 338489.031 5677230.031 34.18 338489.032 5677230.0 34.18 338489.072 5677229.072 34.134 338489.075 5677229.0 34.131 338489.09 5677228.638 34.11</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338488.94 5677228.631 34.109 338489.0 5677228.634 34.108 338489.09 5677228.638 34.11</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338488.94 5677228.631 34.109 338488.966 5677228.0 34.071 338488.968 5677227.968 34.07 338489.0 5677227.187 34.046 338489.007 5677227.007 34.041 338489.008 5677227.0 34.04 338489.047 5677226.047 34.032 338489.049 5677226.0 34.032 338489.087 5677225.087 34.043 338489.091 5677225.0 34.043 338489.127 5677224.127 34.044 338489.132 5677224.0 34.044 338489.167 5677223.167 34.028 338489.174 5677223.0 34.029 338489.207 5677222.207 34.03 338489.216 5677222.0 34.029 338489.247 5677221.247 34.06 338489.257 5677221.0 34.06 338489.287 5677220.287 34.074 338489.299 5677220.0 34.083 338489.327 5677219.327 34.097 338489.34 5677219.0 34.097 338489.366 5677218.366 34.103 338489.375 5677218.161 34.103</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338489.235 5677218.154 34.105 338489.375 5677218.161 34.103</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338489.235 5677218.154 34.105 338489.241 5677218.0 34.105 338489.271 5677217.271 34.112 338489.283 5677217.0 34.117 338489.311 5677216.311 34.151 338489.318 5677216.145 34.149</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338487.443 5677216.067 34.155 338488.0 5677216.09 34.176 338488.094 5677216.094 34.174 338489.0 5677216.132 34.163 338489.137 5677216.137 34.162 338489.318 5677216.145 34.149</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338480.585 5677215.782 34.13 338480.79 5677215.79 34.128 338481.0 5677215.799 34.128 338481.834 5677215.834 34.128 338482.0 5677215.841 34.13 338482.877 5677215.877 34.13 338483.0 5677215.882 34.13 338483.92 5677215.92 34.13 338484.0 5677215.924 34.131 338484.964 5677215.964 34.13 338485.0 5677215.965 34.13 338485.832 5677216.0 34.13 338486.0 5677216.007 34.13 338486.007 5677216.007 34.13 338487.0 5677216.049 34.14 338487.051 5677216.051 34.14 338487.443 5677216.067 34.155</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-            </gml:MultiCurve>
-          </bldg:lod2TerrainIntersection>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_f6d5dbf0-ee03-42ed-ae75-a3f46b16dc69">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_96b30f40-dac9-4da9-988a-44dee1436161">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_1">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_1_0_">
-                          <gml:posList srsDimension="3">338480.585 5677215.782 37.848 338480.064 5677228.387 37.848 338480.064 5677228.387 34.02 338480.585 5677215.782 34.02 338480.585 5677215.782 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_86daad37-72eb-4a8c-ae5f-22b6a2e6676d">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_c9b200dd-7551-401f-80fa-5f655ab9e8a4">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_2">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_2_0_">
-                          <gml:posList srsDimension="3">338480.064 5677228.387 37.848 338479.836 5677228.375 37.643 338479.836 5677228.375 34.02 338480.064 5677228.387 34.02 338480.064 5677228.387 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_040bb174-a170-4ea2-a9ed-50882e2661e9">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_e7cad307-2cec-4cc8-bded-4f8bfb134b52">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_3">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_3_0_">
-                          <gml:posList srsDimension="3">338479.836 5677228.375 37.643 338479.594 5677231.46 37.54 338479.594 5677231.46 34.02 338479.836 5677228.375 34.02 338479.836 5677228.375 37.643</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_604e6062-3104-4ab1-a60e-628ba6e8ee8a">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_a1364edf-3364-4182-af1f-7cc5766a92ec">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_5">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_5_0_">
-                          <gml:posList srsDimension="3">338479.085 5677237.954 37.324 338484.163 5677238.413 41.904 338484.163 5677238.413 34.02 338479.085 5677237.954 34.02 338479.085 5677237.954 37.324</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_9129e6fd-e627-49a2-a58a-02f3c51683eb">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_f6f71515-9dbf-4a0b-8328-776d2007bcca">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_6">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_6_0_">
-                          <gml:posList srsDimension="3">338484.163 5677238.413 41.904 338486.261 5677238.603 40.012 338486.261 5677238.603 34.02 338484.163 5677238.413 34.02 338484.163 5677238.413 41.904</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_b596ca91-79a1-411e-b9dc-dca47691e7f2">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_54a514d9-8e34-42e2-b50c-f77344855c66">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_7">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_7_0_">
-                          <gml:posList srsDimension="3">338486.261 5677238.603 40.012 338488.66 5677238.821 37.848 338488.66 5677238.821 34.02 338486.261 5677238.603 34.02 338486.261 5677238.603 40.012</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_1f7bb649-513f-441a-8b70-8bb5485ee5d6">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_e4df4f6b-3767-4e30-bc08-36374b015dce">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_8">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_8_0_">
-                          <gml:posList srsDimension="3">338488.66 5677238.821 37.848 338489.09 5677228.638 37.724 338489.09 5677228.638 34.02 338488.66 5677238.821 34.02 338488.66 5677238.821 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_b9295d26-e30b-4340-858b-4b9e6433a0c2">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_5648a3c4-ebee-469f-9764-e99c52d0444c">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_9">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_9_0_">
-                          <gml:posList srsDimension="3">338489.09 5677228.638 37.724 338488.94 5677228.631 37.863 338488.94 5677228.631 34.02 338489.09 5677228.638 34.02 338489.09 5677228.638 37.724</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_82ce7834-a479-4bf2-b859-c6f7e7ad36a5">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_fb3bb289-5759-45e8-b88b-7b36edd55aa4">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_10">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_10_0_">
-                          <gml:posList srsDimension="3">338488.94 5677228.631 37.863 338489.375 5677218.161 37.742 338489.375 5677218.161 34.02 338488.94 5677228.631 34.02 338488.94 5677228.631 37.863</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_b3b4974c-319e-4c5c-934b-42f0a6a681b4">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_789714e5-8006-4d52-92ae-f0e46709e46e">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_11">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_11_0_">
-                          <gml:posList srsDimension="3">338489.375 5677218.161 37.742 338489.235 5677218.154 37.871 338489.235 5677218.154 34.02 338489.375 5677218.161 34.02 338489.375 5677218.161 37.742</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_fd324f46-e79f-4ceb-917b-406cb6e3fd82">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_7ba5300d-ed5f-4236-b4bd-4fae12a6ebd5">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_12">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_12_0_">
-                          <gml:posList srsDimension="3">338489.235 5677218.154 37.871 338489.318 5677216.145 37.848 338489.318 5677216.145 34.02 338489.235 5677218.154 34.02 338489.235 5677218.154 37.871</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_7d3b7c67-d18d-487d-b787-015f5206cd4d">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_ff68cc79-b89a-4eae-94c8-f7a0456b94eb">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_13">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_13_0_">
-                          <gml:posList srsDimension="3">338489.318 5677216.145 37.848 338487.443 5677216.067 37.848 338487.443 5677216.067 34.02 338489.318 5677216.145 34.02 338489.318 5677216.145 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_baf3e019-301b-4766-b581-1206ad7f735c">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_9869cb23-9a14-43a2-bbd3-570b0d74fec0">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_15">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_15_0_">
-                          <gml:posList srsDimension="3">338484.786 5677220.685 41.904 338484.163 5677238.413 41.904 338479.085 5677237.954 37.324 338479.594 5677231.46 37.54 338479.836 5677228.375 37.643 338480.064 5677228.387 37.848 338480.585 5677215.782 37.848 338484.786 5677220.685 41.904</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_23b9784c-8ec8-43aa-be74-2f66e894674d">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_5b68a998-6542-4970-82e6-ee2769f31051">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_16">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_16_0_">
-                          <gml:posList srsDimension="3">338484.786 5677220.685 41.904 338480.585 5677215.782 37.848 338487.443 5677216.067 37.848 338489.318 5677216.145 37.848 338484.786 5677220.685 41.904</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_aeed18ee-defd-4809-87a5-51262ff9c7f6">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_ca5b6bc3-c63c-4449-89fd-c86519b13163">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_17">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_17_0_">
-                          <gml:posList srsDimension="3">338484.786 5677220.685 41.904 338489.318 5677216.145 37.848 338489.235 5677218.154 37.871 338489.375 5677218.161 37.742 338488.94 5677228.631 37.863 338489.09 5677228.638 37.724 338488.66 5677238.821 37.848 338486.261 5677238.603 40.012 338484.163 5677238.413 41.904 338484.786 5677220.685 41.904</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:GroundSurface gml:id="UUID_c48cac6d-24cb-4af9-9f7a-40d4139af6b7">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_d6278c06-32b9-4993-8a2b-7bb4bfee8fef">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037333_2_0">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037333_2_0_0_">
-                          <gml:posList srsDimension="3">338480.585 5677215.782 34.02 338480.064 5677228.387 34.02 338479.836 5677228.375 34.02 338479.594 5677231.46 34.02 338479.085 5677237.954 34.02 338484.163 5677238.413 34.02 338486.261 5677238.603 34.02 338488.66 5677238.821 34.02 338489.09 5677228.638 34.02 338488.94 5677228.631 34.02 338489.375 5677218.161 34.02 338489.235 5677218.154 34.02 338489.318 5677216.145 34.02 338487.443 5677216.067 34.02 338480.585 5677215.782 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:GroundSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_3f7bf1d6-696c-4ca6-98b4-251d1c30930f">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.339 5677234.708 37.432 338479.085 5677237.954 37.324 338479.085 5677237.954 34.02 338479.339 5677234.708 34.02 338479.339 5677234.708 37.432</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_52869724-b880-4f88-ae3e-96d0eb8789d6">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.594 5677231.46 37.54 338479.339 5677234.708 37.432 338479.339 5677234.708 34.02 338479.594 5677231.46 34.02 338479.594 5677231.46 37.54</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_aafadcfa-b10f-4919-a2fa-45f4637c3059">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_44ec70fe-f8af-4fc5-97ff-6e75c8892031">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338484.014 5677215.924 34.02 338480.585 5677215.782 34.02 338487.443 5677216.067 34.02 338484.014 5677215.924 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_6107d9d8-0035-4157-b564-d925dc03ef2a">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338484.014 5677215.924 37.848 338480.585 5677215.782 37.848 338480.585 5677215.782 34.02 338484.014 5677215.924 34.02 338484.014 5677215.924 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_33cc0884-794c-4f6c-aaf3-d324ef05536e">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338487.443 5677216.067 37.848 338484.014 5677215.924 37.848 338484.014 5677215.924 34.02 338487.443 5677216.067 34.02 338487.443 5677216.067 35.936 338487.443 5677216.067 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-        </bldg:BuildingPart>
-      </bldg:consistsOfBuildingPart>
-      <bldg:consistsOfBuildingPart>
-        <bldg:BuildingPart gml:id="GUID_1543405942858_18037334">
-          <core:creationDate>2018-12-30</core:creationDate>
-          <gen:stringAttribute name="DatenquelleDachhoehe">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleBodenhoehe">
-            <gen:value>1100</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleLage">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <bldg:roofType>3100</bldg:roofType>
-          <bldg:measuredHeight uom="urn:adv:uom:m">8.902</bldg:measuredHeight>
-          <bldg:lod2Solid>
-            <gml:Solid>
-              <gml:exterior>
-                <gml:CompositeSurface>
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_2" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_7" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_10" />
-                  <gml:surfaceMember xlink:href="#UUID_729c9501-0bcc-4684-8175-c867b0bede4e" />
-                  <gml:surfaceMember xlink:href="#UUID_1093319a-b7c1-4080-9623-cb7cb4710665" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_3" />
-                  <gml:surfaceMember xlink:href="#UUID_358d35e3-1eae-45ad-91d8-d138e7d69194" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_8" />
-                  <gml:surfaceMember xlink:href="#UUID_485a1b5f-41ca-416c-8bd9-bb7dde477fe3" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_1" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_4" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_0" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037334_2_9" />
-                </gml:CompositeSurface>
-              </gml:exterior>
-            </gml:Solid>
-          </bldg:lod2Solid>
-          <bldg:lod2TerrainIntersection>
-            <gml:MultiCurve>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338462.07 5677233.158 34.031 338462.077 5677233.077 34.031 338462.084 5677233.0 34.03 338462.159 5677232.159 34.022 338462.174 5677232.0 34.02 338462.242 5677231.242 34.02 338462.264 5677231.0 34.023 338462.325 5677230.325 34.023 338462.354 5677230.0 34.024 338462.361 5677229.924 34.023</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338461.778 5677236.391 34.113 338461.813 5677236.0 34.098 338461.829 5677235.829 34.093 338461.903 5677235.0 34.069 338461.911 5677234.911 34.066 338461.994 5677234.0 34.03 338461.994 5677233.994 34.03 338462.0 5677233.928 34.03 338462.07 5677233.158 34.031</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338461.778 5677236.391 34.113 338462.0 5677236.41 34.116 338462.088 5677236.418 34.117</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338462.088 5677236.418 34.117 338462.451 5677236.451 34.118 338463.0 5677236.5 34.12 338463.55 5677236.55 34.128 338464.0 5677236.591 34.134 338464.65 5677236.65 34.136 338465.0 5677236.681 34.137 338465.749 5677236.749 34.147 338466.0 5677236.772 34.151 338466.848 5677236.848 34.154 338467.0 5677236.862 34.154 338467.948 5677236.948 34.158 338468.0 5677236.952 34.159 338468.527 5677237.0 34.16 338469.0 5677237.043 34.161 338469.047 5677237.047 34.161 338470.0 5677237.133 34.173 338470.146 5677237.146 34.173 338471.0 5677237.224 34.174 338471.246 5677237.246 34.177 338472.0 5677237.314 34.186 338472.345 5677237.345 34.187 338473.0 5677237.404 34.188 338473.445 5677237.445 34.193 338474.0 5677237.495 34.2 338474.544 5677237.544 34.201 338475.0 5677237.585 34.206 338475.643 5677237.643 34.226 338476.0 5677237.676 34.234 338476.743 5677237.743 34.235 338477.0 5677237.766 34.238 338477.842 5677237.842 34.255 338478.0 5677237.856 34.257 338478.941 5677237.941 34.259 338479.0 5677237.947 34.259 338479.085 5677237.954 34.258</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.085 5677237.954 34.258 338479.148 5677237.148 34.241 338479.159 5677237.0 34.242 338479.221 5677236.221 34.227 338479.238 5677236.0 34.225 338479.293 5677235.293 34.219 338479.316 5677235.0 34.216 338479.339 5677234.708 34.214</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338479.339 5677234.708 34.214 338479.366 5677234.366 34.211 338479.395 5677234.0 34.212 338479.439 5677233.439 34.213 338479.473 5677233.0 34.205 338479.512 5677232.512 34.2 338479.552 5677232.0 34.201 338479.584 5677231.584 34.202 338479.594 5677231.46 34.201</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338462.618 5677229.949 34.026 338462.981 5677229.981 34.03 338463.0 5677229.983 34.03 338463.191 5677230.0 34.034 338464.0 5677230.072 34.049 338464.079 5677230.079 34.048 338465.0 5677230.161 34.022 338465.177 5677230.177 34.024 338466.0 5677230.25 34.032 338466.274 5677230.274 34.035 338467.0 5677230.339 34.05 338467.372 5677230.372 34.054 338468.0 5677230.428 34.06 338468.47 5677230.47 34.065 338469.0 5677230.517 34.065 338469.568 5677230.568 34.071 338470.0 5677230.606 34.08 338470.665 5677230.665 34.093 338471.0 5677230.695 34.1 338471.763 5677230.763 34.1 338472.0 5677230.784 34.104 338472.861 5677230.861 34.094 338473.0 5677230.873 34.09 338473.958 5677230.958 34.09 338474.0 5677230.962 34.09 338474.426 5677231.0 34.086 338475.0 5677231.051 34.081 338475.056 5677231.056 34.082 338476.0 5677231.14 34.103 338476.154 5677231.154 34.105 338477.0 5677231.229 34.115 338477.251 5677231.251 34.118 338478.0 5677231.318 34.12 338478.349 5677231.349 34.138 338479.0 5677231.407 34.19 338479.447 5677231.447 34.199 338479.594 5677231.46 34.201</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338462.361 5677229.924 34.023 338462.618 5677229.949 34.026</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-            </gml:MultiCurve>
-          </bldg:lod2TerrainIntersection>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_b87d51f9-5ac6-4b6f-a656-d92b154edb7c">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_20b32317-ff8c-4354-bacc-725743bb2ec3">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_1">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_1_0_">
-                          <gml:posList srsDimension="3">338462.361 5677229.924 40.609 338462.07 5677233.158 42.922 338462.07 5677233.158 34.02 338462.361 5677229.924 34.02 338462.361 5677229.924 40.609</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_d16f5d19-10a7-4e7d-a15a-839729a9038e">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_e300f140-39a5-4f0a-9335-f148e931f025">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_2">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_2_0_">
-                          <gml:posList srsDimension="3">338462.07 5677233.158 42.922 338461.778 5677236.391 40.609 338461.778 5677236.391 34.02 338462.07 5677233.158 34.02 338462.07 5677233.158 42.922</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_bcc59b74-27bc-4ce2-888b-0b3cd4c9f1bd">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_b6d9048e-7c64-46bc-8356-2afb6db43c65">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_3">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_3_0_">
-                          <gml:posList srsDimension="3">338461.778 5677236.391 40.609 338462.088 5677236.418 40.61 338462.088 5677236.418 34.02 338461.778 5677236.391 34.02 338461.778 5677236.391 40.609</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_3456c79a-519e-474c-a91a-ff5d1f83464c">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_cfd3cec4-6c9a-49e4-8a7f-671e6498c0dc">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_4">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_4_0_">
-                          <gml:posList srsDimension="3">338462.088 5677236.418 40.61 338479.085 5677237.954 40.61 338479.085 5677237.954 34.02 338462.088 5677236.418 34.02 338462.088 5677236.418 40.61</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_07831e4f-5ae2-4c0b-a8ea-a7aa81c27c74">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_1e6952c8-b118-4fb3-a1f0-1a592bd5779d">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_7">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_7_0_">
-                          <gml:posList srsDimension="3">338479.594 5677231.46 40.609 338462.618 5677229.949 40.611 338462.618 5677229.949 34.02 338479.594 5677231.46 34.02 338479.594 5677231.46 40.609</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_7da889ef-9b34-4da1-acc7-97b6411bb058">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_97035151-9c5b-4d3f-a812-2e9debe2602c">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_8">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_8_0_">
-                          <gml:posList srsDimension="3">338462.618 5677229.949 40.611 338462.361 5677229.924 40.609 338462.361 5677229.924 34.02 338462.618 5677229.949 34.02 338462.618 5677229.949 40.611</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_ef22330d-6b69-4e71-9711-e33f0dcd2228">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_0ddb9ecc-3403-46e8-937b-4b181a63ac58">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_9">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_9_0_">
-                          <gml:posList srsDimension="3">338479.339 5677234.708 42.922 338479.085 5677237.954 40.61 338462.088 5677236.418 40.61 338461.778 5677236.391 40.609 338462.07 5677233.158 42.922 338479.339 5677234.708 42.922</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_a3d92918-16c6-4d99-a8ac-27a4ab3c2624">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_d966e9b6-b2c0-461c-a6a8-3aac18f17993">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_10">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_10_0_">
-                          <gml:posList srsDimension="3">338462.07 5677233.158 42.922 338462.361 5677229.924 40.609 338462.618 5677229.949 40.611 338479.594 5677231.46 40.609 338479.339 5677234.708 42.922 338462.07 5677233.158 42.922</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:GroundSurface gml:id="UUID_6604517c-7822-406d-8989-d94883e68d5e">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_5b729312-d46f-4f9a-8dce-f4251e8cab58">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037334_2_0">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037334_2_0_0_">
-                          <gml:posList srsDimension="3">338462.361 5677229.924 34.02 338462.07 5677233.158 34.02 338461.778 5677236.391 34.02 338462.088 5677236.418 34.02 338479.085 5677237.954 34.02 338479.339 5677234.708 34.02 338479.594 5677231.46 34.02 338462.618 5677229.949 34.02 338462.361 5677229.924 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:GroundSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_ecd8a8ca-e759-4d84-b350-db18d8921122">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_485a1b5f-41ca-416c-8bd9-bb7dde477fe3">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.085 5677237.954 40.61 338479.339 5677234.708 42.922 338479.339 5677234.708 37.432 338479.085 5677237.954 37.324 338479.085 5677237.954 34.02 338479.085 5677237.954 40.61</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_358d35e3-1eae-45ad-91d8-d138e7d69194">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.339 5677234.708 37.432 338479.339 5677234.708 34.02 338479.085 5677237.954 34.02 338479.085 5677237.954 37.324 338479.339 5677234.708 37.432</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_477df137-6552-4524-8003-1354f3e61131">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_729c9501-0bcc-4684-8175-c867b0bede4e">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.339 5677234.708 42.922 338479.594 5677231.46 40.609 338479.594 5677231.46 34.02 338479.594 5677231.46 37.54 338479.339 5677234.708 37.432 338479.339 5677234.708 34.02 338479.339 5677234.708 42.922</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_1093319a-b7c1-4080-9623-cb7cb4710665">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338479.594 5677231.46 34.02 338479.339 5677234.708 34.02 338479.339 5677234.708 37.432 338479.594 5677231.46 37.54 338479.594 5677231.46 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-        </bldg:BuildingPart>
-      </bldg:consistsOfBuildingPart>
-      <bldg:consistsOfBuildingPart>
-        <bldg:BuildingPart gml:id="GUID_1543405942858_18037335">
-          <core:creationDate>2018-12-30</core:creationDate>
-          <gen:stringAttribute name="DatenquelleDachhoehe">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleBodenhoehe">
-            <gen:value>1100</gen:value>
-          </gen:stringAttribute>
-          <gen:stringAttribute name="DatenquelleLage">
-            <gen:value>1000</gen:value>
-          </gen:stringAttribute>
-          <bldg:roofType>3100</bldg:roofType>
-          <bldg:measuredHeight uom="urn:adv:uom:m">6.961</bldg:measuredHeight>
-          <bldg:lod2Solid>
-            <gml:Solid>
-              <gml:exterior>
-                <gml:CompositeSurface>
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_1" />
-                  <gml:surfaceMember xlink:href="#UUID_c86cd3e0-b66c-49ab-9ee6-384c3a5fe55a" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_6" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_5" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_8" />
-                  <gml:surfaceMember xlink:href="#UUID_ca82ad35-ddf2-4c85-b09d-5d2d1cce2ce5" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_2" />
-                  <gml:surfaceMember xlink:href="#UUID_f6114cb5-e0ea-4fb2-84b6-db77e8823f0e" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_0" />
-                  <gml:surfaceMember xlink:href="#GUID_1543405942858_18037335_2_7" />
-                  <gml:surfaceMember xlink:href="#UUID_fd41d8a1-4bff-4398-a43b-b52ee3b03617" />
-                </gml:CompositeSurface>
-              </gml:exterior>
-            </gml:Solid>
-          </bldg:lod2Solid>
-          <bldg:lod2TerrainIntersection>
-            <gml:MultiCurve>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338480.803 5677210.52 34.143 338481.0 5677210.528 34.145 338481.551 5677210.551 34.161 338482.0 5677210.57 34.17 338482.594 5677210.594 34.176 338483.0 5677210.611 34.184 338483.637 5677210.637 34.184 338484.0 5677210.652 34.183 338484.232 5677210.662 34.183</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338480.585 5677215.782 34.13 338480.593 5677215.593 34.126 338480.618 5677215.0 34.12 338480.633 5677214.633 34.12 338480.659 5677214.0 34.12 338480.673 5677213.673 34.117 338480.7 5677213.0 34.11 338480.712 5677212.712 34.11 338480.742 5677212.0 34.117 338480.752 5677211.752 34.118 338480.783 5677211.0 34.133 338480.792 5677210.792 34.14 338480.803 5677210.52 34.143</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338480.585 5677215.782 34.13 338480.79 5677215.79 34.128 338481.0 5677215.799 34.128 338481.834 5677215.834 34.128 338482.0 5677215.841 34.13 338482.877 5677215.877 34.13 338483.0 5677215.882 34.13 338483.92 5677215.92 34.13 338484.0 5677215.924 34.131 338484.014 5677215.924 34.131</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338484.014 5677215.924 34.131 338484.964 5677215.964 34.13 338485.0 5677215.965 34.13 338485.832 5677216.0 34.13 338486.0 5677216.007 34.13 338486.007 5677216.007 34.13 338487.0 5677216.049 34.14 338487.051 5677216.051 34.14 338487.443 5677216.067 34.155</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338487.443 5677216.067 34.155 338487.446 5677216.0 34.158 338487.468 5677215.468 34.164 338487.487 5677215.0 34.189 338487.507 5677214.507 34.191 338487.528 5677214.0 34.155 338487.547 5677213.547 34.16 338487.569 5677213.0 34.154 338487.587 5677212.587 34.162 338487.611 5677212.0 34.156 338487.626 5677211.626 34.155 338487.652 5677211.0 34.167 338487.66 5677210.804 34.167</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-              <gml:curveMember>
-                <gml:LineString>
-                  <gml:posList srsDimension="3">338484.232 5677210.662 34.183 338484.681 5677210.681 34.183 338485.0 5677210.694 34.18 338485.724 5677210.724 34.187 338486.0 5677210.735 34.19 338486.767 5677210.767 34.182 338487.0 5677210.777 34.18 338487.66 5677210.804 34.167</gml:posList>
-                </gml:LineString>
-              </gml:curveMember>
-            </gml:MultiCurve>
-          </bldg:lod2TerrainIntersection>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_a0a7d5ee-fd66-4acb-aeee-9a70a5c4140c">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_d14b2884-0233-4cc8-bc97-125dc22b00d7">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_1">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_1_0_">
-                          <gml:posList srsDimension="3">338484.232 5677210.662 40.981 338480.803 5677210.52 37.852 338480.803 5677210.52 34.02 338484.232 5677210.662 34.02 338484.232 5677210.662 40.981</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_77330fb8-3724-418d-ac31-a75702364a41">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_69e252d1-0014-4dd4-85eb-1b9a6b55a3ee">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_2">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_2_0_">
-                          <gml:posList srsDimension="3">338480.803 5677210.52 37.852 338480.585 5677215.782 37.852 338480.585 5677215.782 34.02 338480.803 5677210.52 34.02 338480.803 5677210.52 37.852</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_62ef3142-3e0e-45e1-a8d4-a6b3bb5ec92a">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_b62adfe5-d3c8-4f41-b6eb-ef297f24a146">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_5">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_5_0_">
-                          <gml:posList srsDimension="3">338487.443 5677216.067 37.852 338487.66 5677210.804 37.852 338487.66 5677210.804 34.02 338487.443 5677216.067 34.02 338487.443 5677216.067 37.852</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_a4f05af7-77aa-4017-b1f8-3dd4caf18bac">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_16c31a0a-cac8-4401-98bb-e819b06c6497">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_6">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_6_0_">
-                          <gml:posList srsDimension="3">338487.66 5677210.804 37.852 338484.232 5677210.662 40.981 338484.232 5677210.662 34.02 338487.66 5677210.804 34.02 338487.66 5677210.804 37.852</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_fd73ebd5-fe33-472b-9428-abfccce87e06">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_8bb7b4cc-1ffa-4d9b-b2fc-84dcd3a7373d">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_7">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_7_0_">
-                          <gml:posList srsDimension="3">338484.014 5677215.924 40.981 338480.585 5677215.782 37.852 338480.803 5677210.52 37.852 338484.232 5677210.662 40.981 338484.014 5677215.924 40.981</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:RoofSurface gml:id="UUID_9f1656f7-23f6-4f35-b3c4-51ba48f23068">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_c2340182-4b63-469c-9129-fa24991cba4d">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_8">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_8_0_">
-                          <gml:posList srsDimension="3">338484.232 5677210.662 40.981 338487.66 5677210.804 37.852 338487.443 5677216.067 37.852 338484.014 5677215.924 40.981 338484.232 5677210.662 40.981</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:RoofSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:GroundSurface gml:id="UUID_df3d214c-7a8a-45d5-9f7a-218e52fa6ff7">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface gml:id="UUID_54749754-65a4-4d72-97a5-12ec73ea0b52">
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="GUID_1543405942858_18037335_2_0">
-                      <gml:exterior>
-                        <gml:LinearRing gml:id="GUID_1543405942858_18037335_2_0_0_">
-                          <gml:posList srsDimension="3">338484.232 5677210.662 34.02 338480.803 5677210.52 34.02 338480.585 5677215.782 34.02 338484.014 5677215.924 34.02 338487.443 5677216.067 34.02 338487.66 5677210.804 34.02 338484.232 5677210.662 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:GroundSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_5f59bc7c-4c0f-4e09-99be-e0b6a541af9c">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_ca82ad35-ddf2-4c85-b09d-5d2d1cce2ce5">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338480.585 5677215.782 37.852 338484.014 5677215.924 40.981 338484.014 5677215.924 37.848 338480.585 5677215.782 37.848 338480.585 5677215.782 37.852</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_fd41d8a1-4bff-4398-a43b-b52ee3b03617">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338484.014 5677215.924 37.848 338484.014 5677215.924 34.02 338480.585 5677215.782 34.02 338480.585 5677215.782 37.848 338484.014 5677215.924 37.848</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:WallSurface gml:id="UUID_ecbb07d9-10a2-4f78-9189-76f44e6cf71d">
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_c86cd3e0-b66c-49ab-9ee6-384c3a5fe55a">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338484.014 5677215.924 40.981 338487.443 5677216.067 37.852 338487.443 5677216.067 34.02 338487.443 5677216.067 37.848 338484.014 5677215.924 37.848 338484.014 5677215.924 34.02 338484.014 5677215.924 40.981</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:WallSurface>
-          </bldg:boundedBy>
-          <bldg:boundedBy>
-            <bldg:ClosureSurface>
-              <core:creationDate>2018-12-30</core:creationDate>
-              <bldg:lod2MultiSurface>
-                <gml:MultiSurface>
-                  <gml:surfaceMember>
-                    <gml:Polygon gml:id="UUID_f6114cb5-e0ea-4fb2-84b6-db77e8823f0e">
-                      <gml:exterior>
-                        <gml:LinearRing>
-                          <gml:posList srsDimension="3">338487.443 5677216.067 34.02 338484.014 5677215.924 34.02 338484.014 5677215.924 37.848 338487.443 5677216.067 37.848 338487.443 5677216.067 34.02</gml:posList>
-                        </gml:LinearRing>
-                      </gml:exterior>
-                    </gml:Polygon>
-                  </gml:surfaceMember>
-                </gml:MultiSurface>
-              </bldg:lod2MultiSurface>
-            </bldg:ClosureSurface>
-          </bldg:boundedBy>
-        </bldg:BuildingPart>
-      </bldg:consistsOfBuildingPart>
-      <bldg:address>
-        <core:Address gml:id="UUID_7acbe253-c45b-4c99-b5ed-855450d73ea8">
-          <core:xalAddress>
-            <xal:AddressDetails>
-              <xal:Country>
-                <xal:CountryName>Germany</xal:CountryName>
-                <xal:Locality Type="Town">
-                  <xal:LocalityName>Neuss</xal:LocalityName>
-                  <xal:Thoroughfare Type="Street">
-                    <xal:ThoroughfareNumber>129</xal:ThoroughfareNumber>
-                    <xal:ThoroughfareName>Bockholtstraße</xal:ThoroughfareName>
-                  </xal:Thoroughfare>
-                  <xal:PostalCode>
-                    <xal:PostalCodeNumber>41460</xal:PostalCodeNumber>
-                  </xal:PostalCode>
-                </xal:Locality>
-              </xal:Country>
-            </xal:AddressDetails>
-          </core:xalAddress>
-        </core:Address>
-      </bldg:address>
-    </bldg:Building>
-  </core:cityObjectMember><core:cityObjectMember>
-    <bldg:Building gml:id="DENW32AL00001Kuk">
-      <core:creationDate>2018-12-30</core:creationDate>
-      <core:externalReference>
-        <core:informationSystem>http://repository.gdi-de.org/schemas/adv/citygml/fdv/art.htm#_9100</core:informationSystem>
-        <core:externalObject>
-          <core:name>DENW32AL00001Kuk</core:name>
+          <core:name>DENW32AL00001NDa</core:name>
         </core:externalObject>
       </core:externalReference>
       <gen:stringAttribute name="DatenquelleDachhoehe">
@@ -1121,19 +25,19 @@
       <gen:stringAttribute name="DatenquelleLage">
         <gen:value>1000</gen:value>
       </gen:stringAttribute>
-      <bldg:function>31001_2100</bldg:function>
+      <bldg:function>31001_2120</bldg:function>
       <bldg:roofType>1000</bldg:roofType>
-      <bldg:measuredHeight uom="urn:adv:uom:m">6.096</bldg:measuredHeight>
+      <bldg:measuredHeight uom="urn:adv:uom:m">6.271</bldg:measuredHeight>
       <bldg:lod2Solid>
         <gml:Solid>
           <gml:exterior>
             <gml:CompositeSurface>
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_2" />
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_3" />
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_5" />
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_0" />
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_4" />
-              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037337_2_1" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_4" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_3" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_5" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_2" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_1" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037406_2_0" />
             </gml:CompositeSurface>
           </gml:exterior>
         </gml:Solid>
@@ -1142,36 +46,36 @@
         <gml:MultiCurve>
           <gml:curveMember>
             <gml:LineString>
-              <gml:posList srsDimension="3">338511.874 5677130.296 34.531 338511.903 5677130.0 34.522 338511.912 5677129.912 34.519 338512.0 5677129.008 34.5 338512.001 5677129.001 34.5 338512.001 5677129.0 34.5 338512.09 5677128.09 34.474 338512.099 5677128.0 34.469 338512.179 5677127.179 34.468 338512.196 5677127.0 34.474 338512.268 5677126.268 34.468 338512.294 5677126.0 34.466 338512.357 5677125.357 34.474 338512.392 5677125.0 34.474 338512.446 5677124.446 34.469 338512.49 5677124.0 34.47 338512.535 5677123.535 34.471 338512.587 5677123.0 34.472 338512.624 5677122.624 34.484 338512.685 5677122.0 34.504 338512.713 5677121.713 34.507 338512.783 5677121.0 34.492 338512.802 5677120.802 34.492 338512.803 5677120.796 34.492</gml:posList>
+              <gml:posList srsDimension="3">338496.877 5677916.757 34.55 338497.0 5677916.671 34.55 338497.395 5677916.395 34.55 338497.958 5677916.0 34.55 338497.983 5677915.983 34.55 338498.0 5677915.97 34.55 338498.571 5677915.571 34.544 338499.0 5677915.27 34.54 338499.159 5677915.159 34.54 338499.385 5677915.0 34.54 338499.747 5677914.747 34.54 338500.0 5677914.57 34.536 338500.335 5677914.335 34.533 338500.813 5677914.0 34.53 338500.923 5677913.923 34.53 338501.0 5677913.869 34.529 338501.511 5677913.511 34.525 338502.0 5677913.169 34.522 338502.099 5677913.099 34.52 338502.241 5677913.0 34.518 338502.687 5677912.687 34.513 338503.0 5677912.468 34.521 338503.275 5677912.275 34.527 338503.668 5677912.0 34.523 338503.863 5677911.863 34.521 338504.0 5677911.768 34.522 338504.452 5677911.452 34.525 338505.0 5677911.067 34.501 338505.04 5677911.04 34.501 338505.096 5677911.0 34.5 338505.628 5677910.628 34.493 338506.0 5677910.367 34.487 338506.216 5677910.216 34.486 338506.524 5677910.0 34.48 338506.804 5677909.804 34.478 338507.0 5677909.666 34.477 338507.392 5677909.392 34.474 338507.951 5677909.0 34.47 338507.98 5677908.98 34.47 338508.0 5677908.966 34.469 338508.568 5677908.568 34.451 338509.0 5677908.266 34.431 338509.156 5677908.156 34.426 338509.379 5677908.0 34.412 338509.744 5677907.744 34.397 338510.0 5677907.565 34.387 338510.332 5677907.332 34.37 338510.807 5677907.0 34.338 338510.92 5677906.92 34.33 338511.0 5677906.865 34.326 338511.509 5677906.509 34.31 338512.0 5677906.164 34.287 338512.097 5677906.097 34.279 338512.235 5677906.0 34.268 338512.685 5677905.685 34.239 338513.0 5677905.464 34.219 338513.273 5677905.273 34.207 338513.662 5677905.0 34.19 338513.861 5677904.861 34.179 338514.0 5677904.763 34.173 338514.449 5677904.449 34.132 338515.0 5677904.063 34.091 338515.037 5677904.037 34.09 338515.09 5677904.0 34.087 338515.625 5677903.625 34.067 338516.0 5677903.363 34.054 338516.213 5677903.213 34.033 338516.518 5677903.0 34.003 338516.801 5677902.801 33.972 338517.0 5677902.662 33.953 338517.389 5677902.389 33.932 338517.945 5677902.0 33.902 338517.977 5677901.977 33.901 338518.0 5677901.962 33.9 338518.566 5677901.566 33.87 338519.0 5677901.261 33.833 338519.154 5677901.154 33.825 338519.203 5677901.119 33.825</gml:posList>
             </gml:LineString>
           </gml:curveMember>
           <gml:curveMember>
             <gml:LineString>
-              <gml:posList srsDimension="3">338467.545 5677116.354 34.489 338468.0 5677116.399 34.502 338468.442 5677116.442 34.501 338469.0 5677116.497 34.49 338469.551 5677116.551 34.507 338470.0 5677116.595 34.516 338470.66 5677116.66 34.51 338471.0 5677116.693 34.504 338471.769 5677116.769 34.521 338472.0 5677116.791 34.522 338472.877 5677116.877 34.534 338473.0 5677116.889 34.536 338473.986 5677116.986 34.51 338474.0 5677116.988 34.51 338474.127 5677117.0 34.51 338475.0 5677117.086 34.508 338475.095 5677117.095 34.509 338476.0 5677117.184 34.508 338476.204 5677117.204 34.51 338477.0 5677117.282 34.503 338477.313 5677117.313 34.509 338478.0 5677117.38 34.505 338478.422 5677117.422 34.494 338479.0 5677117.478 34.5 338479.53 5677117.53 34.489 338480.0 5677117.576 34.476 338480.639 5677117.639 34.483 338481.0 5677117.675 34.487 338481.748 5677117.748 34.495 338482.0 5677117.773 34.5 338482.857 5677117.857 34.483 338483.0 5677117.871 34.479 338483.966 5677117.966 34.451 338484.0 5677117.969 34.451 338484.316 5677118.0 34.456 338485.0 5677118.067 34.471 338485.074 5677118.074 34.471 338486.0 5677118.165 34.472 338486.183 5677118.183 34.476 338487.0 5677118.263 34.5 338487.292 5677118.292 34.503 338488.0 5677118.362 34.523 338488.401 5677118.401 34.514 338489.0 5677118.46 34.485 338489.51 5677118.51 34.475 338490.0 5677118.558 34.47 338490.619 5677118.619 34.482 338491.0 5677118.656 34.487 338491.727 5677118.727 34.48 338492.0 5677118.754 34.478 338492.836 5677118.836 34.52 338493.0 5677118.852 34.523 338493.945 5677118.945 34.556 338494.0 5677118.951 34.556 338494.504 5677119.0 34.545 338495.0 5677119.049 34.53 338495.054 5677119.054 34.531 338496.0 5677119.147 34.541 338496.163 5677119.163 34.543 338497.0 5677119.245 34.59 338497.272 5677119.272 34.592 338498.0 5677119.343 34.557 338498.38 5677119.38 34.546 338499.0 5677119.441 34.529 338499.489 5677119.489 34.525 338500.0 5677119.539 34.539 338500.598 5677119.598 34.526 338501.0 5677119.638 34.499 338501.707 5677119.707 34.487 338502.0 5677119.736 34.485 338502.816 5677119.816 34.478 338503.0 5677119.834 34.48 338503.925 5677119.925 34.48 338504.0 5677119.932 34.481 338504.693 5677120.0 34.487 338505.0 5677120.03 34.49 338505.033 5677120.033 34.49 338506.0 5677120.128 34.481 338506.142 5677120.142 34.483 338507.0 5677120.226 34.5 338507.251 5677120.251 34.503 338508.0 5677120.325 34.51 338508.36 5677120.36 34.503 338509.0 5677120.423 34.49 338509.469 5677120.469 34.49 338510.0 5677120.521 34.49 338510.578 5677120.578 34.49 338511.0 5677120.619 34.49 338511.686 5677120.686 34.497 338512.0 5677120.717 34.5 338512.795 5677120.795 34.492 338512.803 5677120.796 34.492</gml:posList>
+              <gml:posList srsDimension="3">338513.455 5677892.914 33.769 338513.515 5677893.0 33.774 338514.0 5677893.692 33.83 338514.216 5677894.0 33.851 338514.721 5677894.721 33.848 338514.916 5677895.0 33.852 338515.0 5677895.119 33.846 338515.617 5677896.0 33.865 338516.0 5677896.547 33.872 338516.317 5677897.0 33.877 338517.0 5677897.974 33.869 338517.018 5677898.0 33.869 338517.06 5677898.06 33.871 338517.719 5677899.0 33.888 338518.0 5677899.402 33.88 338518.419 5677900.0 33.859 338519.0 5677900.829 33.83 338519.12 5677901.0 33.828 338519.203 5677901.119 33.825</gml:posList>
             </gml:LineString>
           </gml:curveMember>
           <gml:curveMember>
             <gml:LineString>
-              <gml:posList srsDimension="3">338466.614 5677125.857 34.466 338466.636 5677125.636 34.466 338466.698 5677125.0 34.467 338466.725 5677124.725 34.464 338466.796 5677124.0 34.49 338466.814 5677123.814 34.498 338466.894 5677123.0 34.517 338466.903 5677122.903 34.513 338466.992 5677122.0 34.5 338466.993 5677121.993 34.499 338467.0 5677121.917 34.499 338467.082 5677121.082 34.491 338467.09 5677121.0 34.49 338467.171 5677120.171 34.465 338467.188 5677120.0 34.466 338467.26 5677119.26 34.453 338467.286 5677119.0 34.449 338467.35 5677118.35 34.483 338467.384 5677118.0 34.502 338467.439 5677117.439 34.486 338467.482 5677117.0 34.474 338467.528 5677116.528 34.485 338467.545 5677116.354 34.489</gml:posList>
+              <gml:posList srsDimension="3">338491.13 5677908.551 34.53 338491.378 5677908.378 34.524 338491.917 5677908.0 34.529 338491.966 5677907.966 34.53 338492.0 5677907.942 34.53 338492.554 5677907.554 34.524 338493.0 5677907.241 34.512 338493.142 5677907.142 34.511 338493.344 5677907.0 34.51 338493.73 5677906.73 34.51 338494.0 5677906.541 34.501 338494.318 5677906.318 34.493 338494.772 5677906.0 34.498 338494.906 5677905.906 34.5 338495.0 5677905.84 34.5 338495.494 5677905.494 34.51 338496.0 5677905.14 34.52 338496.082 5677905.082 34.52 338496.2 5677905.0 34.528 338496.67 5677904.67 34.56 338497.0 5677904.44 34.566 338497.258 5677904.258 34.565 338497.627 5677904.0 34.57 338497.847 5677903.847 34.561 338498.0 5677903.739 34.562 338498.435 5677903.435 34.536 338499.0 5677903.039 34.511 338499.023 5677903.023 34.51 338499.055 5677903.0 34.51 338499.611 5677902.611 34.506 338500.0 5677902.338 34.503 338500.199 5677902.199 34.498 338500.483 5677902.0 34.495 338500.787 5677901.787 34.486 338501.0 5677901.638 34.479 338501.375 5677901.375 34.456 338501.911 5677901.0 34.451 338501.963 5677900.963 34.45 338502.0 5677900.937 34.449 338502.551 5677900.551 34.423 338503.0 5677900.237 34.395 338503.139 5677900.139 34.391 338503.338 5677900.0 34.38 338503.727 5677899.727 34.357 338504.0 5677899.537 34.341 338504.316 5677899.316 34.32 338504.766 5677899.0 34.312 338504.904 5677898.904 34.308 338505.0 5677898.836 34.302 338505.492 5677898.492 34.26 338506.0 5677898.136 34.243 338506.08 5677898.08 34.24 338506.194 5677898.0 34.236 338506.668 5677897.668 34.22 338507.0 5677897.435 34.209 338507.256 5677897.256 34.2 338507.621 5677897.0 34.194 338507.844 5677896.844 34.188 338508.0 5677896.735 34.19 338508.432 5677896.432 34.181 338509.0 5677896.034 34.189 338509.02 5677896.02 34.189 338509.049 5677896.0 34.189 338509.608 5677895.608 34.182 338510.0 5677895.334 34.19 338510.196 5677895.196 34.186 338510.477 5677895.0 34.181 338510.784 5677894.784 34.171 338511.0 5677894.634 34.186 338511.373 5677894.373 34.193 338511.905 5677894.0 34.158 338511.961 5677893.961 34.152 338512.0 5677893.933 34.141 338512.549 5677893.549 33.993 338513.0 5677893.233 33.847 338513.137 5677893.137 33.818 338513.332 5677893.0 33.787 338513.455 5677892.914 33.769</gml:posList>
             </gml:LineString>
           </gml:curveMember>
           <gml:curveMember>
             <gml:LineString>
-              <gml:posList srsDimension="3">338466.614 5677125.857 34.466 338466.883 5677125.883 34.469 338467.0 5677125.895 34.47 338467.992 5677125.992 34.48 338468.0 5677125.993 34.48 338468.072 5677126.0 34.481 338469.0 5677126.091 34.489 338469.101 5677126.101 34.49 338470.0 5677126.189 34.49 338470.21 5677126.21 34.492 338471.0 5677126.287 34.5 338471.318 5677126.318 34.5 338472.0 5677126.385 34.5 338472.427 5677126.427 34.5 338473.0 5677126.483 34.5 338473.536 5677126.536 34.5 338474.0 5677126.581 34.5 338474.645 5677126.645 34.5 338475.0 5677126.679 34.5 338475.753 5677126.753 34.5 338476.0 5677126.778 34.5 338476.862 5677126.862 34.5 338477.0 5677126.876 34.5 338477.971 5677126.971 34.5 338478.0 5677126.974 34.5 338478.268 5677127.0 34.5 338479.0 5677127.072 34.499 338479.08 5677127.08 34.499 338480.0 5677127.17 34.49 338480.188 5677127.188 34.49 338481.0 5677127.268 34.49 338481.297 5677127.297 34.49 338482.0 5677127.366 34.49 338482.406 5677127.406 34.49 338483.0 5677127.464 34.49 338483.515 5677127.515 34.49 338484.0 5677127.562 34.49 338484.623 5677127.623 34.49 338485.0 5677127.66 34.487 338485.732 5677127.732 34.487 338486.0 5677127.758 34.488 338486.841 5677127.841 34.488 338487.0 5677127.856 34.489 338487.95 5677127.95 34.489 338488.0 5677127.954 34.49 338488.464 5677128.0 34.49 338489.0 5677128.053 34.491 338489.058 5677128.058 34.491 338490.0 5677128.151 34.492 338490.167 5677128.167 34.492 338491.0 5677128.249 34.5 338491.276 5677128.276 34.503 338492.0 5677128.347 34.503 338492.385 5677128.385 34.504 338493.0 5677128.445 34.51 338493.493 5677128.493 34.515 338494.0 5677128.543 34.515 338494.602 5677128.602 34.516 338495.0 5677128.641 34.52 338495.711 5677128.711 34.527 338496.0 5677128.739 34.527 338496.819 5677128.819 34.528 338497.0 5677128.837 34.528 338497.928 5677128.928 34.529 338498.0 5677128.935 34.529 338498.66 5677129.0 34.53 338499.0 5677129.033 34.53 338499.037 5677129.037 34.53 338500.0 5677129.131 34.531 338500.146 5677129.146 34.531 338501.0 5677129.23 34.54 338501.254 5677129.254 34.54 338502.0 5677129.328 34.54 338502.363 5677129.363 34.544 338503.0 5677129.426 34.55 338503.472 5677129.472 34.55 338504.0 5677129.524 34.55 338504.581 5677129.581 34.556 338505.0 5677129.622 34.556 338505.689 5677129.689 34.557 338506.0 5677129.72 34.56 338506.798 5677129.798 34.56 338507.0 5677129.818 34.558 338507.907 5677129.907 34.559 338508.0 5677129.916 34.559 338508.856 5677130.0 34.551 338509.0 5677130.014 34.55 338509.016 5677130.016 34.55 338510.0 5677130.112 34.552 338510.124 5677130.124 34.555 338511.0 5677130.21 34.551 338511.233 5677130.233 34.542 338511.874 5677130.296 34.531</gml:posList>
+              <gml:posList srsDimension="3">338491.13 5677908.551 34.53 338491.444 5677909.0 34.536 338492.0 5677909.793 34.538 338492.145 5677910.0 34.539 338492.483 5677910.483 34.535 338492.845 5677911.0 34.532 338493.0 5677911.221 34.532 338493.545 5677912.0 34.54 338494.0 5677912.649 34.546 338494.246 5677913.0 34.545 338494.82 5677913.82 34.542 338494.946 5677914.0 34.541 338495.0 5677914.077 34.54 338495.647 5677915.0 34.54 338496.0 5677915.505 34.545 338496.347 5677916.0 34.55 338496.877 5677916.757 34.55</gml:posList>
             </gml:LineString>
           </gml:curveMember>
         </gml:MultiCurve>
       </bldg:lod2TerrainIntersection>
       <bldg:boundedBy>
-        <bldg:WallSurface gml:id="UUID_e31e0d48-632e-4d15-a789-29f8cc3cf644">
+        <bldg:WallSurface gml:id="UUID_1e6e4e21-7a2b-48f3-af59-d935842ca3ff">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_e75a6226-b25c-4665-bb6b-6f4b4ab8ed9c">
+            <gml:MultiSurface gml:id="UUID_7c538048-e84d-4d33-bece-be27af75c797">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_1">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_1">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_1_0_">
-                      <gml:posList srsDimension="3">338511.874 5677130.296 40.545 338512.803 5677120.796 40.545 338512.803 5677120.796 34.449 338511.874 5677130.296 34.449 338511.874 5677130.296 40.545</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_1_0_">
+                      <gml:posList srsDimension="3">338496.877 5677916.757 40.04 338519.203 5677901.119 40.04 338519.203 5677901.119 33.769 338496.877 5677916.757 33.769 338496.877 5677916.757 40.04</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1181,15 +85,15 @@
         </bldg:WallSurface>
       </bldg:boundedBy>
       <bldg:boundedBy>
-        <bldg:WallSurface gml:id="UUID_73549537-9c00-42da-9be2-49d4b5cc4094">
+        <bldg:WallSurface gml:id="UUID_043113ce-fb99-4f67-8fce-8865e53eca2b">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_afdf97d6-7613-428a-ae9a-6afc38c9ebf3">
+            <gml:MultiSurface gml:id="UUID_b4814dae-4d98-4f9f-bd49-b14e34a2cab9">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_2">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_2">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_2_0_">
-                      <gml:posList srsDimension="3">338512.803 5677120.796 40.545 338467.545 5677116.354 40.545 338467.545 5677116.354 34.449 338512.803 5677120.796 34.449 338512.803 5677120.796 40.545</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_2_0_">
+                      <gml:posList srsDimension="3">338519.203 5677901.119 40.04 338513.455 5677892.914 40.04 338513.455 5677892.914 33.769 338519.203 5677901.119 33.769 338519.203 5677901.119 40.04</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1199,15 +103,15 @@
         </bldg:WallSurface>
       </bldg:boundedBy>
       <bldg:boundedBy>
-        <bldg:WallSurface gml:id="UUID_3e25330a-fa90-438d-b3c3-45f1cb52e7c8">
+        <bldg:WallSurface gml:id="UUID_283404ff-87a0-401b-b828-f6986c0c627d">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_7999e45b-a3ed-4996-ab53-c85962b16367">
+            <gml:MultiSurface gml:id="UUID_22ab9722-7685-44dd-9ea5-789ad7eb76a9">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_3">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_3">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_3_0_">
-                      <gml:posList srsDimension="3">338467.545 5677116.354 40.545 338466.614 5677125.857 40.545 338466.614 5677125.857 34.449 338467.545 5677116.354 34.449 338467.545 5677116.354 40.545</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_3_0_">
+                      <gml:posList srsDimension="3">338513.455 5677892.914 40.04 338491.13 5677908.551 40.04 338491.13 5677908.551 33.769 338513.455 5677892.914 33.769 338513.455 5677892.914 40.04</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1217,15 +121,15 @@
         </bldg:WallSurface>
       </bldg:boundedBy>
       <bldg:boundedBy>
-        <bldg:WallSurface gml:id="UUID_d8e2fc9d-efd0-4e33-a027-6a0e42ae8ff4">
+        <bldg:WallSurface gml:id="UUID_ce2067ed-bb96-4093-a99d-2ef55fd62d84">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_f0c5760f-f5ac-455d-b14f-39dace67439e">
+            <gml:MultiSurface gml:id="UUID_abb6c045-8e25-468c-ae03-8c526d1ae3b9">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_4">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_4">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_4_0_">
-                      <gml:posList srsDimension="3">338466.614 5677125.857 40.545 338511.874 5677130.296 40.545 338511.874 5677130.296 34.449 338466.614 5677125.857 34.449 338466.614 5677125.857 40.545</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_4_0_">
+                      <gml:posList srsDimension="3">338491.13 5677908.551 40.04 338496.877 5677916.757 40.04 338496.877 5677916.757 33.769 338491.13 5677908.551 33.769 338491.13 5677908.551 40.04</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1235,15 +139,15 @@
         </bldg:WallSurface>
       </bldg:boundedBy>
       <bldg:boundedBy>
-        <bldg:RoofSurface gml:id="UUID_275d2b01-26ac-46f2-8026-36eb5a05c50e">
+        <bldg:RoofSurface gml:id="UUID_8797d36c-06a9-40ea-b2c5-22aaee7a6c3d">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_b3125b96-0eaf-4f47-84fd-3b7c1ff7fe8a">
+            <gml:MultiSurface gml:id="UUID_ebb7f4a6-8b55-49f0-9dd7-8d380cf8ad9f">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_5">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_5">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_5_0_">
-                      <gml:posList srsDimension="3">338466.614 5677125.857 40.545 338467.545 5677116.354 40.545 338512.803 5677120.796 40.545 338511.874 5677130.296 40.545 338466.614 5677125.857 40.545</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_5_0_">
+                      <gml:posList srsDimension="3">338491.13 5677908.551 40.04 338513.455 5677892.914 40.04 338519.203 5677901.119 40.04 338496.877 5677916.757 40.04 338491.13 5677908.551 40.04</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1253,15 +157,15 @@
         </bldg:RoofSurface>
       </bldg:boundedBy>
       <bldg:boundedBy>
-        <bldg:GroundSurface gml:id="UUID_dfb6e52e-01b3-4cfc-9c7f-9d1bdb136fdc">
+        <bldg:GroundSurface gml:id="UUID_1d9fb9ef-1845-4f4d-8d56-f38abb9958ab">
           <core:creationDate>2018-12-30</core:creationDate>
           <bldg:lod2MultiSurface>
-            <gml:MultiSurface gml:id="UUID_42906f18-6c9d-40f7-9dd2-5abebf17429e">
+            <gml:MultiSurface gml:id="UUID_3b3e3a38-017b-4cb3-9a42-6b98d6135a9d">
               <gml:surfaceMember>
-                <gml:Polygon gml:id="GUID_1543405942858_18037337_2_0">
+                <gml:Polygon gml:id="GUID_1543405942858_18037406_2_0">
                   <gml:exterior>
-                    <gml:LinearRing gml:id="GUID_1543405942858_18037337_2_0_0_">
-                      <gml:posList srsDimension="3">338511.874 5677130.296 34.449 338512.803 5677120.796 34.449 338467.545 5677116.354 34.449 338466.614 5677125.857 34.449 338511.874 5677130.296 34.449</gml:posList>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037406_2_0_0_">
+                      <gml:posList srsDimension="3">338496.877 5677916.757 33.769 338519.203 5677901.119 33.769 338513.455 5677892.914 33.769 338491.13 5677908.551 33.769 338496.877 5677916.757 33.769</gml:posList>
                     </gml:LinearRing>
                   </gml:exterior>
                 </gml:Polygon>
@@ -1271,7 +175,7 @@
         </bldg:GroundSurface>
       </bldg:boundedBy>
       <bldg:address>
-        <core:Address gml:id="UUID_b7329200-6773-46a2-a7b3-6855a41762e5">
+        <core:Address gml:id="UUID_a9409af8-80f1-4b0e-afd0-e46068263994">
           <core:xalAddress>
             <xal:AddressDetails>
               <xal:Country>
@@ -1279,11 +183,251 @@
                 <xal:Locality Type="Town">
                   <xal:LocalityName>Neuss</xal:LocalityName>
                   <xal:Thoroughfare Type="Street">
-                    <xal:ThoroughfareNumber>129</xal:ThoroughfareNumber>
-                    <xal:ThoroughfareName>Bockholtstraße</xal:ThoroughfareName>
+                    <xal:ThoroughfareNumber>86</xal:ThoroughfareNumber>
+                    <xal:ThoroughfareName>Bataverstraße</xal:ThoroughfareName>
                   </xal:Thoroughfare>
                   <xal:PostalCode>
-                    <xal:PostalCodeNumber>41460</xal:PostalCodeNumber>
+                    <xal:PostalCodeNumber>41462</xal:PostalCodeNumber>
+                  </xal:PostalCode>
+                </xal:Locality>
+              </xal:Country>
+            </xal:AddressDetails>
+          </core:xalAddress>
+        </core:Address>
+      </bldg:address>
+    </bldg:Building>
+  </core:cityObjectMember><core:cityObjectMember>
+    <bldg:Building gml:id="DENW32AL00001KVD">
+      <core:creationDate>2018-12-30</core:creationDate>
+      <core:externalReference>
+        <core:informationSystem>http://repository.gdi-de.org/schemas/adv/citygml/fdv/art.htm#_9100</core:informationSystem>
+        <core:externalObject>
+          <core:name>DENW32AL00001KVD</core:name>
+        </core:externalObject>
+      </core:externalReference>
+      <gen:stringAttribute name="DatenquelleDachhoehe">
+        <gen:value>1000</gen:value>
+      </gen:stringAttribute>
+      <gen:stringAttribute name="Gemeindeschluessel">
+        <gen:value>05162024</gen:value>
+      </gen:stringAttribute>
+      <gen:stringAttribute name="DatenquelleBodenhoehe">
+        <gen:value>1100</gen:value>
+      </gen:stringAttribute>
+      <gen:stringAttribute name="DatenquelleLage">
+        <gen:value>1000</gen:value>
+      </gen:stringAttribute>
+      <bldg:function>31001_1010</bldg:function>
+      <bldg:roofType>1000</bldg:roofType>
+      <bldg:measuredHeight uom="urn:adv:uom:m">3.559</bldg:measuredHeight>
+      <bldg:lod2Solid>
+        <gml:Solid>
+          <gml:exterior>
+            <gml:CompositeSurface>
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_3" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_4" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_7" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_2" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_6" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_1" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_0" />
+              <gml:surfaceMember xlink:href="#GUID_1543405942858_18037767_2_5" />
+            </gml:CompositeSurface>
+          </gml:exterior>
+        </gml:Solid>
+      </bldg:lod2Solid>
+      <bldg:lod2TerrainIntersection>
+        <gml:MultiCurve>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338064.24 5677747.381 37.784 338064.401 5677747.401 37.782 338064.589 5677747.425 37.782</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338064.589 5677747.425 37.782 338064.643 5677747.0 37.79 338064.684 5677746.684 37.79 338064.771 5677746.0 37.79 338064.797 5677745.797 37.79 338064.899 5677745.0 37.799 338064.91 5677744.91 37.798 338065.0 5677744.205 37.808 338065.023 5677744.023 37.81 338065.026 5677744.0 37.809 338065.136 5677743.136 37.79 338065.154 5677743.0 37.788 338065.25 5677742.25 37.772 338065.281 5677742.0 37.764 338065.363 5677741.363 37.775 338065.409 5677741.0 37.741 338065.476 5677740.476 37.628 338065.535 5677740.014 37.508</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338062.526 5677739.63 37.568 338062.645 5677739.645 37.592 338063.0 5677739.69 37.619 338063.791 5677739.791 37.671 338064.0 5677739.818 37.663 338064.938 5677739.938 37.57 338065.0 5677739.946 37.573 338065.425 5677740.0 37.522 338065.535 5677740.014 37.508</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338061.524 5677747.482 37.529 338061.586 5677747.0 37.622 338061.632 5677746.632 37.675 338061.713 5677746.0 37.687 338061.746 5677745.746 37.679 338061.841 5677745.0 37.681 338061.859 5677744.859 37.682 338061.968 5677744.0 37.713 338061.972 5677743.972 37.714 338062.0 5677743.752 37.718 338062.085 5677743.085 37.713 338062.096 5677743.0 37.715 338062.198 5677742.198 37.632 338062.224 5677742.0 37.631 338062.311 5677741.311 37.644 338062.351 5677741.0 37.649 338062.425 5677740.425 37.636 338062.479 5677740.0 37.641 338062.526 5677739.63 37.568</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338061.524 5677747.482 37.529 338062.0 5677747.543 37.643 338062.622 5677747.622 37.755 338063.0 5677747.671 37.767 338063.769 5677747.769 37.775 338064.0 5677747.798 37.782 338064.184 5677747.822 37.78</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+          <gml:curveMember>
+            <gml:LineString>
+              <gml:posList srsDimension="3">338064.184 5677747.822 37.78 338064.24 5677747.381 37.784</gml:posList>
+            </gml:LineString>
+          </gml:curveMember>
+        </gml:MultiCurve>
+      </bldg:lod2TerrainIntersection>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_cffde25d-a7d7-4bfd-9dcf-4ad0a0c84a9d">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_9829d877-1d8e-4008-b4a9-fa724ee2b9ec">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_1">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_1_0_">
+                      <gml:posList srsDimension="3">338064.24 5677747.381 41.067 338064.589 5677747.425 41.067 338064.589 5677747.425 37.508 338064.24 5677747.381 37.508 338064.24 5677747.381 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_baeee0c9-eb36-43c8-97b9-64a99086a0b0">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_a984e2f5-4bf6-4389-be67-986403ee5db6">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_2">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_2_0_">
+                      <gml:posList srsDimension="3">338064.589 5677747.425 41.067 338065.535 5677740.014 41.067 338065.535 5677740.014 37.508 338064.589 5677747.425 37.508 338064.589 5677747.425 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_d34a5d95-ad22-42e4-b021-d8930003c0a9">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_d57976c5-a965-440a-b9c4-4a30d62f6371">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_3">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_3_0_">
+                      <gml:posList srsDimension="3">338065.535 5677740.014 41.067 338062.526 5677739.63 41.067 338062.526 5677739.63 37.508 338065.535 5677740.014 37.508 338065.535 5677740.014 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_d13f9c53-15da-4aba-93a9-5c105a39e822">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_114dcf4f-b5a1-4eed-8487-58db19e6f739">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_4">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_4_0_">
+                      <gml:posList srsDimension="3">338062.526 5677739.63 41.067 338061.524 5677747.482 41.067 338061.524 5677747.482 37.508 338062.526 5677739.63 37.508 338062.526 5677739.63 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_95181fbc-2c68-49ac-b7c1-337fcb00bb65">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_8658278e-275b-427c-aed2-c2b2968eea46">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_5">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_5_0_">
+                      <gml:posList srsDimension="3">338061.524 5677747.482 41.067 338064.184 5677747.822 41.067 338064.184 5677747.822 37.508 338061.524 5677747.482 37.508 338061.524 5677747.482 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:WallSurface gml:id="UUID_3bacfd61-99ec-4ef4-b760-cfe3bfae7d9f">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_67afd5a2-3beb-4a55-bed0-ef55a4fc581f">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_6">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_6_0_">
+                      <gml:posList srsDimension="3">338064.184 5677747.822 41.067 338064.24 5677747.381 41.067 338064.24 5677747.381 37.508 338064.184 5677747.822 37.508 338064.184 5677747.822 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:WallSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:RoofSurface gml:id="UUID_2d6ea965-4d65-4253-b855-1d2dc4a456b9">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_aa0b260a-006b-4462-a1ef-41378795600b">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_7">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_7_0_">
+                      <gml:posList srsDimension="3">338064.184 5677747.822 41.067 338061.524 5677747.482 41.067 338062.526 5677739.63 41.067 338065.535 5677740.014 41.067 338064.589 5677747.425 41.067 338064.24 5677747.381 41.067 338064.184 5677747.822 41.067</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:RoofSurface>
+      </bldg:boundedBy>
+      <bldg:boundedBy>
+        <bldg:GroundSurface gml:id="UUID_cc3b5fc5-f019-4c40-a7a6-60567d99e83b">
+          <core:creationDate>2018-12-30</core:creationDate>
+          <bldg:lod2MultiSurface>
+            <gml:MultiSurface gml:id="UUID_fc3837f9-b78a-4665-8660-fb2d87ff3c97">
+              <gml:surfaceMember>
+                <gml:Polygon gml:id="GUID_1543405942858_18037767_2_0">
+                  <gml:exterior>
+                    <gml:LinearRing gml:id="GUID_1543405942858_18037767_2_0_0_">
+                      <gml:posList srsDimension="3">338064.24 5677747.381 37.508 338064.589 5677747.425 37.508 338065.535 5677740.014 37.508 338062.526 5677739.63 37.508 338061.524 5677747.482 37.508 338064.184 5677747.822 37.508 338064.24 5677747.381 37.508</gml:posList>
+                    </gml:LinearRing>
+                  </gml:exterior>
+                </gml:Polygon>
+              </gml:surfaceMember>
+            </gml:MultiSurface>
+          </bldg:lod2MultiSurface>
+        </bldg:GroundSurface>
+      </bldg:boundedBy>
+      <bldg:address>
+        <core:Address gml:id="UUID_f14dd931-dcba-4408-addf-5ad3b361636c">
+          <core:xalAddress>
+            <xal:AddressDetails>
+              <xal:Country>
+                <xal:CountryName>Germany</xal:CountryName>
+                <xal:Locality Type="Town">
+                  <xal:LocalityName>Neuss</xal:LocalityName>
+                  <xal:Thoroughfare Type="Street">
+                    <xal:ThoroughfareNumber>11</xal:ThoroughfareNumber>
+                    <xal:ThoroughfareName>Brucknerstraße</xal:ThoroughfareName>
+                  </xal:Thoroughfare>
+                  <xal:PostalCode>
+                    <xal:PostalCodeNumber>41462</xal:PostalCodeNumber>
                   </xal:PostalCode>
                 </xal:Locality>
               </xal:Country>

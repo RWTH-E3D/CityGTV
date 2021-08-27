@@ -1,8 +1,6 @@
 
 """
-@Name : PyQt5 GUI for CityGML file Operations
-@author: Yue Pan
-@Date : Dec 09, 2019
+@Name : CityGTV
 """
 import matplotlib
 matplotlib.use('Agg')
@@ -28,7 +26,7 @@ from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout, QLi
 QLabel, QPushButton, QCheckBox, QFileDialog, QMainWindow, QHBoxLayout, QGroupBox, QGridLayout, \
 QStyleFactory, QComboBox, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QFrame, QProgressBar,\
 QCompleter, QListWidget, QAbstractItemView
-from PyQt5.QtGui import QPixmap, QFont, QDesktopServices, QBrush, QColor, QPalette
+from PyQt5.QtGui import QPixmap, QFont, QDesktopServices, QBrush, QColor, QPalette, QIcon
 
 
 
@@ -76,7 +74,8 @@ class WorkerThread(QThread):
 
         pool = Pool()
         pool.starmap(crsTransformPool,\
-            [(self.buildingList,self.buildingResult,loc,self.OFFSET,inProj,outProj,self.angle,self.elevationChange,self.selectionReference) \
+            [(self.buildingList,self.buildingResult,loc,self.OFFSET,inProj,outProj,\
+                self.angle,self.elevationChange,self.selectionReference) \
            for loc in range(len(self.buildingList))])
 
         pool.close()
@@ -88,7 +87,8 @@ class WorkerThread(QThread):
         print("Transformation completed successfully.")
         
         # export the List to an XML
-        treeWriter(self.fileName_exported,ET.parse(self.fileName_input),self.buildingResult,self._nameSpace)
+        treeWriter(self.fileName_exported,ET.parse(self.fileName_input),\
+            self.buildingResult,self._nameSpace)
         
         self.finished.emit(float(time.time()-start_time))
 
@@ -143,7 +143,7 @@ class BlinkButton(QPushButton):
         return self.palette().color(QPalette.Button)
 
     def setColor(self, value):
-        self.setStyleSheet("background-color: rgb(135, 206, 250)")
+        self.setStyleSheet("background-color: rgb(238, 248, 255)")
         if value == self.getColor():
             return
         palette = self.palette()
@@ -153,7 +153,7 @@ class BlinkButton(QPushButton):
 
     def reset_color(self):
         self.setColor(self.default_color)
-        self.setStyleSheet("background-color: rgb(135, 206, 250);")
+        self.setStyleSheet("background-color: rgb(238, 248, 255);")
 
     color = pyqtProperty(QColor, getColor, setColor)
 
@@ -163,6 +163,7 @@ class _MainWindow(QDialog):
     def __init__(self,parent=None):
         super(_MainWindow, self).__init__(parent)
         
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle('Main Window')
         
         # Font Settings
@@ -181,8 +182,8 @@ class _MainWindow(QDialog):
             self.screenWidth = GetSystemMetrics(0)
             self.screenHeight =  GetSystemMetrics(1)
         except:
-            self.screenWidth = 1920
-            self.screenHeight = 1080
+            self.screenWidth = 500
+            self.screenHeight = 400
 
         if self.screenWidth <= 2400 or self.screenHeight <= 1200:
             self.w = 500
@@ -191,8 +192,8 @@ class _MainWindow(QDialog):
             self.mySlimFont.setPointSize(9)
         else:
             # for 4k or higher high-resolution
-            self.w = 1000
-            self.h = 800
+            self.w = 500
+            self.h = 400
             self.myBoldFont.setPointSize(18)
             self.mySlimFont.setPointSize(18)
 
@@ -202,22 +203,21 @@ class _MainWindow(QDialog):
         self.setStyleSheet("background-color:rgb(255, 250, 240);")
         #------------------------------------------------------------------------
         
-        
-
-        # Layout horizontal, with 2 sub vertical layout
-        # Left most layout, vbox, is for buttons;
-        # At Middle, the layout, vbox_show_fig, is for figures.
-        # Right most layout, vbox_validation_input and vbox_validation_output.
-        #------------------------------------------------------------------------
         # set the base layout
         self.vbox = QVBoxLayout()
         self.setLayout(self.vbox) 
         self.vbox.setDirection(2) #QBoxLayout::TopToBottom 
         #------------------------------------------------------------------------
         self.lbl_cover = QLabel()
-        self.pixmap_cover = QPixmap("e3d.png")
-        self.pixmap_cover = self.pixmap_cover.scaled(self.w,int(self.w/4))
-        self.lbl_cover.setPixmap(self.pixmap_cover)
+        # self.pixmap_cover = QPixmap("e3dHeaderGTV.png")
+        # self.pixmap_cover = self.pixmap_cover.scaled(self.w,int(self.w/4))
+        # self.lbl_cover.setPixmap(self.pixmap_cover)
+        self.lbl_cover.setPixmap(QPixmap("e3dHeaderGTV.png"))
+        self.lbl_cover.setScaledContents(True)
+        self.lbl_cover.setMinimumHeight(self.h/3)
+        self.lbl_cover.setMaximumHeight(self.h/3)
+        self.lbl_cover.setMinimumWidth(700)
+        self.lbl_cover.setMaximumWidth(700)
         self.vbox.addWidget(self.lbl_cover)
 
         #Theme selection
@@ -226,14 +226,20 @@ class _MainWindow(QDialog):
         self.vbox.addLayout(self.hbox_theme)
         self.lbl_theme = QLabel("Theme Preference:     ")
         self.lbl_theme.setFont(self.myBoldFont)
-        self.lbl_theme.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark blue
+        #self.lbl_theme.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark grey
+        self.lbl_theme.setStyleSheet("color:rgb(39, 39, 39)")
         self.hbox_theme.addWidget(self.lbl_theme)
 
 
         self.cmb_theme = QComboBox()
         self.cmb_theme.addItems(['Light        ','Dark        ']) #with 8 spaces
         self.cmb_theme.setFont(self.myBoldFont)
-        self.cmb_theme.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark blue
+        #self.cmb_theme.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark grey
+        self.cmb_theme.setStyleSheet("color:rgb(39, 39, 39)")
         self.cmb_theme.currentIndexChanged.connect(self.changeTheme)
         self.hbox_theme.addWidget(self.cmb_theme)
 
@@ -241,7 +247,7 @@ class _MainWindow(QDialog):
         self.btn_about_this_app = QPushButton("About This Tool")
         self.btn_about_this_app.clicked.connect(self.aboutThisTool)
         self.btn_about_this_app.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_about_this_app.setFont(self.myBoldFont)
         self.hbox_theme.addStretch(2)
         self.hbox_theme.addWidget(self.btn_about_this_app)
@@ -249,7 +255,10 @@ class _MainWindow(QDialog):
         # Label, from QTWidgets, a fake title
         self.lbl_title = QLabel("InputGML File Information:  Please select input xml/gml file.")
         self.lbl_title.setFont(self.myBoldFont)
-        self.lbl_title.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark blue
+        #self.lbl_title.setStyleSheet("color:rgb(35, 46, 130)")
+        #dark grey
+        self.lbl_title.setStyleSheet("color:rgb(39, 39, 39)")
         # After widget creation, it has to be added to the LAYOUT.
         self.vbox.addWidget(self.lbl_title)
 
@@ -267,7 +276,7 @@ class _MainWindow(QDialog):
         #self.btn_input_xml = QPushButton("Input XML/GML File")
         self.btn_input_xml = BlinkButton("Input XML/GML File")
         self.btn_input_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250)}""")
+                """QPushButton { background-color: rgb(238, 248, 255)}""")
         self.btn_input_xml.setFont(self.myBoldFont)
         self.btn_input_xml.clicked.connect(self.input_xml)
 
@@ -279,7 +288,7 @@ class _MainWindow(QDialog):
 
         self.btn_select_folder = BlinkButton("Select Folder")
         self.btn_select_folder.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250);}""")
+                """QPushButton { background-color: rgb(238, 248, 255);}""")
         self.btn_select_folder.setFont(self.myBoldFont)
         self.btn_select_folder.clicked.connect(self.selectFolder)
         self.hbox_folder.addWidget(self.btn_select_folder)
@@ -325,7 +334,7 @@ class _MainWindow(QDialog):
         self.btn_transform_xml = BlinkButton("Transformation")
         self.btn_transform_xml.clicked.connect(self.openTransformationWindow)
         self.btn_transform_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250);}""")
+                """QPushButton { background-color: rgb(238, 248, 255);}""")
         self.btn_transform_xml.setFont(self.myBoldFont)
         self.vbox.addWidget(self.btn_transform_xml)
         #------------------------------------------------------------------------
@@ -334,7 +343,7 @@ class _MainWindow(QDialog):
         self.btn_draw_xml = BlinkButton("Visualization")
         self.btn_draw_xml.clicked.connect(self.openDrawWindow)
         self.btn_draw_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250);}""")
+                """QPushButton { background-color: rgb(238, 248, 255);}""")
         self.btn_draw_xml.setFont(self.myBoldFont)
         self.vbox.addWidget(self.btn_draw_xml)
         #------------------------------------------------------------------------
@@ -343,7 +352,7 @@ class _MainWindow(QDialog):
         self.btn_validate_xml = BlinkButton("Validation")
         self.btn_validate_xml.clicked.connect(self.openValidationWindow)
         self.btn_validate_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250);}""")
+                """QPushButton { background-color: rgb(238, 248, 255);}""")
         self.btn_validate_xml.setFont(self.myBoldFont)
         self.vbox.addWidget(self.btn_validate_xml)
         #------------------------------------------------------------------------
@@ -354,7 +363,7 @@ class _MainWindow(QDialog):
         self.btn_crop_xml = QPushButton("Crop Buildings")
         self.btn_crop_xml.clicked.connect(self.openCropWindow)
         self.btn_crop_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_crop_xml.setFont(self.myBoldFont)
         self.vbox.addWidget(self.btn_crop_xml)
         #------------------------------------------------------------------------
@@ -364,8 +373,9 @@ class _MainWindow(QDialog):
         self.vbox.addWidget(self.btn_close_application)       
         self.btn_close_application.clicked.connect(self.close_application)
         self.btn_close_application.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_close_application.setFont(self.myBoldFont)
+
 
         # for parsing XML files.
         # nameSpace used for ElementTree's search function
@@ -410,18 +420,25 @@ class _MainWindow(QDialog):
             self.theme = "Light"
             print("theme = ",self.cmb_theme.currentText()[0:5])
             self.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240)}""")
+            '''
+            #dark blue
             self.lbl_theme.setStyleSheet("color:rgb(35, 46, 130)")
             self.lbl_title.setStyleSheet("color:rgb(35, 46, 130)")
             self.cmb_theme.setStyleSheet("""QComboBox{color: rgb(35, 46, 130);
                                         background-color: rgb(255, 250, 240)}""")
-
+            '''
+            #dark grey
+            self.lbl_theme.setStyleSheet("color:rgb(39, 39, 39)")
+            self.lbl_title.setStyleSheet("color:rgb(39, 39, 39)")
+            self.cmb_theme.setStyleSheet("""QComboBox{color: rgb(39, 39, 39);
+                                        background-color: rgb(255, 250, 240)}""")
         else:
             self.theme = "Dark"
             print("theme = ",self.theme)
             self.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30)}""")
-            self.lbl_theme.setStyleSheet("color:rgb(135, 206, 250)")
-            self.lbl_title.setStyleSheet("color:rgb(135, 206, 250)")
-            self.cmb_theme.setStyleSheet("""QComboBox{color: rgb(135, 206, 250);
+            self.lbl_theme.setStyleSheet("color:rgb(238, 248, 255)")
+            self.lbl_title.setStyleSheet("color:rgb(238, 248, 255)")
+            self.cmb_theme.setStyleSheet("""QComboBox{color: rgb(238, 248, 255);
                                         background-color: rgb(20, 25, 30)}""")
 
     def animButton(self,button):
@@ -461,7 +478,7 @@ class _MainWindow(QDialog):
         if self.workingDirectory:
             self.edit_select_folder.setText(self.workingDirectory)
             self.btn_create_folder.setEnabled(True)
-            self.btn_create_folder.setStyleSheet("background-color: rgb(135, 206, 250);")
+            self.btn_create_folder.setStyleSheet("background-color: rgb(238, 248, 255);")
 
             
             self.animation.stop()
@@ -499,7 +516,8 @@ class _MainWindow(QDialog):
                 #file closed
             
                 buildingList = readCityGML(self.filename_input,self._nameSpace)
-                tmp_text = 'InputGML File Information:  CityGML Version = '+str(self.version)+'.0    Number of buildings = '+str(len(buildingList))
+                tmp_text = 'InputGML File Information:  CityGML Version = '+str(self.version)+\
+                '.0    Number of buildings = '+str(len(buildingList))
                 self.lbl_title.setText(tmp_text)
                 
                 self.animation.stop()
@@ -508,10 +526,16 @@ class _MainWindow(QDialog):
                 self.btn_select_folder.setEnabled(True)
             except:
                 if self.theme == "Light":
+                    '''
+                    #dark blue
                     self.msg.setStyleSheet("""QLabel{color:rgb(35, 46, 130)}
                             QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
+                    '''        
+                    #dark grey
+                    self.msg.setStyleSheet("""QLabel{color:rgb(39, 39, 39)}
+                            QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
                 else:
-                    self.msg.setStyleSheet("""QLabel{color:rgb(135, 206, 250)}
+                    self.msg.setStyleSheet("""QLabel{color:rgb(238, 248, 255)}
                             QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
 
                 self.msg.setText("Unable to parse the file format")
@@ -532,11 +556,17 @@ class _MainWindow(QDialog):
             self.folderWindow.resize(600,300)
 
         if self.theme == "Light":
+            '''
+            #dark blue
             self.folderWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.folderWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}""")
         else:
             self.folderWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
         self.folderWindow.show()
         self.folderWindow.mainWindow = self
 
@@ -555,13 +585,20 @@ class _MainWindow(QDialog):
         self.transformationWindow.outputFileName = self.folder_name+"/Transformation_Result.gml"
         self.transformationWindow.resize(self.w, self.h)
         if self.cmb_theme.currentText() == "Light        ":
+            '''
+            #dark blue
             self.transformationWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}\
                 QCheckBox{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.transformationWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}\
+                QCheckBox{color:rgb(39, 39, 39)}""")
         else:
             self.transformationWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}\
-                QCheckBox{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}\
+                QCheckBox{color:rgb(238, 248, 255)}""")
         self.transformationWindow.show()
         self.transformationWindow.mainWindow = self
         
@@ -591,11 +628,17 @@ class _MainWindow(QDialog):
         self.validationWindow.outputFileName = self.folder_name+"/Transformation_Result.gml"
         self.validationWindow.resize(self.w, self.h)
         if self.cmb_theme.currentText() == "Light        ":
+            '''
+            #dark blue
             self.validationWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.validationWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}""")
         else:
             self.validationWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
         self.validationWindow.show()
         self.validationWindow.mainWindow = self
         self.hide()
@@ -607,20 +650,27 @@ class _MainWindow(QDialog):
         #self.cropWindow.edit_input_xml.setText(self.cropWindow.inputFileName)
         self.cropWindow.resize(self.w, self.h)
         if self.theme == "Light":
+            '''
+            #dark blue
             self.cropWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}\
                 QCheckBox{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.cropWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}\
+                QCheckBox{color:rgb(39, 39, 39)}""")
         else:
             self.cropWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}\
-                QCheckBox{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}\
+                QCheckBox{color:rgb(238, 248, 255)}""")
         self.cropWindow.show()
         self.cropWindow.mainWindow = self
         self.hide()
 
     def aboutThisTool(self):
         # open your URL
-        url = QUrl('http://149.28.76.141')
+        url = QUrl('http://gitlab.com')
         try:
             QDesktopServices.openUrl(url)
         except:
@@ -640,6 +690,7 @@ class _MainWindow(QDialog):
 class _FolderWindow(QDialog):
     def __init__(self,parent=None):
         super(_FolderWindow,self).__init__(parent)
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle("Create your Folder")
 
         self.mainWindow = _MainWindow()
@@ -680,13 +731,13 @@ class _FolderWindow(QDialog):
 
         self.btn_create = QPushButton("Create this Folder")
         self.btn_create.setFont(self.myBoldFont)
-        self.btn_create.setStyleSheet("background-color:rgb(135, 206, 250)")
+        self.btn_create.setStyleSheet("background-color:rgb(238, 248, 255)")
         self.vbox.addWidget(self.btn_create)
         self.btn_create.clicked.connect(self.createFolder)
 
         self.btn_back = QPushButton("Back")
         self.btn_back.setFont(self.myBoldFont)
-        self.btn_back.setStyleSheet("background-color:rgb(210,70,70)")
+        self.btn_back.setStyleSheet("background-color:rgb(174, 163, 163)")
         self.vbox.addWidget(self.btn_back)
         self.btn_back.clicked.connect(self.close)
 
@@ -706,11 +757,11 @@ class _FolderWindow(QDialog):
 
             #Enable buttons
             self.mainWindow.btn_transform_xml.setEnabled(True)
-            self.mainWindow.btn_transform_xml.setStyleSheet("background-color:rgb(135, 206, 250)")
+            self.mainWindow.btn_transform_xml.setStyleSheet("background-color:rgb(238, 248, 255)")
             self.mainWindow.btn_draw_xml.setEnabled(True)
-            self.mainWindow.btn_draw_xml.setStyleSheet("background-color:rgb(135, 206, 250)")
+            self.mainWindow.btn_draw_xml.setStyleSheet("background-color:rgb(238, 248, 255)")
             self.mainWindow.btn_validate_xml.setEnabled(True)
-            self.mainWindow.btn_validate_xml.setStyleSheet("background-color:rgb(135, 206, 250)")
+            self.mainWindow.btn_validate_xml.setStyleSheet("background-color:rgb(238, 248, 255)")
             self.close()
         except:
             self.msgBoxCreator("Unable to create folder!")
@@ -728,6 +779,7 @@ class _FolderWindow(QDialog):
 class _ExitQuestionWindow(QDialog):
     def __init__(self,parent=None):
         super(_ExitQuestionWindow,self).__init__(parent)
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle("")
         # Font Settings
         self.myBoldFont = QFont()
@@ -764,14 +816,14 @@ class _ExitQuestionWindow(QDialog):
 
         self.btn_yes = QPushButton("Confirm")
         self.btn_yes.setFont(self.myBoldFont) 
-        self.btn_yes.setStyleSheet("background-color:rgb(135, 206, 250)")
+        self.btn_yes.setStyleSheet("background-color:rgb(238, 248, 255)")
         self.btn_yes.setFont(self.myBoldFont)
         self.btn_yes.clicked.connect(self.exitConfirmed)
         self.hbox.addWidget(self.btn_yes)
 
         self.btn_no = QPushButton("Cancel")
         self.btn_no.setFont(self.myBoldFont) 
-        self.btn_no.setStyleSheet("background-color:rgb(210,70,70)")
+        self.btn_no.setStyleSheet("background-color:rgb(174, 163, 163)")
         self.btn_no.setFont(self.myBoldFont)
         self.btn_no.clicked.connect(self.exitCanceled)
         self.hbox.addWidget(self.btn_no)
@@ -783,11 +835,11 @@ class _ExitQuestionWindow(QDialog):
         self.close()
 
 # **********************************************************************************  
-
 class _CropWindow(QDialog):
     def __init__(self,parent=None):
         super(_CropWindow, self).__init__(parent)
         
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle('Crop Buildings')
 
         # save the mainWindow
@@ -831,7 +883,7 @@ class _CropWindow(QDialog):
         # Input file
         self.btn_input_xml = QPushButton("Input XML/GML File")
         self.btn_input_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_input_xml.setFont(self.myBoldFont)
         self.btn_input_xml.clicked.connect(self.input_xml)
         self.vbox_crop.addWidget(self.btn_input_xml)
@@ -867,7 +919,7 @@ class _CropWindow(QDialog):
         # Output file
         self.btn_output_xml = QPushButton("Output XML/GML File")
         self.btn_output_xml.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_output_xml.setFont(self.myBoldFont)
         self.btn_output_xml.clicked.connect(self.output_xml)
         self.vbox_crop.addWidget(self.btn_output_xml)
@@ -931,7 +983,7 @@ class _CropWindow(QDialog):
         # button to crop
         self.btn_crop = QPushButton("Crop")
         self.btn_crop.setStyleSheet(
-                """QPushButton { background-color: rgb(135, 206, 250); color: black}""")
+                """QPushButton { background-color: rgb(238, 248, 255); color: black}""")
         self.btn_crop.setFont(self.myBoldFont)
         self.btn_crop.clicked.connect(self.cropXML)
         self.vbox_crop.addWidget(self.btn_crop)
@@ -940,7 +992,7 @@ class _CropWindow(QDialog):
         self.btn_exit_crop = QPushButton("Back")
         self.btn_exit_crop.setFont(self.myBoldFont) 
         self.btn_exit_crop.clicked.connect(self.close_window)
-        self.btn_exit_crop.setStyleSheet("background-color:rgb(210,70,70)")
+        self.btn_exit_crop.setStyleSheet("background-color:rgb(174, 163, 163)")
         self.vbox_crop.addWidget(self.btn_exit_crop)
         
 
@@ -965,14 +1017,21 @@ class _CropWindow(QDialog):
 
         # theme
         if self.mainWindow.theme == "Light":
+            '''
+            #dark blue
             self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240)}
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240)}
+                QLabel{color:rgb(39, 39, 39)}""")
+
             self.buildingListWindow.lst_building.setStyleSheet("""QListWidget{background-color:rgb(240,240,240)}
                         QListWidget::Item:hover{background:skyblue; }
                         QListWidget::item:selected:!active{border-width:0px; background:lightgreen;}""")
         else:
             self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30)}
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
             self.buildingListWindow.lst_building.setStyleSheet("""QListWidget{background-color:rgb(130,145,150)}
                         QListWidget::Item:hover{background:skyblue; }
                         QListWidget::item:selected:!active{border-width:0px; background:lightgreen;}""")
@@ -1149,6 +1208,8 @@ class _CropWindow(QDialog):
 class BuildingListWindow(QDialog):
     def __init__(self, parent=None):
         super(BuildingListWindow, self).__init__(parent)
+        self.setWindowIcon(QIcon('e3dIcon.png'))
+
         self.mainWindow = _CropWindow()
         self.setWindowTitle('Edit Selection of buildings')
         
@@ -1216,15 +1277,16 @@ class BuildingListWindow(QDialog):
         self.vbox_bList.addWidget(self.btn_delete)
 
         #back to parent window
-        self.btn_back = QPushButton("Back")
+        self.btn_back = QPushButton("OK")
         self.btn_back.setFont(self.myBoldFont)
-        self.btn_back.setStyleSheet("background-color:rgb(210,70,70)")
+        self.btn_back.setStyleSheet("background-color:rgb(174, 163, 163)")
         self.btn_back.clicked.connect(self.close_window)
         self.vbox_bList.addWidget(self.btn_back)
 
     def addBuilding(self):
         newBuildingName = self.searchBar.text()
-        if newBuildingName in [str(self.lst_building.item(i).text()) for i in range(self.lst_building.count())]:
+        if newBuildingName in \
+        [str(self.lst_building.item(i).text()) for i in range(self.lst_building.count())]:
             self.msgBoxCreator("This building has alrady been selected!")
             return 0
         elif newBuildingName in self.buildingNameList:
@@ -1248,7 +1310,8 @@ class BuildingListWindow(QDialog):
 
     def close_window(self,label):
         # back to mainWindow and close the sub-window.
-        self.mainWindow.lbl_manual_setting_number.setText("Number of Buildings Selected = "+str(self.lst_building.count()))
+        self.mainWindow.lbl_manual_setting_number.\
+            setText("Number of Buildings Selected = "+str(self.lst_building.count()))
         # mainWindow must have a property named "buildingSelectionList"
         self.mainWindow.buildingSelectionList = \
             [str(self.lst_building.item(i).text()) for i in range(self.lst_building.count())]
@@ -1271,6 +1334,7 @@ class _TransformationWindow(QDialog):
     def __init__(self,parent=None):
         super(_TransformationWindow, self).__init__(parent)
         
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle('CRS Transformation')
 
         # save the mainWindow
@@ -1366,7 +1430,7 @@ class _TransformationWindow(QDialog):
         self.btn_lonlat = BlinkButton("Transform to [X,Y,Z]")
         self.btn_lonlat.setFont(self.myBoldFont) 
         self.btn_lonlat.clicked.connect(self.transformLonLat)
-        self.btn_lonlat.setStyleSheet("font:bold;background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_lonlat.setStyleSheet("font:bold;background-color:rgb(238, 248, 255);font-weight:bold")
         
         self.animButton(self.btn_lonlat)
         
@@ -1378,7 +1442,8 @@ class _TransformationWindow(QDialog):
 
         self.tragetpoint = [0,0,0]
         # contains one label and 3 lineEdits
-        self.lbl_tartgetPoint = QLabel("\nDestination in [x,y,z]\nCoordinates shall fall within the projeced bounds of output CRS.")
+        self.lbl_tartgetPoint = \
+            QLabel("\nDestination in [x,y,z]\nCoordinates shall fall within the projeced bounds of output CRS.")
         self.setFont(self.myBoldFont)
         self.vbox_targetPoint.addWidget(self.lbl_tartgetPoint)
 
@@ -1436,7 +1501,7 @@ class _TransformationWindow(QDialog):
         self.btn_help.resize(20,20)
         self.btn_help.setFont(self.myBoldFont)
         self.btn_help.clicked.connect(self.openInfoWindow)
-        self.btn_help.setStyleSheet("font:bold;background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_help.setStyleSheet("font:bold;background-color:rgb(174, 163, 163);font-weight:bold")
         self.hbox_checkbox.addStretch(4)
         self.hbox_checkbox.addWidget(self.btn_help) 
         
@@ -1457,7 +1522,9 @@ class _TransformationWindow(QDialog):
         self.vbox_rotation.addLayout(self.hbox_checkbox)
         self.vbox_rotation.addWidget(self.lbl_rotation)
         self.vbox_rotation.addLayout(self.hbox_rotation) 
+
         #------------------------------------------------------------------------
+        # elevation module
         self.gbox_elevation = QGroupBox()
         #self.checkbox_elevation.toggled.connect(self.gbox_elevation.setEnabled)
         self.vbox_transformation.addWidget(self.gbox_elevation)
@@ -1474,12 +1541,12 @@ class _TransformationWindow(QDialog):
         self.btn_help2.resize(20,20)
         self.btn_help2.setFont(self.myBoldFont)
         self.btn_help2.clicked.connect(self.openInfoWindowE)
-        self.btn_help2.setStyleSheet("font:bold;background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_help2.setStyleSheet("font:bold;background-color:rgb(174, 163, 163);font-weight:bold")
         self.hbox_checkbox2.addStretch(4)
         self.hbox_checkbox2.addWidget(self.btn_help2)
 
         self.hbox_elevation = QHBoxLayout()
-        self.lbl_elevation = QLabel("Please Enter Elevation Value in [m]:")
+        self.lbl_elevation = QLabel("Please Enter Elevation Change Value in [m]:")
         self.lbl_elevation.setFont(self.myBoldFont)
         self.hbox_elevation.addWidget(self.lbl_elevation)
         self.edit_elevation = QLineEdit("0")
@@ -1528,14 +1595,14 @@ class _TransformationWindow(QDialog):
         self.btn_transform_xml = QPushButton("Start Transformation")
         self.btn_transform_xml.setFont(self.myBoldFont) 
         self.btn_transform_xml.clicked.connect(self.transformXML)
-        self.btn_transform_xml.setStyleSheet("font:bold;background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_transform_xml.setStyleSheet("font:bold;background-color:rgb(238, 248, 255);font-weight:bold")
         self.vbox_transformation.addWidget(self.btn_transform_xml)
 
         # close it
         self.btn_exit_transformation = QPushButton("Back")
         self.btn_exit_transformation.setFont(self.myBoldFont) 
         self.btn_exit_transformation.clicked.connect(self.close_window)
-        self.btn_exit_transformation.setStyleSheet("font:bold;background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_exit_transformation.setStyleSheet("font:bold;background-color:rgb(174, 163, 163);font-weight:bold")
         self.vbox_transformation.addWidget(self.btn_exit_transformation)  
         
         # disable check boxes
@@ -1595,7 +1662,8 @@ class _TransformationWindow(QDialog):
     def onToggleBuildingSelection(self):
         if self.checkbox_buildingSelection.isChecked():
             self.buildingSelectionList = []
-            self.lbl_manual_setting_number.setText("Number of Buildings Selected = "+str(len(self.buildingSelectionList)))
+            self.lbl_manual_setting_number.\
+                setText("Number of Buildings Selected = "+str(len(self.buildingSelectionList)))
 
             self.btn_buildingSelection.setEnabled(True)
             self.checkbox_rotation.setChecked(True)
@@ -1630,14 +1698,20 @@ class _TransformationWindow(QDialog):
 
         # theme
         if self.mainWindow.theme == "Light":
+            '''
+            #dark blue
             self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240)}
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240)}
+                QLabel{color:rgb(39, 39, 39)}""")
             self.buildingListWindow.lst_building.setStyleSheet("""QListWidget{background-color:rgb(240,240,240)}
                         QListWidget::Item:hover{background:skyblue; }
                         QListWidget::item:selected:!active{border-width:0px; background:lightgreen;}""")
         else:
             self.buildingListWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30)}
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
             self.buildingListWindow.lst_building.setStyleSheet("""QListWidget{background-color:rgb(130,145,150)}
                         QListWidget::Item:hover{background:skyblue; }
                         QListWidget::item:selected:!active{border-width:0px; background:lightgreen;}""")
@@ -1669,11 +1743,17 @@ class _TransformationWindow(QDialog):
             self.infoWindow.resize(600, 700)
 
         if self.mainWindow.theme == "Light":
+            '''
+            #dark blue
             self.infoWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark blue
+            self.infoWindow.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}""")
         else:
             self.infoWindow.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
 
         self.infoWindow.show()
         self.infoWindow.mainWindow = self
@@ -1703,11 +1783,17 @@ class _TransformationWindow(QDialog):
             self.infoWindowE.resize(600, 700)
 
         if self.mainWindow.theme == "Light":
+            '''
+            #dark blue
             self.infoWindowE.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
                 QLabel{color:rgb(35, 46, 130)}""")
+            '''
+            #dark grey
+            self.infoWindowE.setStyleSheet("""QDialog{background-color:rgb(255, 250, 240);}\
+                QLabel{color:rgb(39, 39, 39)}""")
         else:
             self.infoWindowE.setStyleSheet("""QDialog{background-color:rgb(20, 25, 30);}\
-                QLabel{color:rgb(135, 206, 250)}""")
+                QLabel{color:rgb(238, 248, 255)}""")
 
         self.infoWindowE.show()
         self.infoWindowE.mainWindow = self
@@ -1725,7 +1811,7 @@ class _TransformationWindow(QDialog):
         
         try:
             x,y = transform(wgs,OutProj,lat,lon)
-            
+
             self.edit_targetPoint_x.setText(str(x))
             self.edit_targetPoint_y.setText(str(y))
             self.edit_targetPoint_z.setText("0")
@@ -1817,7 +1903,8 @@ class _TransformationWindow(QDialog):
         if (tp_x >= x_west and tp_x <= x_east) and (tp_y >= y_south and tp_y <= y_north):
             print("Target point falls within the boundary of outProj.")
         else:
-            self.msgBoxCreator("Target point [x,y,z] out of the projected bounds of the output CRS.\nPlease re-enter.")
+            self.msgBoxCreator(\
+                "Target point [x,y,z] out of the projected bounds of the output CRS.\nPlease re-enter tartget point or choose other output CRS.")
             return 1
 
         print("========================================")
@@ -1865,11 +1952,9 @@ class _TransformationWindow(QDialog):
         self.workerThread.start()
 
         # see function transformationCompleted(self) for what will happen once the jone done.
-
         # after successful transformation, animate "visualization" and "validation" button
         self.mainWindow.animVisualization()
         self.mainWindow.animValidation()
-
         return 0
 
     # create a QMessageBox when needed
@@ -1890,6 +1975,7 @@ class _TransformationWindow(QDialog):
 class InfoWindow(QDialog):
     def __init__(self, parent=None):
         super(InfoWindow, self).__init__(parent)
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.mainWindow =_TransformationWindow()
         self.setWindowTitle('Help for Rotation Setting')
         
@@ -1935,7 +2021,7 @@ class InfoWindow(QDialog):
         self.btn_exit_info = QPushButton("Back")
         self.btn_exit_info.setFont(self.myBoldFont) 
         self.btn_exit_info.clicked.connect(self.close_window)
-        self.btn_exit_info.setStyleSheet("font:bold;background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_exit_info.setStyleSheet("font:bold;background-color:rgb(174, 163, 163);font-weight:bold")
         self.vbox_info.addWidget(self.btn_exit_info)
     
     def close_window(self):
@@ -1946,6 +2032,7 @@ class InfoWindow(QDialog):
 class InfoWindowE(QDialog):
     def __init__(self, parent=None):
         super(InfoWindowE, self).__init__(parent)
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.mainWindow =_TransformationWindow()
         self.setWindowTitle('Help for Elevation Setting')
         
@@ -1991,7 +2078,7 @@ class InfoWindowE(QDialog):
         self.btn_exit_info = QPushButton("Back")
         self.btn_exit_info.setFont(self.myBoldFont) 
         self.btn_exit_info.clicked.connect(self.close_window)
-        self.btn_exit_info.setStyleSheet("font:bold;background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_exit_info.setStyleSheet("font:bold;background-color:rgb(174, 163, 163);font-weight:bold")
         self.vbox_info.addWidget(self.btn_exit_info)
     
     def close_window(self):
@@ -2079,6 +2166,7 @@ class _DrawWindow(QDialog):
     def __init__(self,parent=None):
         super(_DrawWindow, self).__init__(parent)
         
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle('Building Visualization')
         # save the mainWindow
         self.mainWindow = _MainWindow()
@@ -2128,7 +2216,7 @@ class _DrawWindow(QDialog):
         self.btn_input_fig = QPushButton('Visualization Input',self)
         self.btn_input_fig.clicked.connect(lambda: self.show_fig("input"))
         self.btn_input_fig.setFont(self.myBoldFont) 
-        self.btn_input_fig.setStyleSheet("background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_input_fig.setStyleSheet("background-color:rgb(238, 248, 255);font-weight:bold")
         self.vbox_input_fig.addWidget(self.btn_input_fig) 
 
         self.viewer_in = PhotoViewer(self)
@@ -2148,7 +2236,7 @@ class _DrawWindow(QDialog):
             self.btn_output_fig.setEnabled(True)
         self.btn_output_fig.clicked.connect(lambda: self.show_fig("output"))
         self.btn_output_fig.setFont(self.myBoldFont) 
-        self.btn_output_fig.setStyleSheet("background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_output_fig.setStyleSheet("background-color:rgb(238, 248, 255);font-weight:bold")
         self.vbox_output_fig.addWidget(self.btn_output_fig)
 
         self.viewer_out = PhotoViewer(self)
@@ -2159,7 +2247,7 @@ class _DrawWindow(QDialog):
         # add a button to exit this drawWindow()
         self.btn_exit_drawWindow = QPushButton("Back",self)
         self.btn_exit_drawWindow.clicked.connect(self.close_window)
-        self.btn_exit_drawWindow.setStyleSheet("background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_exit_drawWindow.setStyleSheet("background-color:rgb(174, 163, 163);font-weight:bold")
         self.btn_exit_drawWindow.setFont(self.myBoldFont) 
         self.vbox_show_fig.addWidget(self.btn_exit_drawWindow)
         #------------------------------------------------------------------------
@@ -2214,10 +2302,16 @@ class _DrawWindow(QDialog):
         self.msg = QMessageBox(self)
         self.msg.setFont(self.myBoldFont)
         if self.mainWindow.theme == "Light":
+            '''
+            #dark blue
             self.msg.setStyleSheet("""QLabel{color:rgb(35, 46, 130)}
                     QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
+            '''
+            #dark blue
+            self.msg.setStyleSheet("""QLabel{color:rgb(39, 39, 39)}
+                    QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
         else:
-            self.msg.setStyleSheet("""QLabel{color:rgb(135, 206, 250)}
+            self.msg.setStyleSheet("""QLabel{color:rgb(238, 248, 255)}
                     QPushButton{background-color:rgb(180,180,180);font:9pt'Arial';font-weight:bold}""")
         self.msg.setText(text)
         self.msg.show()
@@ -2232,6 +2326,7 @@ class _ValidationWindow(QDialog):
     def __init__(self,parent=None):
         super(_ValidationWindow, self).__init__(parent)
         
+        self.setWindowIcon(QIcon('e3dIcon.png'))
         self.setWindowTitle('CityGML Validation')
         # save the mainWindow
         self.mainWindow = _MainWindow()
@@ -2271,7 +2366,7 @@ class _ValidationWindow(QDialog):
         self.btn_exit_validationWindow = QPushButton("Back")
         self.btn_exit_validationWindow.clicked.connect(self.close_window)
         self.btn_exit_validationWindow.setFont(self.myBoldFont) 
-        self.btn_exit_validationWindow.setStyleSheet("background-color:rgb(210,70,70);font-weight:bold")
+        self.btn_exit_validationWindow.setStyleSheet("background-color:rgb(174, 163, 163);font-weight:bold")
         self.vbox_validation.addWidget(self.btn_exit_validationWindow)
 
         # Now design the hbox_validation
@@ -2286,7 +2381,7 @@ class _ValidationWindow(QDialog):
          # Module: validation, Input XML 
         self.btn_validation_input = QPushButton("Validatate Input XML",self)
         self.btn_validation_input.setFont(self.myBoldFont) 
-        self.btn_validation_input.setStyleSheet("background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_validation_input.setStyleSheet("background-color:rgb(238, 248, 255);font-weight:bold")
         self.vbox_validation_input.addWidget(self.btn_validation_input)
         #the button clicked connect will be state later
 
@@ -2336,7 +2431,7 @@ class _ValidationWindow(QDialog):
         # Module: validation, Output XML, almost the same
         self.btn_validation_output = QPushButton("Validate Output XML",self)
         self.btn_validation_output.setFont(self.myBoldFont)
-        self.btn_validation_output.setStyleSheet("background-color:rgb(135, 206, 250);font-weight:bold")
+        self.btn_validation_output.setStyleSheet("background-color:rgb(238, 248, 255);font-weight:bold")
         self.vbox_validation_output.addWidget(self.btn_validation_output)
         #the button clicked connect will be state later
         
@@ -2432,14 +2527,20 @@ class _ValidationWindow(QDialog):
                         #print("Building No ",i,">>",newInvalidStr)
                         self.report_str += newInvalidStr
 
-
-        print("number of invalid LinearRings = ",num_invalid_geometry)
-        self.lbl_val_num_of_invalid_polygon_input.setText(str(num_invalid_geometry))
-        print("cpu_count = ",mp.cpu_count())
-        print("number of invalid Buildings = ",num_invalid_building,"/",len(buildingResult))
-        self.lbl_val_num_of_buildings_input.setText(str(len(buildingResult)))
-        self.lbl_val_num_of_invalid_bldg_input.setText(str(num_invalid_building))
-        
+        if isInputOrOutput == "input":
+            print("number of invalid LinearRings = ",num_invalid_geometry)
+            self.lbl_val_num_of_invalid_polygon_input.setText(str(num_invalid_geometry))
+            print("cpu_count = ",mp.cpu_count())
+            print("number of invalid Buildings = ",num_invalid_building,"/",len(buildingResult))
+            self.lbl_val_num_of_buildings_input.setText(str(len(buildingResult)))
+            self.lbl_val_num_of_invalid_bldg_input.setText(str(num_invalid_building))
+        else:
+            print("number of invalid LinearRings = ",num_invalid_geometry)
+            self.lbl_val_num_of_invalid_polygon_output.setText(str(num_invalid_geometry))
+            print("cpu_count = ",mp.cpu_count())
+            print("number of invalid Buildings = ",num_invalid_building,"/",len(buildingResult))
+            self.lbl_val_num_of_buildings_output.setText(str(len(buildingResult)))
+            self.lbl_val_num_of_invalid_bldg_output.setText(str(num_invalid_building))
         
         if num_invalid_building == 0:
             self.report_str = "All buildings are valid!"
