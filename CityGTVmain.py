@@ -4,9 +4,10 @@
 """
 import matplotlib
 matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 
-from xmlParser_Process import *
+import xmlParser_Process as xp
 from Just_Draw_gml import drawXML
 from validation_Process import *
 
@@ -37,6 +38,7 @@ import sys
 import PySide2
 from PySide2 import QtWidgets, QtGui
 import CityGTV_gui_func as gtvgf
+import transform_func as tf
 # setting environment variable for PySide2
 dirname = os.path.dirname(PySide2.__file__)
 plugin_path = os.path.join(dirname, 'plugins', 'platforms')
@@ -48,7 +50,7 @@ os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 posx = 200
 posy = 50
 width = 600
-height = 350
+height = 450
 sizefactor = 0
 sizer = True
 
@@ -111,23 +113,29 @@ class mainWindow(QtWidgets.QWidget):
 
         self.lGrid = QtWidgets.QGridLayout()
 
-        self.btn_reset = QtWidgets.QPushButton('Reset window', self)  # btn to reset window to defaults
-        self.lGrid.addWidget(self.btn_reset, 0, 0, 1, 3)
-
-        self.btn_save = QtWidgets.QPushButton('Save results', self)  # btn to jump to 'save' window
-        self.lGrid.addWidget(self.btn_save, 0, 3, 1, 3)
-
-        self.btn_search = QtWidgets.QPushButton('Search for buildings', self)  # btn to jump to 'search' window
-        self.lGrid.addWidget(self.btn_search, 1, 0, 1, 3)
+        self.btn_transformation = QtWidgets.QPushButton('Transformation', self)  # btn to reset window to defaults
+        self.lGrid.addWidget(self.btn_transformation, 0, 0, 1, 3)
 
         self.btn_validation = QtWidgets.QPushButton('Validation', self)  # btn to jump to 'validation' window
         self.lGrid.addWidget(self.btn_validation, 1, 3, 1, 3)
 
+        self.btn_crop = QtWidgets.QPushButton('Crop Dataset', self)  # btn to jump to 'save' window
+        self.lGrid.addWidget(self.btn_crop, 0, 3, 1, 3)
+
+        self.btn_visualize = QtWidgets.QPushButton('Visualize', self)  # btn to jump to 'search' window
+        self.lGrid.addWidget(self.btn_visualize, 1, 0, 1, 3)
+
+        self.btn_about = QtWidgets.QPushButton('About', self)  # btn to jump to 'about' window
+        self.lGrid.addWidget(self.btn_about, 2, 0, 1, 3)
+
+        self.btn_reset = QtWidgets.QPushButton('Reset', self)  # btn to close programme
+        self.lGrid.addWidget(self.btn_reset, 2, 3, 1, 3)
+
         self.btn_exit = QtWidgets.QPushButton('Exit', self)  # btn to jump to 'about' window
-        self.lGrid.addWidget(self.btn_exit, 2, 0, 1, 3)
+        self.lGrid.addWidget(self.btn_exit, 3, 0, 1, 3)
 
         self.btn_mainWindow = QtWidgets.QPushButton('Main Window', self)  # btn to close programme
-        self.lGrid.addWidget(self.btn_mainWindow, 2, 3, 1, 3)
+        self.lGrid.addWidget(self.btn_mainWindow, 3, 3, 1, 3)
 
         self.vbox.addLayout(self.lGrid)
 
@@ -135,6 +143,7 @@ class mainWindow(QtWidgets.QWidget):
         self.btn_select_file.clicked.connect(self.func_select_file)
         self.btn_select_folder.clicked.connect(self.func_select_folder)
         self.btn_reset.clicked.connect(self.func_new_search)
+        self.btn_transformation.clicked.connect(self.open_transformation)
 
     def func_select_file(self):
             global gmlpath, dirpath
@@ -150,6 +159,160 @@ class mainWindow(QtWidgets.QWidget):
         gmlpath = ''
         dirpath = ''
         data = []
+
+    def open_transformation(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, transformation())
+
+    # def open_transformation(self):
+    #     global posx, posy
+    #     posx, posy = gtvgf.dimensions(self)
+    #     gtvgf.next_window(self, transformation())
+    #
+    # def open_transformation(self):
+    #     global posx, posy
+    #     posx, posy = gtvgf.dimensions(self)
+    #     gtvgf.next_window(self, transformation())
+    #
+    # def open_transformation(self):
+    #     global posx, posy
+    #     posx, posy = gtvgf.dimensions(self)
+    #     gtvgf.next_window(self, transformation())
+
+
+class transformation(QtWidgets.QWidget):
+    def __init__(self):
+        # initiate the parent
+        super(transformation, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        global posx, posy, width, height, sizefactor, sizer
+        gtvgf.windowSetup(self, posx, posy, width, height, pypath, 'CityGTV - Transform CityGML Models')
+
+        # setup of gui / layout
+        self.vbox_transform = QtWidgets.QVBoxLayout()
+        self.setLayout(self.vbox_transform)
+
+        coordinateReferenceSystems = ['', 'EPSG:2056', 'EPSG:2263', 'EPSG:25830', 'EPSG:25832', 'EPSG:25833', 'EPSG:27700', 'EPSG:28992', 'EPSG:2979', 'EPSG:31256', 'EPSG:31370', 'EPSG:31467', 'EPSG:32118', 'EPSG:32626', 'EPSG:32627', 'EPSG:32628', 'EPSG:3879', 'EPSG:4326', 'EPSG:4979']
+
+        self.groupbox = QtWidgets.QGroupBox(' Coordinate Selection ')
+        self.vbox_transform.addWidget(self.groupbox)
+        self.groupbox.setStyleSheet(
+            "QGroupBox {border: 1px solid rgb(90,90,90);margin-top: 20px;} QGroupBox::title {bottom: 6px; left: 5px;}")
+
+        self.mGrid = QtWidgets.QGridLayout()
+        self.groupbox.setLayout(self.mGrid)
+
+        self.lbl_iCRS = QtWidgets.QLabel('Input CRS:')
+        self.mGrid.addWidget(self.lbl_iCRS, 0, 0, 1, 1)
+
+        self.combobox_input = QtWidgets.QComboBox()
+        self.combobox_input.addItems(coordinateReferenceSystems)
+        self.mGrid.addWidget(self.combobox_input, 0, 1, 1, 2)
+
+        self.lbl_oCRS = QtWidgets.QLabel('Output CRS:')
+        self.mGrid.addWidget(self.lbl_oCRS, 0, 4, 1, 1)
+
+        self.combobox_output = QtWidgets.QComboBox()
+        self.combobox_output.addItems(coordinateReferenceSystems)
+        self.mGrid.addWidget(self.combobox_output, 0, 5, 1, 2)
+
+        self.lbl_x = QtWidgets.QLabel('Longitude:')
+        self.mGrid.addWidget(self.lbl_x, 2, 0, 1, 1)
+
+        self.QL_x = QtWidgets.QLineEdit('')
+        self.mGrid.addWidget(self.QL_x, 2, 1, 1, 2)
+        self.QL_x.setPlaceholderText('enter longitude')
+
+        self.lbl_y = QtWidgets.QLabel('Latitude:')
+        self.mGrid.addWidget(self.lbl_y, 2, 4, 1, 1)
+
+        self.QL_y = QtWidgets.QLineEdit('')
+        self.mGrid.addWidget(self.QL_y, 2, 5, 1, 2)
+        self.QL_y.setPlaceholderText('enter latitude')
+
+        self.btn_addpoint = QtWidgets.QPushButton('Add Point', self)
+        self.mGrid.addWidget(self.btn_addpoint, 3, 5, 1, 2)
+
+        self.lbl_x_user = QtWidgets.QLabel('X coordinate:')
+        self.mGrid.addWidget(self.lbl_x_user, 5, 0, 1, 1)
+
+        self.x_user = QtWidgets.QLineEdit('')
+        self.mGrid.addWidget(self.x_user, 5, 1, 1, 2)
+        self.x_user.setPlaceholderText('X coordinate entered')
+        self.x_user.setEnabled(False)
+
+        self.lbl_y_user = QtWidgets.QLabel('Y coordinate:')
+        self.mGrid.addWidget(self.lbl_y_user, 5, 4, 1, 1)
+
+        self.y_user = QtWidgets.QLineEdit('')
+        self.mGrid.addWidget(self.y_user, 5, 5, 1, 2)
+        self.y_user.setPlaceholderText('Y coordinate entered')
+        self.y_user.setEnabled(False)
+
+
+        self.btn_delpoint = QtWidgets.QPushButton('Delete', self)
+        self.mGrid.addWidget(self.btn_delpoint, 6, 5, 1, 2)
+
+
+        self.groupbox_rotation = QtWidgets.QGroupBox('Rotation and Elevation')
+        self.vbox_transform.addWidget(self.groupbox_rotation)
+        self.groupbox_rotation.setStyleSheet(
+            "QGroupBox {border: 1px solid rgb(90,90,90);margin-top: 20px;} QGroupBox::title {bottom: 6px; left: 5px;}")
+
+        self.lGrid = QtWidgets.QGridLayout()
+        self.groupbox_rotation.setLayout(self.lGrid)
+
+        self.lbl_rotation = QtWidgets.QLabel('Enter rotation angle [-360,360]: ')
+        self.lGrid.addWidget(self.lbl_rotation, 0, 0, 1, 1)
+
+        self.line_rotation = QtWidgets.QLineEdit('')
+        self.lGrid.addWidget(self.line_rotation, 0, 1, 1, 1)
+        self.line_rotation.setPlaceholderText('0')
+
+        self.btn_rotation = QtWidgets.QPushButton('Transformation')
+        self.lGrid.addWidget(self.btn_rotation, 0, 2, 1, 1)
+
+        self.lbl_elevation = QtWidgets.QLabel('Enter elevation [m]: ')
+        self.lGrid.addWidget(self.lbl_elevation, 1, 0, 1, 1)
+
+        self.line_elevation = QtWidgets.QLineEdit('')
+        self.lGrid.addWidget(self.line_elevation, 1, 1, 1, 1)
+        self.line_rotation.setPlaceholderText('0')
+
+        self.btn_elevation = QtWidgets.QPushButton('Elevation')
+        self.lGrid.addWidget(self.btn_elevation, 1, 2, 1, 1)
+
+        self.lGrid = QtWidgets.QGridLayout()
+
+        self.btn_transform_select = QtWidgets.QPushButton('Transform')
+        self.lGrid.addWidget(self.btn_transform_select, 0, 0, 1, 1)
+
+        self.progress_bar = QtWidgets.QProgressBar(self)
+        self.lGrid.addWidget(self.progress_bar, 0, 1, 1, 2)
+
+        self.btn_back = QtWidgets.QPushButton('Back')
+        self.lGrid.addWidget(self.btn_back, 1, 0, 1, 1)
+
+        self.btn_exit_gtv = QtWidgets.QPushButton('Exit CityGTV')
+        self.lGrid.addWidget(self.btn_exit_gtv, 1, 1, 1, 1)
+
+        self.btn_exit_des = QtWidgets.QPushButton('Exit DESCity')
+        self.lGrid.addWidget(self.btn_exit_des, 1, 2, 1, 1)
+
+        self.vbox_transform.addLayout(self.lGrid)
+
+        self.btn_addpoint.clicked.connect(self.add_lat)
+        self.btn_delpoint.clicked.connect(self.delete_point)
+
+    def add_lat(self):
+        tf.transformLonLat(self)
+
+    def delete_point(self):
+        tf.delpoint(self)
+
 
 
 # from win32api import GetSystemMetrics
