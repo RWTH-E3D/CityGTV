@@ -85,7 +85,7 @@ class mainWindow(QtWidgets.QWidget):
         self.Font_i.setItalic(True)
 
         # Loading banner
-        gtvgf.load_banner(self, os.path.join(pypath, r'pictures\e3dHeader.png'), sizefactor)
+        gtvgf.load_banner(self, os.path.join(pypath, r'pictures\CityGTV_header.png'), sizefactor)
         # self.lbl_descity = QtWidgets.QLabel(DESCity)
         # self.vbox.addWidget(self.lbl_descity)
 
