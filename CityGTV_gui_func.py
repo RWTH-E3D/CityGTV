@@ -109,6 +109,6 @@ def new_search(self):
     # en/disabling buttons
     self.btn_select_file.setEnabled(True)
     self.btn_select_folder.setEnabled(True)
-    self.btn_save.setEnabled(False)
+    # self.btn_save.setEnabled(False)
     self.btn_reset.setEnabled(False)
 

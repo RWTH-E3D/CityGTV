@@ -49,8 +49,8 @@ os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 # positions and dimensions of window
 posx = 200
 posy = 50
-width = 600
-height = 450
+width = 650
+height = 750
 sizefactor = 0
 sizer = True
 
@@ -98,7 +98,7 @@ class mainWindow(QtWidgets.QWidget):
         self.textbox_gml = QtWidgets.QLineEdit('')  # textbox to display single file path
         self.textbox_gml.setReadOnly(True)
         self.textbox_gml.setPlaceholderText('.gml path')
-        self.uGrid.addWidget(self.textbox_gml, 0, 1, 1, 3)
+        self.uGrid.addWidget(self.textbox_gml, 0, 1, 1, 2)
 
         self.btn_select_folder = QtWidgets.QPushButton('Select folder for multiple files',
                                                        self)  # btn to select directory of .gml / .xml files
@@ -107,44 +107,65 @@ class mainWindow(QtWidgets.QWidget):
         self.textbox_gml_folder = QtWidgets.QLineEdit('')  # textbox to display directory path
         self.textbox_gml_folder.setReadOnly(True)
         self.textbox_gml_folder.setPlaceholderText('directory path')
-        self.uGrid.addWidget(self.textbox_gml_folder, 1, 1, 1, 3)
+        self.uGrid.addWidget(self.textbox_gml_folder, 1, 1, 1, 2)
+
+        self.btn_select_output = QtWidgets.QPushButton('Select output folder',
+                                                       self)  # btn to select directory of .gml / .xml files
+        self.uGrid.addWidget(self.btn_select_output, 2, 0, 1, 1)
+
+        self.textbox_gml_output = QtWidgets.QLineEdit('')  # textbox to display directory path
+        self.textbox_gml_output.setReadOnly(True)
+        self.textbox_gml_output.setPlaceholderText('directory path')
+        self.uGrid.addWidget(self.textbox_gml_output, 2, 1, 1, 2)
+
+        self.tbl_buildings = QtWidgets.QTableWidget()
+        self.tbl_buildings.setColumnCount(3)
+        self.tbl_buildings.setHorizontalHeaderLabels(['File Name', 'Name of Building', 'Level of Detail (LoD)'])
+        self.tbl_buildings.verticalHeader().hide()
+        # self.tbl_buildings.horizontalHeader().hide()
+        self.tbl_buildings.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tbl_buildings.setEnabled(False)
+        self.tbl_buildings.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
+        self.tbl_buildings.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        self.tbl_buildings.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+        self.uGrid.addWidget(self.tbl_buildings, 3, 0, 9, 3)
 
         self.vbox.addLayout(self.uGrid)
 
         self.lGrid = QtWidgets.QGridLayout()
 
         self.btn_transformation = QtWidgets.QPushButton('Transformation', self)  # btn to reset window to defaults
-        self.lGrid.addWidget(self.btn_transformation, 0, 0, 1, 3)
+        self.lGrid.addWidget(self.btn_transformation, 0, 0, 1, 1)
 
         self.btn_validation = QtWidgets.QPushButton('Validation', self)  # btn to jump to 'validation' window
-        self.lGrid.addWidget(self.btn_validation, 1, 3, 1, 3)
+        self.lGrid.addWidget(self.btn_validation, 0, 1, 1, 1)
 
-        self.btn_crop = QtWidgets.QPushButton('Crop Dataset', self)  # btn to jump to 'save' window
-        self.lGrid.addWidget(self.btn_crop, 0, 3, 1, 3)
+        # self.btn_crop = QtWidgets.QPushButton('Crop Dataset', self)  # btn to jump to 'save' window
+        # self.lGrid.addWidget(self.btn_crop, 0, 3, 1, 3)
 
         self.btn_visualize = QtWidgets.QPushButton('Visualize', self)  # btn to jump to 'search' window
-        self.lGrid.addWidget(self.btn_visualize, 1, 0, 1, 3)
+        self.lGrid.addWidget(self.btn_visualize, 0, 2, 1, 1)
 
         self.btn_about = QtWidgets.QPushButton('About', self)  # btn to jump to 'about' window
-        self.lGrid.addWidget(self.btn_about, 2, 0, 1, 3)
+        self.lGrid.addWidget(self.btn_about, 1, 0, 1, 1)
 
-        self.btn_reset = QtWidgets.QPushButton('Reset', self)  # btn to close programme
-        self.lGrid.addWidget(self.btn_reset, 2, 3, 1, 3)
-
-        self.btn_exit = QtWidgets.QPushButton('Exit', self)  # btn to jump to 'about' window
-        self.lGrid.addWidget(self.btn_exit, 3, 0, 1, 3)
+        # self.btn_reset = QtWidgets.QPushButton('Reset', self)  # btn to close programme
+        # self.lGrid.addWidget(self.btn_reset, 2, 3, 1, 3)
 
         self.btn_mainWindow = QtWidgets.QPushButton('Main Window', self)  # btn to close programme
-        self.lGrid.addWidget(self.btn_mainWindow, 3, 3, 1, 3)
+        self.lGrid.addWidget(self.btn_mainWindow, 1, 1, 1, 1)
+
+        self.btn_exit = QtWidgets.QPushButton('Exit', self)  # btn to jump to 'about' window
+        self.lGrid.addWidget(self.btn_exit, 1, 2, 1, 1)
 
         self.vbox.addLayout(self.lGrid)
 
         # binding buttons to functions
         self.btn_select_file.clicked.connect(self.func_select_file)
         self.btn_select_folder.clicked.connect(self.func_select_folder)
-        self.btn_reset.clicked.connect(self.func_new_search)
+        # self.btn_reset.clicked.connect(self.func_new_search)
         self.btn_transformation.clicked.connect(self.open_transformation)
-
+        self.btn_visualize.clicked.connect(self.open_visual)
 
     def func_select_file(self):
             global gmlpath, dirpath
@@ -165,6 +186,12 @@ class mainWindow(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, transformation())
+
+
+    def open_visual(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, static_visual())
 
     # def open_transformation(self):
     #     global posx, posy
@@ -197,6 +224,7 @@ class transformation(QtWidgets.QWidget):
         self.setLayout(self.vbox_transform)
 
         coordinateReferenceSystems = ['', 'EPSG:2056', 'EPSG:2263', 'EPSG:25830', 'EPSG:25832', 'EPSG:25833', 'EPSG:27700', 'EPSG:28992', 'EPSG:2979', 'EPSG:31256', 'EPSG:31370', 'EPSG:31467', 'EPSG:32118', 'EPSG:32626', 'EPSG:32627', 'EPSG:32628', 'EPSG:3879', 'EPSG:4326', 'EPSG:4979']
+
 
         self.groupbox = QtWidgets.QGroupBox(' Coordinate Selection ')
         self.vbox_transform.addWidget(self.groupbox)
@@ -320,6 +348,98 @@ class transformation(QtWidgets.QWidget):
 
     def transform_models(self):
         tf.transformmodels(self)
+
+    def func_exit(self):
+        gtvgf.close_application(self)
+
+    def back_clicked(self):
+        # def main_winodw(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, mainWindow())
+
+
+class static_visual(QtWidgets.QWidget):
+    def __init__(self):
+        # initiate the parent
+        super(static_visual, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        global posx, posy, width, height, sizefactor, sizer
+        gtvgf.windowSetup(self, posx, posy, width, height, pypath, 'CityGTV - Static Visualization CityGML Models')
+
+        # setup of gui / layout
+        self.vbox_visual = QtWidgets.QVBoxLayout()
+        self.setLayout(self.vbox_visual)
+
+        self.groupbox_visual = QtWidgets.QGroupBox()
+        self.vbox_visual.addWidget(self.groupbox_visual)
+        self.groupbox_visual.setStyleSheet(
+            "QGroupBox {border: 1px solid rgb(90,90,90);margin-top: 20px;} QGroupBox::title {bottom: 6px; left: 5px;}")
+
+        self.mGrid = QtWidgets.QGridLayout()
+        self.groupbox_visual.setLayout(self.mGrid)
+
+        self.box_input = QtWidgets.QGroupBox('Input GML Models')
+        self.mGrid.addWidget(self.box_input, 0, 0, 1, 1)
+
+        self.vboxgrid_inputvisual = QtWidgets.QGridLayout()
+        self.box_input.setLayout(self.vboxgrid_inputvisual)
+
+        self.lbl_igml_picture = QtWidgets.QLabel()
+        self.vboxgrid_inputvisual.addWidget(self.lbl_igml_picture, 0, 0, 3, 3)
+
+        self.saveas_inp = QtWidgets.QPushButton('Save As')
+        self.vboxgrid_inputvisual.addWidget(self.saveas_inp, 4, 3, 1, 1)
+
+
+        self.box_output = QtWidgets.QGroupBox('Output GML Models')
+        self.mGrid.addWidget(self.box_output, 1, 0, 1, 1)
+
+        self.vboxgrid_outputvisual = QtWidgets.QGridLayout()
+        self.box_output.setLayout(self.vboxgrid_outputvisual)
+
+        self.lbl_ogml_picture = QtWidgets.QLabel()
+        self.vboxgrid_outputvisual.addWidget(self.lbl_ogml_picture, 0, 0, 3, 3)
+
+        self.saveas_out = QtWidgets.QPushButton('Save As')
+        self.vboxgrid_outputvisual.addWidget(self.saveas_out, 4, 3, 1, 1)
+
+        # self.lbl_igml = QtWidgets.QLabel('Input GML Models')
+        # self.mGrid.addWidget(self.lbl_igml, 0, 1, 1, 2)
+
+        # self.lbl_igml_picture = QtWidgets.QLabel()
+        # self.mGrid.addWidget(self.lbl_igml_picture, 1, 0, 3, 2)
+
+        # self.saveas_inp = QtWidgets.QPushButton('Save As')
+        # self.mGrid.addWidget(self.saveas_inp, 2, 1, 1, 1)
+
+        # self.lbl_ogml = QtWidgets.QLabel('Output GML Models')
+        # self.mGrid.addWidget(self.lbl_ogml, 0, 3, 1, 2)
+
+        # self.lbl_ogml_picture = QtWidgets.QLabel()
+        # self.mGrid.addWidget(self.lbl_ogml_picture, 1, 3, 3, 2)
+        #
+        # self.saveas_out = QtWidgets.QPushButton('Save As')
+        # self.mGrid.addWidget(self.saveas_out,2, 3, 1, 1)
+
+
+        self.lGrid = QtWidgets.QGridLayout()
+
+        self.btn_back = QtWidgets.QPushButton('Back')
+        self.lGrid.addWidget(self.btn_back, 0, 0, 1, 1)
+
+        self.btn_exit_gtv = QtWidgets.QPushButton('Exit CityGTV')
+        self.lGrid.addWidget(self.btn_exit_gtv, 0, 1, 1, 1)
+
+        self.btn_exit_des = QtWidgets.QPushButton('Exit DESCity')
+        self.lGrid.addWidget(self.btn_exit_des, 0, 2, 1, 1)
+
+        self.vbox_visual.addLayout(self.lGrid)
+
+        self.btn_back.clicked.connect(self.back_clicked)
+        self.btn_exit_des.clicked.connect(self.func_exit)
 
     def func_exit(self):
         gtvgf.close_application(self)
