@@ -37,8 +37,9 @@ import os
 import sys
 import PySide2
 from PySide2 import QtWidgets, QtGui
-import CityGTV_gui_func as gtvgf
-import transform_func as tf
+import CityGTV.CityGTV_gui_func as gtvgf
+import CityGTV.transform_func as tf
+import DESmain as DES
 # setting environment variable for PySide2
 dirname = os.path.dirname(PySide2.__file__)
 plugin_path = os.path.join(dirname, 'plugins', 'platforms')
@@ -56,12 +57,13 @@ sizer = True
 
 pypath = os.path.dirname(os.path.realpath(__file__))        # path of script
 
+path_parent = os.path.dirname(os.getcwd())
 
 class mainWindow(QtWidgets.QWidget):
     def __init__(self):
         #initiate the parent
         super(mainWindow,self).__init__()
-        self.path_parent = os.path.dirname(os.getcwd())
+        # self.
         self.initUI()
 
 
@@ -166,6 +168,7 @@ class mainWindow(QtWidgets.QWidget):
         # self.btn_reset.clicked.connect(self.func_new_search)
         self.btn_transformation.clicked.connect(self.open_transformation)
         self.btn_visualize.clicked.connect(self.open_visual)
+        self.btn_validation.clicked.connect(self.open_validation)
 
     def func_select_file(self):
             global gmlpath, dirpath
@@ -192,6 +195,11 @@ class mainWindow(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, static_visual())
+
+    def open_validation(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, validationGML())
 
     # def open_transformation(self):
     #     global posx, posy
@@ -406,25 +414,6 @@ class static_visual(QtWidgets.QWidget):
         self.saveas_out = QtWidgets.QPushButton('Save As')
         self.vboxgrid_outputvisual.addWidget(self.saveas_out, 4, 3, 1, 1)
 
-        # self.lbl_igml = QtWidgets.QLabel('Input GML Models')
-        # self.mGrid.addWidget(self.lbl_igml, 0, 1, 1, 2)
-
-        # self.lbl_igml_picture = QtWidgets.QLabel()
-        # self.mGrid.addWidget(self.lbl_igml_picture, 1, 0, 3, 2)
-
-        # self.saveas_inp = QtWidgets.QPushButton('Save As')
-        # self.mGrid.addWidget(self.saveas_inp, 2, 1, 1, 1)
-
-        # self.lbl_ogml = QtWidgets.QLabel('Output GML Models')
-        # self.mGrid.addWidget(self.lbl_ogml, 0, 3, 1, 2)
-
-        # self.lbl_ogml_picture = QtWidgets.QLabel()
-        # self.mGrid.addWidget(self.lbl_ogml_picture, 1, 3, 3, 2)
-        #
-        # self.saveas_out = QtWidgets.QPushButton('Save As')
-        # self.mGrid.addWidget(self.saveas_out,2, 3, 1, 1)
-
-
         self.lGrid = QtWidgets.QGridLayout()
 
         self.btn_back = QtWidgets.QPushButton('Back')
@@ -449,6 +438,98 @@ class static_visual(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, mainWindow())
+
+class validationGML(QtWidgets.QWidget):
+    def __init__(self):
+        # initiate the parent
+        super(validationGML, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        global posx, posy, width, height, sizefactor, sizer
+        gtvgf.windowSetup(self, posx, posy, width, height, pypath, 'CityGTV - Validation of CityGML Models')
+
+        # setup of gui / layout
+        self.vbox_validate = QtWidgets.QVBoxLayout()
+        self.setLayout(self.vbox_validate)
+
+        self.groupbox_validate = QtWidgets.QGroupBox()
+        self.vbox_validate.addWidget(self.groupbox_validate)
+        self.groupbox_validate.setStyleSheet(
+            "QGroupBox {border: 1px solid rgb(90,90,90);margin-top: 20px;} QGroupBox::title {bottom: 6px; left: 5px;}")
+
+        self.mGrid_valid = QtWidgets.QGridLayout()
+        self.groupbox_validate.setLayout(self.mGrid_valid)
+
+        self.box_input_valid = QtWidgets.QGroupBox('Input GML Model: '+'xx.gml')
+        self.mGrid_valid.addWidget(self.box_input_valid, 0, 0, 1, 1)
+
+        self.vboxgrid_inputvalid = QtWidgets.QGridLayout()
+        self.box_input_valid.setLayout(self.vboxgrid_inputvalid)
+
+        self.inp_valid = QtWidgets.QPushButton('Validate')
+        self.vboxgrid_inputvalid.addWidget(self.inp_valid, 0, 2, 1, 1)
+
+        self.saveas_inp_valid = QtWidgets.QPushButton('Save As')
+        self.vboxgrid_inputvalid.addWidget(self.saveas_inp_valid, 0, 3, 1, 1)
+
+        self.lbl_igml_valid = QtWidgets.QTextEdit()
+        self.vboxgrid_inputvalid.addWidget(self.lbl_igml_valid, 1, 1, 3, 4)
+        self.lbl_igml_valid.setReadOnly(True)
+
+        self.box_output_valid = QtWidgets.QGroupBox('Output GML Models: '+'zz.gml')
+        self.mGrid_valid.addWidget(self.box_output_valid, 1, 0, 1, 1)
+
+        self.vboxgrid_outputvalid = QtWidgets.QGridLayout()
+        self.box_output_valid.setLayout(self.vboxgrid_outputvalid)
+
+        self.out_valid = QtWidgets.QPushButton('Validate')
+        self.vboxgrid_outputvalid.addWidget(self.out_valid, 0, 1, 1, 1)
+
+        self.saveas_out_valid = QtWidgets.QPushButton('Save As')
+        self.vboxgrid_outputvalid.addWidget(self.saveas_out_valid, 0, 2, 1, 1)
+
+        self.lbl_ogml_valid = QtWidgets.QTextEdit()
+        self.vboxgrid_outputvalid.addWidget(self.lbl_ogml_valid, 1, 0, 3, 4)
+
+
+
+        self.lGrid_valid = QtWidgets.QGridLayout()
+
+        self.btn_back_valid = QtWidgets.QPushButton('Back')
+        self.lGrid_valid.addWidget(self.btn_back_valid, 0, 0, 1, 1)
+
+        self.btn_exit_gtv_valid = QtWidgets.QPushButton('Exit CityGTV')
+        self.lGrid_valid.addWidget(self.btn_exit_gtv_valid, 0, 1, 1, 1)
+
+        self.btn_exit_des_valid = QtWidgets.QPushButton('Exit DESCity')
+        self.lGrid_valid.addWidget(self.btn_exit_des_valid, 0, 2, 1, 1)
+
+        self.vbox_validate.addLayout(self.lGrid_valid)
+
+        self.btn_back_valid.clicked.connect(self.back_valid_clicked)
+        self.btn_exit_des_valid.clicked.connect(self.func_exit)
+        self.btn_exit_gtv_valid.clicked.connect(self.func_exitgtv)
+
+    def back_valid_clicked(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, mainWindow())
+
+    def func_exit(self):
+        gtvgf.close_application(self)
+
+    def func_exitgtv(self):
+        global path_parent
+        os.chdir(path_parent)
+        print(path_parent)
+        self.close()
+        # DES.mainWindow()
+
+
+
+#TODO: Add no. of buildings, invalid and polygons to validation report and label.
+
 
 
 # from win32api import GetSystemMetrics
