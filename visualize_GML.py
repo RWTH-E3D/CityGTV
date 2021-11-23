@@ -253,7 +253,7 @@ def main():
     elif len(sys.argv) == 2:
         if sys.argv[1] == "-H" or sys.argv[1] == "--help":
             print("-------------------------------------------------")
-            print("python Just_Draw_gml.py [input.xml] [output.png]")
+            print("python visualize_GML.py [input.xml] [output.png]")
             print("-------------------------------------------------")
             return 0
         else:
@@ -268,7 +268,7 @@ def main():
     else:
         print(">>>ERROR: TOO MANY ARGUMENTS.")
         print("-------------------------------------------------")
-        print("python Just_Draw_gml.py [input.xml] [output.png]")
+        print("python visualize_GML.py [input.xml] [output.png]")
         print("-------------------------------------------------")
         return 0
 

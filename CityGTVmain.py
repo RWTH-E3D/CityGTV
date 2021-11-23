@@ -5,29 +5,29 @@
 import matplotlib
 matplotlib.use('Agg')
 
-import matplotlib.pyplot as plt
-
-import xmlParser_Process as xp
-from Just_Draw_gml import drawXML
-from validation_Process import *
-
-import numpy as np
-from pyproj import Proj, transform, CRS
-import multiprocessing as mp
-from multiprocessing import Process, Manager, Queue, Pool
-import time
-import sys
-import random
-import os
-import shutil
-import xml.etree.ElementTree as ET
-from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QPoint, pyqtSignal, QRectF, pyqtProperty, \
-QPropertyAnimation, QTimer, QThread, QStringListModel
-from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout, QLineEdit, QMessageBox,\
-QLabel, QPushButton, QCheckBox, QFileDialog, QMainWindow, QHBoxLayout, QGroupBox, QGridLayout, \
-QStyleFactory, QComboBox, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QFrame, QProgressBar,\
-QCompleter, QListWidget, QAbstractItemView
-from PyQt5.QtGui import QPixmap, QFont, QDesktopServices, QBrush, QColor, QPalette, QIcon
+# import matplotlib.pyplot as plt
+#
+# # import xmlParser_Process as xp
+# # import visualize_GML as vg
+# from validation_Process import *
+#
+# import numpy as np
+# from pyproj import Proj, transform, CRS
+# import multiprocessing as mp
+# from multiprocessing import Process, Manager, Queue, Pool
+# import time
+# import sys
+# import random
+# import os
+# import shutil
+# import xml.etree.ElementTree as ET
+# from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QPoint, pyqtSignal, QRectF, pyqtProperty, \
+# QPropertyAnimation, QTimer, QThread, QStringListModel
+# from PyQt5.QtWidgets import QDialog, QApplication, QPushButton, QVBoxLayout, QLineEdit, QMessageBox,\
+# QLabel, QPushButton, QCheckBox, QFileDialog, QMainWindow, QHBoxLayout, QGroupBox, QGridLayout, \
+# QStyleFactory, QComboBox, QGraphicsScene, QGraphicsView, QGraphicsPixmapItem, QFrame, QProgressBar,\
+# QCompleter, QListWidget, QAbstractItemView
+# from PyQt5.QtGui import QPixmap, QFont, QDesktopServices, QBrush, QColor, QPalette, QIcon
 
 
 
@@ -144,6 +144,7 @@ class mainWindow(QtWidgets.QWidget):
         self.btn_select_folder.clicked.connect(self.func_select_folder)
         self.btn_reset.clicked.connect(self.func_new_search)
         self.btn_transformation.clicked.connect(self.open_transformation)
+
 
     def func_select_file(self):
             global gmlpath, dirpath
@@ -280,32 +281,36 @@ class transformation(QtWidgets.QWidget):
 
         self.line_elevation = QtWidgets.QLineEdit('')
         self.lGrid.addWidget(self.line_elevation, 1, 1, 1, 1)
-        self.line_rotation.setPlaceholderText('0')
+        self.line_elevation.setPlaceholderText('0')
 
         self.btn_elevation = QtWidgets.QPushButton('Elevation')
         self.lGrid.addWidget(self.btn_elevation, 1, 2, 1, 1)
 
-        self.lGrid = QtWidgets.QGridLayout()
+        self.tlGrid = QtWidgets.QGridLayout()
 
         self.btn_transform_select = QtWidgets.QPushButton('Transform')
-        self.lGrid.addWidget(self.btn_transform_select, 0, 0, 1, 1)
+        self.tlGrid.addWidget(self.btn_transform_select, 0, 0, 1, 1)
 
         self.progress_bar = QtWidgets.QProgressBar(self)
-        self.lGrid.addWidget(self.progress_bar, 0, 1, 1, 2)
+        self.tlGrid.addWidget(self.progress_bar, 0, 1, 1, 2)
 
         self.btn_back = QtWidgets.QPushButton('Back')
-        self.lGrid.addWidget(self.btn_back, 1, 0, 1, 1)
+        self.tlGrid.addWidget(self.btn_back, 1, 0, 1, 1)
 
         self.btn_exit_gtv = QtWidgets.QPushButton('Exit CityGTV')
-        self.lGrid.addWidget(self.btn_exit_gtv, 1, 1, 1, 1)
+        self.tlGrid.addWidget(self.btn_exit_gtv, 1, 1, 1, 1)
 
         self.btn_exit_des = QtWidgets.QPushButton('Exit DESCity')
-        self.lGrid.addWidget(self.btn_exit_des, 1, 2, 1, 1)
+        self.tlGrid.addWidget(self.btn_exit_des, 1, 2, 1, 1)
 
-        self.vbox_transform.addLayout(self.lGrid)
+        self.vbox_transform.addLayout(self.tlGrid)
 
         self.btn_addpoint.clicked.connect(self.add_lat)
         self.btn_delpoint.clicked.connect(self.delete_point)
+        self.btn_transform_select.clicked.connect(self.transform_models)
+        self.btn_back.clicked.connect(self.back_clicked)
+
+        self.btn_exit_des.clicked.connect(self.func_exit)
 
     def add_lat(self):
         tf.transformLonLat(self)
@@ -313,6 +318,17 @@ class transformation(QtWidgets.QWidget):
     def delete_point(self):
         tf.delpoint(self)
 
+    def transform_models(self):
+        tf.transformmodels(self)
+
+    def func_exit(self):
+        gtvgf.close_application(self)
+
+    def back_clicked(self):
+        # def main_winodw(self):
+        global posx, posy
+        posx, posy = gtvgf.dimensions(self)
+        gtvgf.next_window(self, mainWindow())
 
 
 # from win32api import GetSystemMetrics
