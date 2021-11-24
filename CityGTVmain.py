@@ -39,7 +39,7 @@ import PySide2
 from PySide2 import QtWidgets, QtGui
 import CityGTV.CityGTV_gui_func as gtvgf
 import CityGTV.transform_func as tf
-import DESmain as DES
+import gui_funct as desgf
 # setting environment variable for PySide2
 dirname = os.path.dirname(PySide2.__file__)
 plugin_path = os.path.join(dirname, 'plugins', 'platforms')
@@ -169,6 +169,7 @@ class mainWindow(QtWidgets.QWidget):
         self.btn_transformation.clicked.connect(self.open_transformation)
         self.btn_visualize.clicked.connect(self.open_visual)
         self.btn_validation.clicked.connect(self.open_validation)
+        self.btn_mainWindow.clicked.connect(self.func_exitgtv)
 
     def func_select_file(self):
             global gmlpath, dirpath
@@ -200,6 +201,9 @@ class mainWindow(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, validationGML())
+
+    def func_exitgtv(self):
+        desgf.open_main(self)
 
     # def open_transformation(self):
     #     global posx, posy
@@ -345,7 +349,7 @@ class transformation(QtWidgets.QWidget):
         self.btn_delpoint.clicked.connect(self.delete_point)
         self.btn_transform_select.clicked.connect(self.transform_models)
         self.btn_back.clicked.connect(self.back_clicked)
-
+        self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
         self.btn_exit_des.clicked.connect(self.func_exit)
 
     def add_lat(self):
@@ -365,6 +369,9 @@ class transformation(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, mainWindow())
+
+    def func_exitgtv(self):
+        desgf.open_main(self)
 
 
 class static_visual(QtWidgets.QWidget):
@@ -429,6 +436,7 @@ class static_visual(QtWidgets.QWidget):
 
         self.btn_back.clicked.connect(self.back_clicked)
         self.btn_exit_des.clicked.connect(self.func_exit)
+        self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
 
     def func_exit(self):
         gtvgf.close_application(self)
@@ -438,6 +446,12 @@ class static_visual(QtWidgets.QWidget):
         global posx, posy
         posx, posy = gtvgf.dimensions(self)
         gtvgf.next_window(self, mainWindow())
+
+    def func_exitgtv(self):
+        desgf.open_main(self)
+
+
+
 
 class validationGML(QtWidgets.QWidget):
     def __init__(self):
@@ -520,10 +534,13 @@ class validationGML(QtWidgets.QWidget):
         gtvgf.close_application(self)
 
     def func_exitgtv(self):
-        global path_parent
-        os.chdir(path_parent)
-        print(path_parent)
-        self.close()
+        desgf.open_main(self)
+
+        # global path_parent
+        # os.chdir(path_parent)
+        # print(path_parent)
+        # self.close()
+        # os.system('python ./DESmain.py')
         # DES.mainWindow()
 
 
