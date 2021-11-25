@@ -66,39 +66,26 @@ def dimensions(self):
     return posx, posy
 
 def select_gml(self):
-    """func to selecet single .gml or .xml or .zip file"""
-    tup = QtWidgets.QFileDialog.getOpenFileName(self, 'Select file',
-                                                self.tr("*.gml;*.xml"))  # starts file selection dialog
+    """func to select file"""
+    tup = QtWidgets.QFileDialog.getOpenFileName(self, 'Select .gml or .xml file', self.tr("*.gml;*.xml"))
     path = tup[0]
-    if path.endswith('.gml') or path.endswith('.xml') or path.endswith(
-            '.zip'):  # checks if valid file has been selected
-        self.textbox_gml.setText(path)  # displaying path
-        self.btn_reset.setEnabled(True)
-        self.btn_select_folder.setEnabled(False)
-        dirpath = os.path.dirname(path)
-        return path, dirpath
-
+    if path.endswith('.gml') or path.endswith('.xml'):
+        return path
     else:
-        self.textbox_gml.setText('')  # resetting textbox for path
-        messageBox(self, 'Important',
-                      'Please select a valid .gml or .xml file')  # message-box informing about unsuccessful selection
-        return '', ''
+        self.txtB_inPath.setText('')  
+        messageBox(self, "Important", "Valid File not selected")
+        return 0
+
 
 
 def select_folder(self):
-    """func to select directory"""
-    path = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Directory')  # starts directory selection dialog
-    if path:  # checks if valid directory has been selected
-        self.textbox_gml_folder.setText(path)  # displaying path
-        self.btn_reset.setEnabled(True)
-        self.btn_run_analysis.setEnabled(True)
-        self.btn_select_file.setEnabled(False)
-        return path
+    """func to select folder"""
+    dirpath = QtWidgets.QFileDialog.getExistingDirectory(self, "Select Directory")
+    if dirpath:
+        return dirpath
     else:
-        self.textbox_gml_folder.setText('')  # resetting textbox for path
-        messageBox(self, 'Important',
-                      'Valid Folder not selected')  # message-box informing about unsuccessful selection
-    return ''
+        messageBox(self, "Important", "Valid Folder not selected")
+        return 0
 
 
 def new_search(self):

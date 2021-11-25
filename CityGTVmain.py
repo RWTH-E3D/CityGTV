@@ -37,15 +37,15 @@ import os
 import sys
 import PySide2
 from PySide2 import QtWidgets, QtGui
-import CityGTV.CityGTV_gui_func as gtvgf
-import CityGTV.transform_func as tf
-import gui_funct as desgf
+import CityGTV_gui_func as gtvgf
+import transform_func as tf
+# import gui_funct as desgf
 # setting environment variable for PySide2
 dirname = os.path.dirname(PySide2.__file__)
 plugin_path = os.path.join(dirname, 'plugins', 'platforms')
 os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 
-
+import tablestufftest as tst
 
 # positions and dimensions of window
 posx = 200
@@ -58,6 +58,8 @@ sizer = True
 pypath = os.path.dirname(os.path.realpath(__file__))        # path of script
 
 path_parent = os.path.dirname(os.getcwd())
+
+selectedBuildings = []
 
 class mainWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -121,12 +123,12 @@ class mainWindow(QtWidgets.QWidget):
         self.uGrid.addWidget(self.textbox_gml_output, 2, 1, 1, 2)
 
         self.tbl_buildings = QtWidgets.QTableWidget()
-        self.tbl_buildings.setColumnCount(3)
-        self.tbl_buildings.setHorizontalHeaderLabels(['File Name', 'Name of Building', 'Level of Detail (LoD)'])
+        self.tbl_buildings.setColumnCount(4)
+        self.tbl_buildings.setHorizontalHeaderLabels(['File Name', 'Name of Building', 'Level of Detail (LoD)', ''])
         self.tbl_buildings.verticalHeader().hide()
         # self.tbl_buildings.horizontalHeader().hide()
         self.tbl_buildings.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tbl_buildings.setEnabled(False)
+        # self.tbl_buildings.setEnabled(False)
         self.tbl_buildings.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.tbl_buildings.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         self.tbl_buildings.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
@@ -169,15 +171,50 @@ class mainWindow(QtWidgets.QWidget):
         self.btn_transformation.clicked.connect(self.open_transformation)
         self.btn_visualize.clicked.connect(self.open_visual)
         self.btn_validation.clicked.connect(self.open_validation)
-        self.btn_mainWindow.clicked.connect(self.func_exitgtv)
+        # self.btn_mainWindow.clicked.connect(self.func_exitgtv)
+        
+
+        self.buildingDict = {}
+
+
+    def onStateChanged(self):
+        """gets called when a checkbox for a building is (un)checked to update the buildingDict"""
+        ch = self.sender()
+        ix = self.tbl_buildings.indexAt(ch.pos())
+        self.buildingDict[ix.row()]["selected"] = ch.isChecked()
+        curText = self.tbl_buildings.item(ix.row(), 1).text().split('/')[0]
+        for i in range(self.tbl_buildings.rowCount()):
+            if i != ix.row():
+                if self.tbl_buildings.item(i, 1).text().split('/')[0] == curText:
+                    self.cBoxes[i].setChecked(ch.isChecked())
+                    self.buildingDict[i]["selected"] = ch.isChecked()
+    
 
     def func_select_file(self):
-            global gmlpath, dirpath
-            gmlpath, dirpath = gtvgf.select_gml(self)
+        global gmlpath, dirpath
+        res = gtvgf.select_gml(self)
+        if res:
+            gmlpath = res
+            dirpath = os.path.dirname(res)
+            self.textbox_gml.setText(res)
+            tst.get_files(self, res)
+        else:
+            self.textbox_gml.setText('')
+            gmlpath = ''
+            dirpath = ''
+
 
     def func_select_folder(self):
-            global dirpath
-            dirpath = gtvgf.select_folder(self)
+        global dirpath
+        res = gtvgf.select_folder(self)
+        if res:
+            dirpath = res
+            self.textbox_gml_folder.setText(res)
+            tst.get_files(self, res)
+        else:
+            dirpath = ''
+            self.textbox_gml_folder.setText('')
+
 
     def func_new_search(self):
         global gmlpath, dirpath, data
@@ -186,24 +223,49 @@ class mainWindow(QtWidgets.QWidget):
         dirpath = ''
         data = []
 
+    def func_select_export(self):
+        global exppath
+        res = gtvgf.select_folder(self)
+        if res: 
+            exppath = res
+            self.textbox_gml_output.setText(res)
+        else:
+            exppath = ''
+            self.textbox_gml_output.setText('')
+        
+
+
     def open_transformation(self):
-        global posx, posy
+        global posx, posy, selectedBuildings
         posx, posy = gtvgf.dimensions(self)
-        gtvgf.next_window(self, transformation())
+        res = tst.prepForExport(self)
+        if type(res) != int:
+            selectedBuildings = res
+            self.inpDir = dirpath
+            tst.runningOverDatatSet(self, res)
+            gtvgf.next_window(self, transformation())
 
 
     def open_visual(self):
-        global posx, posy
+        global posx, posy, selectedBuildings
         posx, posy = gtvgf.dimensions(self)
-        gtvgf.next_window(self, static_visual())
+        res = tst.prepForExport(self)
+        if type(res) != int:
+            selectedBuildings = res
+
+            gtvgf.next_window(self, static_visual())
 
     def open_validation(self):
-        global posx, posy
+        global posx, posy, selectedBuildings
         posx, posy = gtvgf.dimensions(self)
-        gtvgf.next_window(self, validationGML())
+        res = tst.prepForExport(self)
+        if type(res) != int:
+            selectedBuildings = res
+            gtvgf.next_window(self, validationGML())
 
     def func_exitgtv(self):
-        desgf.open_main(self)
+        # desgf.open_main(self)
+        pass
 
     # def open_transformation(self):
     #     global posx, posy
@@ -349,7 +411,7 @@ class transformation(QtWidgets.QWidget):
         self.btn_delpoint.clicked.connect(self.delete_point)
         self.btn_transform_select.clicked.connect(self.transform_models)
         self.btn_back.clicked.connect(self.back_clicked)
-        self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
+        # self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
         self.btn_exit_des.clicked.connect(self.func_exit)
 
     def add_lat(self):
@@ -371,7 +433,8 @@ class transformation(QtWidgets.QWidget):
         gtvgf.next_window(self, mainWindow())
 
     def func_exitgtv(self):
-        desgf.open_main(self)
+        # desgf.open_main(self)
+        pass
 
 
 class static_visual(QtWidgets.QWidget):
@@ -436,7 +499,7 @@ class static_visual(QtWidgets.QWidget):
 
         self.btn_back.clicked.connect(self.back_clicked)
         self.btn_exit_des.clicked.connect(self.func_exit)
-        self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
+        # self.btn_exit_gtv.clicked.connect(self.func_exitgtv)
 
     def func_exit(self):
         gtvgf.close_application(self)
@@ -448,7 +511,8 @@ class static_visual(QtWidgets.QWidget):
         gtvgf.next_window(self, mainWindow())
 
     def func_exitgtv(self):
-        desgf.open_main(self)
+        # desgf.open_main(self)
+        pass
 
 
 
@@ -534,7 +598,8 @@ class validationGML(QtWidgets.QWidget):
         gtvgf.close_application(self)
 
     def func_exitgtv(self):
-        desgf.open_main(self)
+        # desgf.open_main(self)
+        pass
 
         # global path_parent
         # os.chdir(path_parent)
