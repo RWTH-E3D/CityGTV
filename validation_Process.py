@@ -105,7 +105,7 @@ def v_readCityGML(fileName,_nameSpace):
                     newPoly.ring.append(newGeometry)
                 Building.foot.append(newPoly)
         for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
-            for Poly in foot.findall('.//gml:Polygon',_nameSpace):
+            for Poly in wall.findall('.//gml:Polygon',_nameSpace):
                 newPoly = _Polygon(Poly.attrib)
                 for Pts in Poly.findall('.//gml:posList',_nameSpace):
                     posList = np.array(str(Pts.text).split(' '))
