@@ -39,18 +39,24 @@ def readCityGML(fileName,_nameSpace):
         Building = _Building(kiminonamae)
         # seearch the XML file using the XPath format, provided by ElementTree.
         # and change the string into float arrays, stored in the Building object.
-        for Pts in bldg.findall('.//bldg:RoofSurface//gml:posList',_nameSpace):
-            posList = np.array(str(Pts.text).split(' '))
-            posList = posList.astype(np.float)
-            Building.roof.append(posList)   
-        for Pts in bldg.findall('.//bldg:GroundSurface//gml:posList',_nameSpace):
-            posList = np.array(str(Pts.text).split(' '))
-            posList = posList.astype(np.float)
-            Building.foot.append(posList)
-        for Pts in bldg.findall('.//bldg:WallSurface//gml:posList',_nameSpace):
-            posList = np.array(str(Pts.text).split(' '))
-            posList = posList.astype(np.float)
-            Building.wall.append(posList)
+        for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
+            for Poly in roof.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    Building.roof.append(posList)   
+        for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
+            for Poly in foot.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    Building.foot.append(posList)
+        for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
+            for Poly in wall.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    Building.wall.append(posList)
         # Append the object Building to our reserved list.
         buildingList.append(Building)
     # end loop of XML searching
@@ -98,25 +104,31 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
             if str(bldg.attrib) == str(building.name):
                 # roof
                 roof_mark = 0
-                for pts in bldg.findall(".//bldg:RoofSurface//gml:posList",_nameSpace): 
-                    transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
-                    seperator = ' '
-                    pts.text = seperator.join(transformedList)
-                    roof_mark += 1
+                for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
+                    for Poly in roof.findall('.//gml:Polygon',_nameSpace):
+                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                            transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
+                            seperator = ' '
+                            Pts.text = seperator.join(transformedList)
+                            roof_mark += 1
                 # foot
                 foot_mark = 0
-                for pts in bldg.findall(".//bldg:GroundSurface//gml:posList",_nameSpace):
-                    transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
-                    seperator = ' '
-                    pts.text = seperator.join(transformedList)
-                    foot_mark += 1
+                for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
+                    for Poly in foot.findall('.//gml:Polygon',_nameSpace):
+                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                            transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
+                            seperator = ' '
+                            Pts.text = seperator.join(transformedList)
+                            foot_mark += 1
                 # wall
                 wall_mark = 0
-                for pts in bldg.findall(".//bldg:WallSurface//gml:posList",_nameSpace):
-                    transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
-                    seperator = ' '
-                    pts.text = seperator.join(transformedList)
-                    wall_mark += 1      
+                for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
+                    for Poly in wall.findall('.//gml:Polygon',_nameSpace):
+                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                            transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
+                            seperator = ' '
+                            Pts.text = seperator.join(transformedList)
+                            wall_mark += 1      
         # end loop of searching for the building with same name, and go for the next building.
     # end loop of all buildings
 

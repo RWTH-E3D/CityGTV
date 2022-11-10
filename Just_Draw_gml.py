@@ -77,30 +77,36 @@ def drawXML(fileName,figureName,myDPI):
     num_building = 0
     for bldg in root.findall('.//bldg:Building',_nameSpace):
         num_building += 1
-        for pts in bldg.findall('.//bldg:RoofSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
-            roof = []
-            for j in range(int(len(posList)/3)):
-                pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
-                roof.append(pt)
-            roof_list.append(roof)
-        for pts in bldg.findall('.//bldg:GroundSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
-            foot = []
-            for j in range(int(len(posList)/3)):
-                pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
-                foot.append(pt)
-            foot_list.append(foot)
-        for pts in bldg.findall('.//bldg:WallSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
-            wall = []
-            for j in range(int(len(posList)/3)):
-                pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
-                wall.append(pt)
-            wall_list.append(wall)
+        for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
+            for Poly in roof.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    roof = []
+                    for j in range(int(len(posList)/3)):
+                        pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
+                        roof.append(pt)
+                    roof_list.append(roof)
+        for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
+            for Poly in foot.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    foot = []
+                    for j in range(int(len(posList)/3)):
+                        pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
+                        foot.append(pt)
+                    foot_list.append(foot)
+        for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
+            for Poly in wall.findall('.//gml:Polygon',_nameSpace):
+                for Pts in Poly.findall('.//gml:posList',_nameSpace):
+                    posList = np.array(str(Pts.text).split(' '))
+                    posList = posList.astype(np.float)
+                    wall = []
+                    for j in range(int(len(posList)/3)):
+                        pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
+                        wall.append(pt)
+                    wall_list.append(wall)
 
     print("Extracted " + str(num_building) + " Buildings.")
     print("Extracted " + str(len(roof_list)) + " roof surfaces.")
