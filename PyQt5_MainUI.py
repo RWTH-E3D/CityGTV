@@ -670,7 +670,7 @@ class _MainWindow(QDialog):
 
     def aboutThisTool(self):
         # open your URL
-        url = QUrl('http://gitlab.com')
+        url = QUrl('https://gitlab.e3d.rwth-aachen.de/e3d-software-tools/citygtv')
         try:
             QDesktopServices.openUrl(url)
         except:
