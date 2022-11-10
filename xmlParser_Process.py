@@ -24,6 +24,23 @@ class _Building:
         self.wall = []
 #end class _Building
 
+
+
+def getPosListOfSurface(surface_E, namespace):
+    """extracts a numpy array of coordinates from a surface"""
+    for polygon_E in surface_E.findall('.//gml:Polygon',namespace):
+        Pts = polygon_E.find('.//gml:posList',namespace)
+        if posList != None:
+            posList = np.array(str(Pts.text).split(' '))
+        else:
+            points = []
+            for Pt in polygon_E.findall('.//gml:posList', namespace):
+                points.extend([float(i) for i in Pt.split(' ')])
+            posList = np.array(points)
+    return posList.astype(np.float)
+
+
+
 # read xml and save it to cityObjs
 def readCityGML(fileName,_nameSpace):
     buildingList = []
@@ -40,23 +57,14 @@ def readCityGML(fileName,_nameSpace):
         # seearch the XML file using the XPath format, provided by ElementTree.
         # and change the string into float arrays, stored in the Building object.
         for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
-            for Poly in roof.findall('.//gml:Polygon',_nameSpace):
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    Building.roof.append(posList)   
+            posList = getPosListOfSurface(roof, _nameSpace)
+            Building.roof.append(posList)
         for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
-            for Poly in foot.findall('.//gml:Polygon',_nameSpace):
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    Building.foot.append(posList)
+            posList = getPosListOfSurface(foot, _nameSpace)
+            Building.foot.append(posList)
         for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
-            for Poly in wall.findall('.//gml:Polygon',_nameSpace):
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    Building.wall.append(posList)
+            posList = getPosListOfSurface(wall, _nameSpace)
+            Building.wall.append(posList)
         # Append the object Building to our reserved list.
         buildingList.append(Building)
     # end loop of XML searching
@@ -67,12 +75,10 @@ def readCityGML(fileName,_nameSpace):
 def getREF(root,_nameSpace,inProj,outProj):
     for obj in root.findall('core:cityObjectMember',_nameSpace):
         for foot in obj.findall('.//bldg:GroundSurface',_nameSpace):
-            for pts in foot.findall('.//gml:posList',_nameSpace):
-                posList = np.array(str(pts.text).split(' '))
-                posList = posList.astype(np.float)
-                pt_REF = np.array([posList[0],posList[1],posList[2]])
-                pt_REF[0],pt_REF[1] = transform(inProj,outProj,pt_REF[0],pt_REF[1])
-                return pt_REF
+            posList = getPosListOfSurface(foot, _nameSpace)
+            pt_REF = np.array([posList[0],posList[1],posList[2]])
+            pt_REF[0],pt_REF[1] = transform(inProj,outProj,pt_REF[0],pt_REF[1])
+            return pt_REF
     return 0
 
 def getCenter(building):
@@ -99,6 +105,7 @@ def getCenter(building):
 # export the xml file
 def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
     root = tree.getroot()
+    seperator = ' '
     for bldg in root.findall(".//bldg:Building",_nameSpace):
         for building in buildingList:
             if str(bldg.attrib) == str(building.name):
@@ -106,29 +113,41 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                 roof_mark = 0
                 for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
                     for Poly in roof.findall('.//gml:Polygon',_nameSpace):
-                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                            transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
-                            seperator = ' '
-                            Pts.text = seperator.join(transformedList)
-                            roof_mark += 1
+                        Pts = Poly.find('.//gml:posList',_nameSpace)
+                        if Pts == None:
+                            linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pts)
+                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                        transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
+                        Pts.text = seperator.join(transformedList)
+                        roof_mark += 1
                 # foot
                 foot_mark = 0
                 for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
                     for Poly in foot.findall('.//gml:Polygon',_nameSpace):
-                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                            transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
-                            seperator = ' '
-                            Pts.text = seperator.join(transformedList)
-                            foot_mark += 1
+                        Pts = Poly.find('.//gml:posList',_nameSpace)
+                        if Pts == None:
+                            linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pts)
+                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                        transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
+                        Pts.text = seperator.join(transformedList)
+                        foot_mark += 1
                 # wall
                 wall_mark = 0
                 for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
                     for Poly in wall.findall('.//gml:Polygon',_nameSpace):
-                        for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                            transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
-                            seperator = ' '
-                            Pts.text = seperator.join(transformedList)
-                            wall_mark += 1      
+                        Pts = Poly.find('.//gml:posList',_nameSpace)
+                        if Pts == None:
+                            linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pts)
+                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                        transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
+                        Pts.text = seperator.join(transformedList)
+                        wall_mark += 1      
         # end loop of searching for the building with same name, and go for the next building.
     # end loop of all buildings
 
