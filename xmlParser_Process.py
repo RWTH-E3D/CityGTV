@@ -30,11 +30,11 @@ def getPosListOfSurface(surface_E, namespace):
     """extracts a numpy array of coordinates from a surface"""
     for polygon_E in surface_E.findall('.//gml:Polygon',namespace):
         Pts = polygon_E.find('.//gml:posList',namespace)
-        if posList != None:
+        if Pts != None:
             posList = np.array(str(Pts.text).split(' '))
         else:
             points = []
-            for Pt in polygon_E.findall('.//gml:posList', namespace):
+            for Pt in polygon_E.findall('.//gml:pos', namespace):
                 points.extend([float(i) for i in Pt.split(' ')])
             posList = np.array(points)
     return posList.astype(np.float)
@@ -116,8 +116,8 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                         Pts = Poly.find('.//gml:posList',_nameSpace)
                         if Pts == None:
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pts)
+                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pt)
                             Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
                         transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
                         Pts.text = seperator.join(transformedList)
@@ -129,8 +129,8 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                         Pts = Poly.find('.//gml:posList',_nameSpace)
                         if Pts == None:
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pts)
+                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pt)
                             Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
                         transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
                         Pts.text = seperator.join(transformedList)
@@ -142,8 +142,8 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                         Pts = Poly.find('.//gml:posList',_nameSpace)
                         if Pts == None:
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pts in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pts)
+                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                linearRing.remove(Pt)
                             Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
                         transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
                         Pts.text = seperator.join(transformedList)
