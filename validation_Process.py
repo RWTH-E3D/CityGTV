@@ -83,7 +83,7 @@ def getNewPolyOfPolygon(polygon_E, parent_E, namespace):
     else:
         points = []
         for Pt in polygon_E.findall('.//gml:pos', namespace):
-            points.extend([float(i) for i in Pt.split(' ')])
+            points.extend([float(i) for i in Pt.text.split(' ')])
         posList = np.array(points)
     posList = posList.astype(np.float)
     newGeometry = _Geometry(parent_E.attrib, posList)
