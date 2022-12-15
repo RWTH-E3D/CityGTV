@@ -7,10 +7,12 @@ import time
 import xml.etree.ElementTree as ET
 import numpy as np
 import multiprocessing as mp
+import functools
 
 
 import gui_fucntions as gf
 import xmlParser_Process as xmlPP
+import validation_Process as valP
 
 # positions and dimensions of window
 POSX = 275
@@ -68,7 +70,7 @@ class MainWindow(QtWidgets.QWidget):
         self.vbox.addWidget(self.btn_visualisation)
 
         self.btn_validation = QtWidgets.QPushButton("Validation")
-        self.btn_validation.setEnabled(True)
+        self.btn_validation.setEnabled(False)
         self.vbox.addWidget(self.btn_validation)
         
         self.bGrid = QtWidgets.QGridLayout()
@@ -114,6 +116,7 @@ class MainWindow(QtWidgets.QWidget):
         self.version = 0
         self.buildingList = []
         self.isTransformed = True
+        self.filename_input = None
 
 
     def func_close(self) -> None:
@@ -121,14 +124,12 @@ class MainWindow(QtWidgets.QWidget):
 
 
     def input_xml(self):
-        self.filename_input = QtWidgets.QFileDialog.getOpenFileName(self, 'Select Input GML')[0]
-        print("InputGML=",self.filename_input)
+        tmp_path = QtWidgets.QFileDialog.getOpenFileName(self, 'Select Input GML')[0]
 
-        if self.filename_input:
-            self.txtB_input_file.setText(self.filename_input)
+        if os.path.isfile(tmp_path):
             try:
                 # determine _nameSpace for XML parser
-                with open(self.filename_input,"r") as fileHandle:
+                with open(tmp_path,"r") as fileHandle:
                     for line in fileHandle.readlines():
                         #print("current line = ",line)
                         if str(line).find("citygml/1.0")!= -1:
@@ -146,7 +147,9 @@ class MainWindow(QtWidgets.QWidget):
                         print("CityGML Version Not Supported.")
                         return -1
                 #file closed
-            
+                self.filename_input = tmp_path
+                self.txtB_input_file.setText(self.filename_input)
+
                 self.buildingList = xmlPP.readCityGML(self.filename_input,self._nameSpace)
                 tmp_text = 'InputGML File Information:  CityGML Version = '+str(self.version)+\
                 '.0    Number of buildings = '+str(len(self.buildingList))
@@ -301,12 +304,14 @@ class TransformationWindow(QtWidgets.QWidget):
         self.coor_grid.addWidget(self.lbl_lat, 1, 0, 1, 6)
 
         self.txtB_lat = QtWidgets.QLineEdit("")
+        self.txtB_lat.setPlaceholderText("50.775428")
         self.coor_grid.addWidget(self.txtB_lat, 1, 6, 1, 6)
 
         self.lbl_lon = QtWidgets.QLabel("Lon=")
         self.coor_grid.addWidget(self.lbl_lon, 1, 12, 1, 6)
 
         self.txtB_lon = QtWidgets.QLineEdit("")
+        self.txtB_lon.setPlaceholderText("6.083808")
         self.coor_grid.addWidget(self.txtB_lon, 1, 18, 1, 6)
 
         self.btn_transform_desitnation = QtWidgets.QPushButton("Transform to [X,Y,Z] for Output CRS")
@@ -324,19 +329,22 @@ class TransformationWindow(QtWidgets.QWidget):
         self.coor_grid.addWidget(self.lbl_x, 5, 0, 1, 5)
 
         self.txtB_x = QtWidgets.QLineEdit("")
+        self.txtB_x.setEnabled(False)
         self.coor_grid.addWidget(self.txtB_x, 5, 5, 1, 5)
 
         self.lbl_y = QtWidgets.QLabel("Y=")
         self.coor_grid.addWidget(self.lbl_y, 5,  10, 1, 5)
 
         self.txtB_y = QtWidgets.QLineEdit("")
+        self.txtB_y.setEnabled(False)
         self.coor_grid.addWidget(self.txtB_y, 5, 15, 1, 5)
 
-        self.lbl_z = QtWidgets.QLabel("Z=")
-        self.coor_grid.addWidget(self.lbl_z, 5, 20, 1, 5)
+        # self.lbl_z = QtWidgets.QLabel("Z=")
+        # self.coor_grid.addWidget(self.lbl_z, 5, 20, 1, 5)
 
-        self.txtB_z = QtWidgets.QLineEdit("")
-        self.coor_grid.addWidget(self.txtB_z, 5, 25, 1, 5)
+        # self.txtB_z = QtWidgets.QLineEdit("")
+        # self.txtB_z.setEnabled(True)
+        # self.coor_grid.addWidget(self.txtB_z, 5, 25, 1, 5)
 
 
         self.groupB_rotation = QtWidgets.QGroupBox("Rotation")
@@ -350,13 +358,11 @@ class TransformationWindow(QtWidgets.QWidget):
         self.lbl_rotation_description = QtWidgets.QLabel("Use Center of input CityGML file as pivot point")
         self.rot_grid.addWidget(self.lbl_rotation_description, 0, 0, 1, 4)
 
-        self.btn_rotation_help = QtWidgets.QPushButton("Help")
-        self.rot_grid.addWidget(self.btn_rotation_help, 0, 5, 1, 1)
-
-        self.lbl_rotation_input = QtWidgets.QLabel("Please enter roation in degrees:")
-        self.rot_grid.addWidget(self.lbl_rotation_input, 1, 1, 1, 3)
+        self.lbl_rotation_input = QtWidgets.QLabel("Please enter roation in degree [-360,360]:")
+        self.rot_grid.addWidget(self.lbl_rotation_input, 1, 0, 1, 3)
 
         self.txtB_rotation = QtWidgets.QLineEdit("0")
+        self.txtB_rotation.setToolTip("A positive angle will rotate buildings in a counterclockwise direction\nA negative value will rotate buildings in a clockwise direction")
         self.rot_grid.addWidget(self.txtB_rotation, 1, 3, 1, 3)
 
 
@@ -367,9 +373,6 @@ class TransformationWindow(QtWidgets.QWidget):
 
         self.ele_grid = QtWidgets.QGridLayout()
         self.groupB_elevation.setLayout(self.ele_grid)
-
-        self.btn_elevation_help = QtWidgets.QPushButton("Help")
-        self.ele_grid.addWidget(self.btn_elevation_help, 0, 5, 1, 1)
 
         self.lbl_elevation = QtWidgets.QLabel("Please enter elevation value")
         self.ele_grid.addWidget(self.lbl_elevation, 1, 0, 1, 3)
@@ -417,7 +420,7 @@ class TransformationWindow(QtWidgets.QWidget):
 
             self.txtB_x.setText(str(x))
             self.txtB_y.setText(str(y))
-            self.txtB_z.setText("0")
+            # self.txtB_z.setText("0")
 
         except:
             gf.messageBox(self, "Error", "Error within CRS transformation")
@@ -445,7 +448,7 @@ class TransformationWindow(QtWidgets.QWidget):
         try:
             tp_x = float(self.txtB_x.text())
             tp_y = float(self.txtB_y.text())
-            tp_z = float(self.txtB_z.text())
+            tp_z = 0
             angle = float(self.txtB_rotation.text())
             elevationChange = float(self.txtB_elevation.text())
         except:
