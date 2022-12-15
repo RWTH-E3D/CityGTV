@@ -168,6 +168,7 @@ class MainWindow(QtWidgets.QWidget):
         if self.workingDirectory:
             self.txtB_output_folder.setText(self.workingDirectory)
             self.btn_transformation.setEnabled(True)
+            self.btn_validation.setEnabled(True)
         else:
             self.txtB_output_folder.setText('No Folder Selected')
 
@@ -233,21 +234,165 @@ class ValidationWindow(QtWidgets.QWidget):
         self.vbox = QtWidgets.QVBoxLayout()
         self.setLayout(self.vbox)
 
+        self.tbl_vali = QtWidgets.QTableWidget()
+        self.tbl_vali.setColumnCount(4)
+        self.tbl_vali.setHorizontalHeaderLabels(["Filename", "NO. of Buildings in Total:", "NO. of Buildings Invalid:", "NO. of Invalid Polygons:"])
+        self.tbl_vali.verticalHeader().hide()
+        for i in range(self.tbl_vali.columnCount()):
+            self.tbl_vali.horizontalHeader().setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+        self.vbox.addWidget(self.tbl_vali)
+
         self.hbox = QtWidgets.QHBoxLayout()
         self.vbox.addLayout(self.hbox)
 
-        self.vbox_in = QtWidgets.QVBoxLayout()
-        self.hbox.addLayout(self.vbox_in)
+        self.btn_save_in = QtWidgets.QPushButton("Save input file validation report")
+        self.btn_save_in.setEnabled(False)
+        self.hbox.addWidget(self.btn_save_in)
 
-        self.btn_validate_input = QtWidgets.QPushButton("Validate input CityGML")
-        self.vbox_in.addWidget(self.btn_validate_input)
+        self.btn_save_out = QtWidgets.QPushButton("Save output file validation report")
+        self.btn_save_out.setEnabled(False)
+        self.hbox.addWidget(self.btn_save_out)
 
-        self.groupB_in = QtWidgets.QGroupBox()
-        self.vbox_in_gpB = QtWidgets.QVBoxLayout()
-        self.groupB_in.setLayout(self.vbox_in_gpB)
+        self.btn_back = QtWidgets.QPushButton("Close validation results")
+        self.vbox.addWidget(self.btn_back)
 
-        self.vbox_out = QtWidgets.QVBoxLayout()
-        self.hbox.addLayout(self.vbox_out)
+        self.btn_back.clicked.connect(self.func_close)
+        self.btn_save_in.clicked.connect(functools.partial(self.saveReport, True))
+        self.btn_save_out.clicked.connect(functools.partial(self.saveReport, False))
+
+        self.report_in = None
+        self.report_out = None
+        self.thread_vali = ValidationThread()
+
+        self.validate_file(self.input_file, True)
+
+            
+
+
+    def func_close(self) -> None:
+        self.parent.show()
+        self.hide()
+
+
+    def validate_file(self, filename: str, is_input: bool):
+        """validates citygml file"""
+        buildingList = valP.v_readCityGML(filename, self.parent._nameSpace)
+        print("Number buildings = ",len(buildingList))
+
+        self.thread_vali = ValidationThread()
+        self.thread_vali.filename = filename
+        self.thread_vali.buildingList = buildingList
+        self.thread_vali.isInput = is_input
+        self.thread_vali.finished.connect(self.validationCompleted)
+        self.thread_vali.start()
+
+
+    def validationCompleted(self, is_input:bool):
+        """displays validation results"""
+        is_input = is_input[0]
+
+        report_str = ""
+        num_invalid_geometry = 0
+        num_invalid_building = 0
+
+        buildingResult = self.thread_vali.buildingResult
+
+        for i in range(len(buildingResult)):
+            invalidOne = buildingResult[i]
+            if invalidOne.cmt == "Valid":
+                continue
+            else:
+                num_invalid_building += 1
+                for roof in invalidOne.roof:
+                    if roof.cmt != "Valid":
+                        num_invalid_geometry += 1
+                        newInvalidStr = str(num_invalid_geometry)+". In Building = "+str(invalidOne.name)+\
+                        ";\n\n Roof Issue = "+str(roof.name)+"\n\n"+str(roof.cmt)+\
+                        "------------------------------------------------------------------------\n\n"
+                        #print("Building No ",i,">>",newInvalidStr)
+                        report_str += newInvalidStr
+                for foot in invalidOne.foot:
+                    if foot.cmt != "Valid":
+                        num_invalid_geometry += 1
+                        newInvalidStr = str(num_invalid_geometry)+". In This Building = "\
+                        +str(invalidOne.name)+\
+                        ";\n\n Foot Issue = "+str(foot.name)+"\n\n"+str(foot.cmt)+\
+                        "------------------------------------------------------------------------\n\n"   
+                        #print("Building No ",i,">>",newInvalidStr)
+                        report_str += newInvalidStr
+                for wall in invalidOne.wall:
+                    if wall.cmt != "Valid":
+                        num_invalid_geometry += 1
+                        newInvalidStr = str(num_invalid_geometry)+". In Building = "+str(invalidOne.name)+\
+                        ";\n\n Wall Issue = "+str(wall.name)+"\n\n"+str(wall.cmt)+\
+                        "------------------------------------------------------------------------\n\n"   
+                        #print("Building No ",i,">>",newInvalidStr)
+                        report_str += newInvalidStr
+
+
+        
+        row_count = self.tbl_vali.rowCount()
+        self.tbl_vali.insertRow(row_count)
+        for i, entry in enumerate([os.path.basename(self.thread_vali.filename), len(buildingResult), num_invalid_building, num_invalid_geometry]):
+            item = QtWidgets.QTableWidgetItem(str(entry))
+            self.tbl_vali.setItem(row_count, i, item)
+
+        print("number of invalid LinearRings = ",num_invalid_geometry)
+        print("cpu_count = ",mp.cpu_count())
+        print("number of invalid Buildings = ",num_invalid_building,"/",len(buildingResult))
+        
+        if is_input:
+            self.report_in = report_str
+            self.btn_save_in.setEnabled(True)
+            if os.path.isfile(self.output_file):
+                self.validate_file(self.output_file, False)
+        else:
+            self.report_out = report_str
+            self.btn_save_out.setEnabled(True)
+
+
+
+    def saveReport(self, is_input:bool) -> None:
+        if is_input:
+            self.fileNameReport_input = self.parent.workingDirectory+"/Validation_report_for_inputGML.txt"
+            with open(self.fileNameReport_input,'w') as f_handle:
+                f_handle.write(self.report_in)
+        else:
+            self.fileNameReport_output = self.parent.workingDirectory+"/Validation_report_for_outputGML.txt"
+            with open(self.fileNameReport_output,'w') as f_handle:
+                f_handle.write(self.report_out)
+
+        gf.messageBox(self, "Info", "Validation Report Saved")
+
+
+
+
+class ValidationThread(QtCore.QThread):
+    finished = QtCore.Signal(list)
+    def __init__(self, parent=None):
+        super(ValidationThread, self).__init__(parent)
+        self.filename = ""
+        self.buildingList = []
+        self.manager = mp.Manager()
+        self.buildingResult = self.manager.list()
+        self.isInput = True
+
+    def run(self):
+        #self.do_work()
+
+        pool = mp.Pool()
+        pool.starmap(valP.validation,\
+            [(self.buildingList,self.buildingResult,loc) for loc in range(len(self.buildingList))])
+
+        pool.close()
+        pool.join()
+        
+        # Update buildingList with the buildingResult, which contains the transformation results.
+        print("number of results",len(self.buildingResult))
+        print("cpu_count = ",mp.cpu_count())
+          
+        self.finished.emit([self.isInput])
+
 
 
 
