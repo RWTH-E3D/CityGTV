@@ -16,6 +16,23 @@ import math
 import sys
 import time
 
+
+
+def getPosListOfSurface(surface_E, namespace):
+    """extracts a numpy array of coordinates from a surface"""
+    for polygon_E in surface_E.findall('.//gml:Polygon',namespace):
+        Pts = polygon_E.find('.//gml:posList',namespace)
+        if Pts != None:
+            posList = np.array(str(Pts.text).split(' '))
+        else:
+            points = []
+            for Pt in polygon_E.findall('.//gml:pos', namespace):
+                points.extend([float(i) for i in Pt.text.split(' ')])
+            posList = np.array(points)
+    return posList.astype(np.float)
+
+
+
 '''
 Just Draw a gml, no CRS transformation included.
 '''
@@ -77,25 +94,22 @@ def drawXML(fileName,figureName,myDPI):
     num_building = 0
     for bldg in root.findall('.//bldg:Building',_nameSpace):
         num_building += 1
-        for pts in bldg.findall('.//bldg:RoofSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
+        for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
+            posList = getPosListOfSurface(roof, _nameSpace)
             roof = []
             for j in range(int(len(posList)/3)):
                 pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
                 roof.append(pt)
             roof_list.append(roof)
-        for pts in bldg.findall('.//bldg:GroundSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
+        for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
+            posList = getPosListOfSurface(foot, _nameSpace)
             foot = []
             for j in range(int(len(posList)/3)):
                 pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
                 foot.append(pt)
             foot_list.append(foot)
-        for pts in bldg.findall('.//bldg:WallSurface//gml:posList',_nameSpace):
-            posList = np.array(str(pts.text).split(' '))
-            posList = posList.astype(np.float)
+        for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
+            posList = getPosListOfSurface(wall, _nameSpace)
             wall = []
             for j in range(int(len(posList)/3)):
                 pt = [posList[3*j],posList[3*j+1],posList[3*j+2]]
@@ -279,8 +293,3 @@ if __name__ == "__main__":
     start_time = time.time()
     main()
     print("--- %s seconds ---" % (time.time() - start_time))
-
-
-
-
-

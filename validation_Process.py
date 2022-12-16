@@ -72,6 +72,26 @@ class _Building:
         self.cmt = "Valid"  
 #end class _Building
 
+
+
+def getNewPolyOfPolygon(polygon_E, parent_E, namespace):
+    """creates newPoly from polygon"""
+    newPoly = _Polygon(polygon_E.attrib)
+    Pts = polygon_E.find('.//gml:posList', namespace)
+    if Pts != None:
+        posList = np.array(str(Pts.text).split(' '))
+    else:
+        points = []
+        for Pt in polygon_E.findall('.//gml:pos', namespace):
+            points.extend([float(i) for i in Pt.text.split(' ')])
+        posList = np.array(points)
+    posList = posList.astype(np.float)
+    newGeometry = _Geometry(parent_E.attrib, posList)
+    newPoly.ring.append(newGeometry)
+    return newPoly
+
+
+
 # read xml and save it to cityObjs
 def v_readCityGML(fileName,_nameSpace):
     buildingList = []
@@ -88,30 +108,15 @@ def v_readCityGML(fileName,_nameSpace):
         # and change the string into float arrays, stored in the Building object.
         for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
             for Poly in roof.findall('.//gml:Polygon',_nameSpace):
-                newPoly = _Polygon(Poly.attrib)
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    newGeometry = _Geometry(roof.attrib, posList)
-                    newPoly.ring.append(newGeometry)
+                newPoly = getNewPolyOfPolygon(Poly, roof, _nameSpace)
                 Building.roof.append(newPoly)   
         for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
             for Poly in foot.findall('.//gml:Polygon',_nameSpace):
-                newPoly = _Polygon(Poly.attrib)
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    newGeometry = _Geometry(foot.attrib,posList)
-                    newPoly.ring.append(newGeometry)
+                newPoly = getNewPolyOfPolygon(Poly, foot, _nameSpace)
                 Building.foot.append(newPoly)
         for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
-            for Poly in foot.findall('.//gml:Polygon',_nameSpace):
-                newPoly = _Polygon(Poly.attrib)
-                for Pts in Poly.findall('.//gml:posList',_nameSpace):
-                    posList = np.array(str(Pts.text).split(' '))
-                    posList = posList.astype(np.float)
-                    newGeometry = _Geometry(wall.attrib,posList)
-                    newPoly.ring.append(newGeometry)
+            for Poly in wall.findall('.//gml:Polygon',_nameSpace):
+                newPoly = getNewPolyOfPolygon(Poly, wall, _nameSpace)
                 Building.wall.append(newPoly)
         # Append the object Building to our reserved list.
         buildingList.append(Building)
