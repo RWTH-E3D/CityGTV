@@ -1,7 +1,7 @@
 # import of libraries
 import os
 import sys
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets, QtCore, QtGui
 import pyproj
 import time
 import xml.etree.ElementTree as ET
@@ -9,10 +9,10 @@ import numpy as np
 import multiprocessing as mp
 import functools
 
-
 import gui_fucntions as gf
 import xmlParser_Process as xmlPP
 import validation_Process as valP
+import Just_Draw_gml as drawP
 
 # positions and dimensions of window
 POSX = 275
@@ -87,6 +87,7 @@ class MainWindow(QtWidgets.QWidget):
         self.btn_select_input.clicked.connect(self.input_xml)
         self.btn_select_output.clicked.connect(self.func_select_folder)
         self.btn_transformation.clicked.connect(self.func_open_transformation)
+        self.btn_visualisation.clicked.connect(self.func_open_visualisation)
         self.btn_validation.clicked.connect(self.func_open_validation)
 
         """some variables"""
@@ -180,7 +181,7 @@ class MainWindow(QtWidgets.QWidget):
 
     def func_open_visualisation(self):
         """opens visualisation window"""
-        self.visualisation = VisualisationWindow()
+        self.visualisation = VisualisationWindow(self)
         self.visualisation.show()
         self.hide()
 
@@ -200,25 +201,68 @@ class VisualisationWindow(QtWidgets.QWidget):
         self.initUI()
 
     def initUI(self):
-        gf.windowSetup(self, POSX +100, POSY +100, WIDTH, HEIGHT + (300*SIZEFACTOR), "CityGTV - Building Visualisation", SIZEFACTOR)
+        gf.windowSetup(self, POSX +100, POSY +100, WIDTH + (300*SIZEFACTOR), HEIGHT + (100*SIZEFACTOR), "CityGTV - Building Visualisation", SIZEFACTOR)
 
-        self.vbox = QtWidgets.QVBoxLayout()
-        self.setLayout(self.vbox)
+        self.grid = QtWidgets.QGridLayout()
+        self.setLayout(self.grid)
 
-        self.hbox = QtWidgets.QHBoxLayout()
-        self.vbox.addLayout(self.hbox)
+        self.lbl_input = QtWidgets.QLabel(os.path.basename(self.input_file))
+        self.grid.addWidget(self.lbl_input, 0, 0, 1, 1,)
 
-        self.groupB_in = QtWidgets.QGroupBox()
-        self.in_grid = QtWidgets.QGridLayout()
-        self.groupB_in.setLayout(self.in_grid)
-        self.hbox.addWidget(self.groupB_in)
+        self.lbl_output = QtWidgets.QLabel(os.path.basename(self.output_file))
+        self.grid.addWidget(self.lbl_output, 0, 1, 1, 1)
 
-        self.lbl_input = QtWidgets.QLabel(self.input_file)
-        self.in_grid.addWidget(self.lbl_input)
+        self.lbl_input_pic = QtWidgets.QLabel("Loading...")
+        self.grid.addWidget(self.lbl_input_pic, 1, 0, 1, 1)
 
-        """missing"""
+        self.lbl_output_pic = QtWidgets.QLabel("Loading...")
+        self.grid.addWidget(self.lbl_output_pic, 1, 1, 1, 1)
 
+        self.btn_back = QtWidgets.QPushButton("Close visualisation")
+        self.grid.addWidget(self.btn_back, 2, 0, 1, 2)
 
+        self.btn_back.clicked.connect(self.func_back)
+
+        input_pngname = os.path.join(self.parent.workingDirectory, os.path.basename(self.input_file).rsplit(".", 1)[0] + ".png")
+        drawP.drawXML(self.input_file, input_pngname)
+
+        self.pixm_in = QtGui.QPixmap(input_pngname)
+        self.lbl_input_pic.setPixmap(self.pixm_in)
+        self.lbl_input_pic.setScaledContents(True)
+        self.lbl_input_pic.setFixedSize(QtCore.QSize(400*SIZEFACTOR, 400*SIZEFACTOR))
+
+        if os.path.isfile(self.output_file):
+            output_pngname = os.path.join(self.parent.workingDirectory, os.path.basename(self.output_file).rsplit(".", 1)[0] + ".png")
+            drawP.drawXML(self.output_file, output_pngname)
+            self.pixm_out = QtGui.QPixmap(output_pngname)
+            self.lbl_output_pic.setPixmap(self.pixm_out)
+            self.lbl_output_pic.setScaledContents(True)
+            self.lbl_output_pic.setFixedSize(QtCore.QSize(400*SIZEFACTOR, 400*SIZEFACTOR))
+        else:
+            self.lbl_output_pic.setText("please transform file first")
+
+    def func_back(self):
+        self.parent.show()
+        self.hide()
+    
+
+class VisualisationThread(QtCore.QThread):
+    finished = QtCore.Signal(str)
+    def __init__(self, filename: str) -> None:
+        super(VisualisationThread, self).__init__()
+        self.filename = filename
+
+    def run(self) -> None:
+        print(f"rendering {self.filename}")
+        pngname = self.filename.rsplit(".", 1)[0] + ".png"
+        drawP.drawXML(self.filename, pngname)
+        # print(f"dummy drawing {self.filename}")
+        # # time.sleep(3)
+        # dummy.bing(self.filename, pngname)
+        print("done drawing")
+        self.finished.emit(pngname)
+
+    
 class ValidationWindow(QtWidgets.QWidget):
     def __init__(self, parent: MainWindow) -> None:
         super(ValidationWindow, self).__init__()
@@ -228,7 +272,7 @@ class ValidationWindow(QtWidgets.QWidget):
         self.initUI()
 
     def initUI(self) -> None:
-        gf.windowSetup(self, POSX +100, POSY +100, WIDTH, HEIGHT + (300*SIZEFACTOR), "CityGTV - CityGML Validation", SIZEFACTOR)
+        gf.windowSetup(self, POSX +100, POSY +100, WIDTH, HEIGHT, "CityGTV - CityGML Validation", SIZEFACTOR)
 
 
         self.vbox = QtWidgets.QVBoxLayout()
@@ -289,7 +333,6 @@ class ValidationWindow(QtWidgets.QWidget):
 
     def validationCompleted(self, is_input:bool):
         """displays validation results"""
-        is_input = is_input[0]
 
         report_str = ""
         num_invalid_geometry = 0
@@ -368,7 +411,7 @@ class ValidationWindow(QtWidgets.QWidget):
 
 
 class ValidationThread(QtCore.QThread):
-    finished = QtCore.Signal(list)
+    finished = QtCore.Signal(bool)
     def __init__(self, parent=None):
         super(ValidationThread, self).__init__(parent)
         self.filename = ""
@@ -391,7 +434,7 @@ class ValidationThread(QtCore.QThread):
         print("number of results",len(self.buildingResult))
         print("cpu_count = ",mp.cpu_count())
           
-        self.finished.emit([self.isInput])
+        self.finished.emit(self.isInput)
 
 
 
