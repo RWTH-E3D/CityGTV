@@ -149,7 +149,7 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                         Pts.text = seperator.join(transformedList)
                         wall_mark += 1
 
-                for i in range(1, 4):
+                for i in range(1, 5):
                     for inter in bldg.findall(f".//bldg:lod{i}TerrainIntersection", _nameSpace):
                         bldg.remove(inter)     
 
