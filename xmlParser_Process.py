@@ -147,7 +147,12 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
                             Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
                         transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
                         Pts.text = seperator.join(transformedList)
-                        wall_mark += 1      
+                        wall_mark += 1
+
+                for i in range(1, 4):
+                    for inter in bldg.findall(f".//bldg:lod{i}TerrainIntersection", _nameSpace):
+                        bldg.remove(inter)     
+
         # end loop of searching for the building with same name, and go for the next building.
     # end loop of all buildings
 
