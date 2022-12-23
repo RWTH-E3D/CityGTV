@@ -2,4 +2,4 @@ numpy
 matplotlib
 pandas
 pyproj
-PyQt5
+PySide6
