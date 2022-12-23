@@ -4,7 +4,6 @@
 """
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 
 from xmlParser_Process import *
 from Just_Draw_gml import drawXML
@@ -18,7 +17,6 @@ import time
 import sys
 import random
 import os
-import shutil
 import xml.etree.ElementTree as ET
 from PyQt5.QtCore import Qt, QUrl, QCoreApplication, QPoint, pyqtSignal, QRectF, pyqtProperty, \
 QPropertyAnimation, QTimer, QThread, QStringListModel

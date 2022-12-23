@@ -4,15 +4,10 @@
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-from matplotlib import cm
 
 import xml.etree.ElementTree as ET
 import numpy as np
-from pyproj import Proj, transform
-import re
-import math
 import sys
 import time
 
@@ -29,7 +24,7 @@ def getPosListOfSurface(surface_E, namespace):
             for Pt in polygon_E.findall('.//gml:pos', namespace):
                 points.extend([float(i) for i in Pt.text.split(' ')])
             posList = np.array(points)
-    return posList.astype(np.float)
+    return posList.astype(np.float64)
 
 
 

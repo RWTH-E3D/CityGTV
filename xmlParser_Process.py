@@ -37,7 +37,7 @@ def getPosListOfSurface(surface_E, namespace):
             for Pt in polygon_E.findall('.//gml:pos', namespace):
                 points.extend([float(i) for i in Pt.text.split(' ')])
             posList = np.array(points)
-    return posList.astype(np.float)
+    return posList.astype(np.float64)
 
 
 

@@ -24,12 +24,10 @@ Maybe later on, we will try to delete the invalid building from the xml (build a
 
 import xml.etree.ElementTree as ET
 import numpy as np
-from pyproj import Proj, transform
 import multiprocessing as mp
 from multiprocessing import Process, Manager, Queue, Pool
 import time
 import sys
-import math
 
 
 # Classes for storing data extracted from xml and transformation made by pyproj;
@@ -85,7 +83,7 @@ def getNewPolyOfPolygon(polygon_E, parent_E, namespace):
         for Pt in polygon_E.findall('.//gml:pos', namespace):
             points.extend([float(i) for i in Pt.text.split(' ')])
         posList = np.array(points)
-    posList = posList.astype(np.float)
+    posList = posList.astype(np.float64)
     newGeometry = _Geometry(parent_E.attrib, posList)
     newPoly.ring.append(newGeometry)
     return newPoly
