@@ -112,35 +112,47 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS =
                 # roof
                 roof_mark = 0
                 for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
-                    for Poly in roof.findall('.//gml:Polygon',_nameSpace):
-                        Pts = Poly.find('.//gml:posList',_nameSpace)
-                        if Pts == None:
+                    roof.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{roof.attrib['{http://www.opengis.net/gml}id']}")
+                    for multi in roof.findall('.//gml:MultiSurface', _nameSpace):
+                        multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                        for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                            Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pt)
-                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
-                        transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
-                        Pts.text = seperator.join(transformedList)
-                        roof_mark += 1
+                            linearRing.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{linearRing.attrib['{http://www.opengis.net/gml}id']}")
+                            Pts = linearRing.find('.//gml:posList',_nameSpace)
+                            if Pts == None:
+                                for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                    linearRing.remove(Pt)
+                                Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                            transformedList = ['{:.8f}'.format(x) for x in building.roof[roof_mark]]
+                            Pts.text = seperator.join(transformedList)
+                            roof_mark += 1
                 # foot
                 foot_mark = 0
                 for foot in bldg.findall('.//bldg:GroundSurface',_nameSpace):
-                    for Poly in foot.findall('.//gml:Polygon',_nameSpace):
-                        Pts = Poly.find('.//gml:posList',_nameSpace)
-                        if Pts == None:
+                    foot.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{foot.attrib['{http://www.opengis.net/gml}id']}")
+                    for multi in foot.findall('.//gml:MultiSurface', _nameSpace):
+                        multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                        for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                            Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pt)
-                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
-                        transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
-                        Pts.text = seperator.join(transformedList)
-                        foot_mark += 1
+                            linearRing.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{linearRing.attrib['{http://www.opengis.net/gml}id']}")
+                            Pts = linearRing.find('.//gml:posList',_nameSpace)
+                            if Pts == None:
+                                for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                    linearRing.remove(Pt)
+                                Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                            transformedList = ['{:.8f}'.format(x) for x in building.foot[foot_mark]]
+                            Pts.text = seperator.join(transformedList)
+                            foot_mark += 1
                 # wall
                 wall_mark = 0
                 for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
-                    for Poly in wall.findall('.//gml:Polygon',_nameSpace):
-                        Pts = Poly.find('.//gml:posList',_nameSpace)
-                        if Pts == None:
+                    wall.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{wall.attrib['{http://www.opengis.net/gml}id']}")
+                    for multi in wall.findall('.//gml:MultiSurface', _nameSpace):
+                        multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                        for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                            Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
                             for Pt in linearRing.findall('.//gml:pos',_nameSpace):
                                 linearRing.remove(Pt)
