@@ -170,6 +170,7 @@ class MainWindow(QtWidgets.QWidget):
             self.txtB_output_folder.setText(self.workingDirectory)
             self.btn_transformation.setEnabled(True)
             self.btn_validation.setEnabled(True)
+            self.btn_visualisation.setEnabled(True)
         else:
             self.txtB_output_folder.setText('No Folder Selected')
 
@@ -240,6 +241,45 @@ class VisualisationWindow(QtWidgets.QWidget):
             self.lbl_output_pic.setFixedSize(QtCore.QSize(400*SIZEFACTOR, 400*SIZEFACTOR))
         else:
             self.lbl_output_pic.setText("please transform file first")
+
+        self.scale = 1
+        self.lbl_input_pic.installEventFilter(self)
+
+    def eventFilter(self, watched: QtCore.QObject, event: QtCore.QEvent) -> bool:
+        if watched is self.lbl_input_pic or watched is self.lbl_output_pic and event.type() == QtCore.QEvent.Wheel:
+            if 'angleDelta' in dir(event):
+                if self.lbl_input_pic.underMouse():
+                    pos = self.lbl_input.mapFromGlobal(QtGui.QCursor.pos())
+                elif self.lbl_output_pic.underMouse():
+                    pos = self.lbl_output.mapFromGlobal(QtGui.QCursor.pos())
+                x, y = pos.x(), pos.y()
+                if event.angleDelta().y() > 0:
+                    self.scale *= 0.9
+                    img_in = self.pixm_in.toImage()
+                    img_out = self.pixm_out.toImage()
+                    scaled = img_in.height() * self.scale
+                    x *= img_in.width() /self.lbl_input_pic.width()
+                    y *= img_in.height() /self.lbl_input_pic.height()
+                    img_in_copy = img_in.copy(max(0, min(x - (scaled / 2), 1000 - scaled)),max(0, min(y - (scaled / 2), 1000 - scaled)), scaled, scaled)
+                    img_out_copy = img_out.copy(max(0, min(x - (scaled / 2), 1000 - scaled)),max(0, min(y - (scaled / 2), 1000 - scaled)), scaled, scaled)
+                    self.lbl_input_pic.setPixmap(QtGui.QPixmap(img_in_copy))
+                    self.lbl_output_pic.setPixmap(QtGui.QPixmap(img_out_copy))
+                elif event.angleDelta().y() < 0:
+                    self.scale /= 0.9
+                    if self.scale >= 1:
+                        self.scale = 1
+                        self.lbl_input_pic.setPixmap(self.pixm_in)
+                        self.lbl_output_pic.setPixmap(self.pixm_out)
+                    img_out = self.pixm_out.toImage()
+                    img_in = self.pixm_in.toImage()
+                    scaled = img_in.height() * self.scale
+                    x *= img_in.width() /self.lbl_input_pic.width()
+                    y *= img_in.height() /self.lbl_input_pic.height()
+                    img_in_copy = img_in.copy(max(0, min(x - (scaled / 2), 1000 - scaled)),max(0, min(y - (scaled / 2), 1000 - scaled)), scaled, scaled)
+                    img_out_copy = img_out.copy(max(0, min(x - (scaled / 2), 1000 - scaled)),max(0, min(y - (scaled / 2), 1000 - scaled)), scaled, scaled)
+                    self.lbl_input_pic.setPixmap(QtGui.QPixmap(img_in_copy))
+                    self.lbl_output_pic.setPixmap(QtGui.QPixmap(img_out_copy))
+        return super().eventFilter(watched, event)
 
     def func_back(self):
         self.parent.show()
@@ -743,7 +783,6 @@ class TransformationWindow(QtWidgets.QWidget):
     def close_transformation(self):
         # back to MainWindow and close the sub-window.
         if self.parent.isTransformed == True:
-            self.parent.btn_visualisation.setEnabled(True)
             self.parent.btn_validation.setEnabled(True)
         self.parent.show()
         self.close()
