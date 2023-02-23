@@ -125,10 +125,10 @@ def drawXML(fileName,figureName):
         for pt in roof:
             totalPts.append(pt)
     for foot in foot_list:
-        for pt in roof:
+        for pt in foot:
             totalPts.append(pt)
     for wall in wall_list:
-        for pt in roof:
+        for pt in wall:
             totalPts.append(pt)
     
     totalPts = np.array(totalPts)
