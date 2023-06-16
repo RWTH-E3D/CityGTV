@@ -30,9 +30,9 @@ The CityGTV is currently being developed. Currently the CityGTV is available in 
 
 ### Dependencies
 
-CityGTV is currently being developed using Python 3.5+ and PyQt5 python bindings. However in future, the developers will make it usable with other versions of python 3. 
+CityGTV is currently being developed using Python 3.5+ and PySide6 python bindings. However in future, the developers will make it usable with other versions of python 3. 
 Futhermore, the following external libraries/python packages are used in the different functionalities of CityGTV:
-1. PyQt5
+1. PySide6
 2. numpy
 3. matplotlib
 4. pandas

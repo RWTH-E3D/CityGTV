@@ -31,7 +31,7 @@ def getPosListOfSurface(surface_E, namespace):
 '''
 Just Draw a gml, no CRS transformation included.
 '''
-def drawXML(fileName,figureName,myDPI):
+def drawXML(fileName,figureName):
     # change the font size here if needed
     plt.rcParams.update({'font.size': 14})
 
@@ -125,10 +125,10 @@ def drawXML(fileName,figureName,myDPI):
         for pt in roof:
             totalPts.append(pt)
     for foot in foot_list:
-        for pt in roof:
+        for pt in foot:
             totalPts.append(pt)
     for wall in wall_list:
-        for pt in roof:
+        for pt in wall:
             totalPts.append(pt)
     
     totalPts = np.array(totalPts)
@@ -138,7 +138,7 @@ def drawXML(fileName,figureName,myDPI):
 
     #---------------------------------------------------------------------------------------
     # Drawings
-    fig = plt.figure(dpi=myDPI, figsize=(16,9))
+    fig = plt.figure(figsize=[10,10], dpi=100)
     ax1 = fig.add_subplot(111,projection='3d')
     lineWidth = 0.5
 
@@ -281,8 +281,7 @@ def main():
         print("-------------------------------------------------")
         return 0
 
-    myDPI = 500
-    drawXML(fileName,figureName,myDPI)
+    drawXML(fileName,figureName)
 
 if __name__ == "__main__":
     start_time = time.time()
