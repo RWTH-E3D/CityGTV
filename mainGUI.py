@@ -608,6 +608,23 @@ class TransformationWindow(QtWidgets.QWidget):
         self.txtB_elevation = QtWidgets.QLineEdit("0")
         self.ele_grid.addWidget(self.txtB_elevation, 1, 3, 1, 3)
 
+        self.groubB_additional = QtWidgets.QGroupBox("Additional settings")
+        self.vbox.addWidget(self.groubB_additional)
+
+        self.additional_grid = QtWidgets.QGridLayout()
+        self.groubB_additional.setLayout(self.additional_grid)
+
+        self.lbl_newCRS = QtWidgets.QLabel("srsName:")
+        self.additional_grid.addWidget(self.lbl_newCRS, 0, 0, 1, 2)
+
+        self.txtB_newCRS = QtWidgets.QLineEdit("")
+        self.txtB_newCRS.setPlaceholderText("can be left empty if input CRS = output CRS")
+        self.additional_grid.addWidget(self.txtB_newCRS, 0, 2, 1, 3)
+
+        self.btn_crsDocu = QtWidgets.QPushButton("Documentation")
+        self.additional_grid.addWidget(self.btn_crsDocu, 0, 5, 1, 1)
+        
+
         self.progressBar = QtWidgets.QProgressBar()
         self.progressBar.setValue(0)
         self.vbox.addWidget(self.progressBar)
@@ -629,6 +646,11 @@ class TransformationWindow(QtWidgets.QWidget):
         self.groupB_rotation.setEnabled(True)
 
         self.buildingSelectionList = []
+
+        self.btn_crsDocu.clicked.connect(self.openGuide)
+
+    def openGuide(self):
+        os.startfile(r"https://en.wiki.quality.sig3d.org/index.php/Modeling_Guide_for_3D_Objects_-_Part_2:_Modeling_of_Buildings_(LoD1,_LoD2,_LoD3)#Reference_Coordinate_System:~:text=as%20semantic%20objects.-,Reference%20Coordinate%20System,-CityGML%202.0%20strongly")
 
 
     def transformLonLat(self):
@@ -754,6 +776,15 @@ class TransformationWindow(QtWidgets.QWidget):
         self.workerThread.selectionReference = self.buildingSelectionList
         self.workerThread._nameSpace = self.parent._nameSpace
 
+        # check if new srsName definition is needed
+        if self.combB_input_crs.currentText() != self.combB_output_crs.currentText():
+           if self.txtB_newCRS.text() == "":
+               gf.messageBox(self, "Error", "Please set a new srsName")
+               return 1
+        
+        if self.txtB_newCRS.text() != "":
+            self.workerThread.newCRS = self.txtB_newCRS.text()
+
         # make progressBar alive
         self.progressBar.setRange(0,len(self.parent.buildingList))
         self.progressBar.setValue(0)
@@ -810,6 +841,7 @@ class WorkerThread(QtCore.QThread):
         self.fileName_exported = ""
         self.selectionReference = []
         self._nameSpace = {"key":"value"}
+        self.newCRS = None
 
     def run(self):
         #self.do_work()
@@ -831,10 +863,13 @@ class WorkerThread(QtCore.QThread):
         print("number of results",len(self.buildingResult))
         print("cpu_count = ",mp.cpu_count())
         print("Transformation completed successfully.")
-        
+
+        lowerCorner, upperCorner = xmlPP.getCorners(self.fileName_input, self._nameSpace)
+        corners = xmlPP.calculateNewCorners(lowerCorner, upperCorner, inProj, outProj, self.OFFSET, self.angle, self.elevationChange)
+
         # export the List to an XML
         xmlPP.treeWriter(self.fileName_exported,ET.parse(self.fileName_input),\
-            self.buildingResult,self._nameSpace)
+            self.buildingResult,self._nameSpace, corners, self.newCRS)
         
         self.finished.emit(float(time.time()-start_time))
 

@@ -195,7 +195,7 @@ def getCorners(filename:str, _nameSpace: dict) -> list[list]:
     x_min, y_min, z_min = lowerCorner_E.text.split(" ")
     upperCorner_E = root.find('.//gml:Envelope/gml:upperCorner',_nameSpace)
     x_max, y_max, z_max = upperCorner_E.text.split(" ")
-    return [[x_min, y_min, z_min], [x_max, y_max, z_max]]
+    return [[float(x_min), float(y_min), float(z_min)], [float(x_max), float(y_max), float(z_max)]]
 
 
 def calculateNewCorners(lowerCorner: list, upperCorner: list, inProj, outProj, offset, angle: float, elevation: float) -> list[list]:
@@ -222,7 +222,7 @@ def calculateNewCorners(lowerCorner: list, upperCorner: list, inProj, outProj, o
 
     z_min += elevation
     z_max += elevation
-    return [[min(x_s), min(y_s), z_min], [max(x_s), max(y_s), z_max]]
+    return [[str(min(x_s)), str(min(y_s)), str(z_min)], [str(max(x_s)), str(max(y_s)), str(z_max)]]
 
 
 
