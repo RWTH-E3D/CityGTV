@@ -623,6 +623,9 @@ class TransformationWindow(QtWidgets.QWidget):
 
         self.btn_crsDocu = QtWidgets.QPushButton("Documentation")
         self.additional_grid.addWidget(self.btn_crsDocu, 0, 5, 1, 1)
+
+        self.cB_anonymize = QtWidgets.QCheckBox("Anonymize data (change building ID and delete address)")
+        self.additional_grid.addWidget(self.cB_anonymize, 1, 0, 1, 5)
         
 
         self.progressBar = QtWidgets.QProgressBar()
@@ -775,6 +778,7 @@ class TransformationWindow(QtWidgets.QWidget):
         self.workerThread.fileName_exported = fileName_exported
         self.workerThread.selectionReference = self.buildingSelectionList
         self.workerThread._nameSpace = self.parent._nameSpace
+        self.workerThread.anonymize = self.cB_anonymize.isChecked()
 
         # check if new srsName definition is needed
         if self.combB_input_crs.currentText() != self.combB_output_crs.currentText():
@@ -842,6 +846,7 @@ class WorkerThread(QtCore.QThread):
         self.selectionReference = []
         self._nameSpace = {"key":"value"}
         self.newCRS = None
+        self.anonymize = False
 
     def run(self):
         #self.do_work()
@@ -869,7 +874,7 @@ class WorkerThread(QtCore.QThread):
 
         # export the List to an XML
         xmlPP.treeWriter(self.fileName_exported,ET.parse(self.fileName_input),\
-            self.buildingResult,self._nameSpace, corners, self.newCRS)
+            self.buildingResult,self._nameSpace, corners, self.newCRS, self.anonymize)
         
         self.finished.emit(float(time.time()-start_time))
 

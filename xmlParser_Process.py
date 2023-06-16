@@ -13,6 +13,7 @@ from multiprocessing import Process, Manager, Queue, Pool
 import time
 import sys
 from math import sin,cos
+import uuid
 
 # A Class for storing data extracted from xml and transformation made by pyproj;
 # Use the name property as a reference to find the right place in the original XML file.
@@ -103,12 +104,22 @@ def getCenter(building):
     return center
 
 # export the xml file
-def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS = None):
+def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS = None, anonymize= False):
     root = tree.getroot()
     seperator = ' '
+    baseName = "RWTHE3DCityGTV"
+    anonymizeDict = {}
     for bldg in root.findall(".//bldg:Building",_nameSpace):
         for building in buildingList:
             if str(bldg.attrib) == str(building.name):
+                # anonymize data by adding uuid as building id and deleting address
+                if anonymize:
+                    anonymized = baseName + str(uuid.uuid4())
+                    anonymizeDict[bldg.attrib["{http://www.opengis.net/gml}id"]] = anonymized
+                    bldg.attrib["{http://www.opengis.net/gml}id"] = anonymized
+                    addresses =  bldg.findall("./bldg:address", _nameSpace)
+                    for i in addresses:
+                        bldg.remove(i) 
                 # roof
                 roof_mark = 0
                 for roof in bldg.findall('.//bldg:RoofSurface',_nameSpace):
@@ -184,6 +195,13 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS =
 
     # change the output file name here:
     tree.write(fileName_exported,xml_declaration=True,encoding='utf-8', method="xml")
+
+    # write translation file for building gml:id's
+    if anonymizeDict != {}:
+        dictFileName = fileName_exported.replace("Transformation_Result.gml", "anonymize.csv")
+        with open(dictFileName, "w") as f:
+            for key, value in anonymizeDict.items():
+                f.write(f"{key},{value}\n")
     return 0
 
 
