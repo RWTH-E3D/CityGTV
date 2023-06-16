@@ -23,8 +23,8 @@ class _Building:
         self.roof = []
         self.foot = []
         self.wall = []
+        self.buildingParts = []
 #end class _Building
-
 
 
 def getPosListOfSurface(surface_E, namespace):
@@ -66,6 +66,26 @@ def readCityGML(fileName,_nameSpace):
         for wall in bldg.findall('.//bldg:WallSurface',_nameSpace):
             posList = getPosListOfSurface(wall, _nameSpace)
             Building.wall.append(posList)
+
+        # check for buildingPart:
+        bps_in_bldg = bldg.findall('./bldg:consistsOfBuildingPart', _nameSpace)
+        for i, co_bp_E in enumerate(bps_in_bldg):
+            bp_E = co_bp_E.find('bldg:BuildingPart', _nameSpace)
+            BuildingPart = _Building(f"bp_{i}")
+            # seearch the XML file using the XPath format, provided by ElementTree.
+            # and change the string into float arrays, stored in the Building object.
+            for roof in bp_E.findall('.//bldg:RoofSurface',_nameSpace):
+                posList = getPosListOfSurface(roof, _nameSpace)
+                BuildingPart.roof.append(posList)
+            for foot in bp_E.findall('.//bldg:GroundSurface',_nameSpace):
+                posList = getPosListOfSurface(foot, _nameSpace)
+                BuildingPart.foot.append(posList)
+            for wall in bp_E.findall('.//bldg:WallSurface',_nameSpace):
+                posList = getPosListOfSurface(wall, _nameSpace)
+                BuildingPart.wall.append(posList)
+            Building.buildingParts.append(BuildingPart)
+
+        
         # Append the object Building to our reserved list.
         buildingList.append(Building)
     # end loop of XML searching
@@ -117,7 +137,7 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS =
                     anonymized = baseName + str(uuid.uuid4())
                     anonymizeDict[bldg.attrib["{http://www.opengis.net/gml}id"]] = anonymized
                     bldg.attrib["{http://www.opengis.net/gml}id"] = anonymized
-                    addresses =  bldg.findall("./bldg:address", _nameSpace)
+                    addresses =  bldg.findall(".bldg:address", _nameSpace)
                     for i in addresses:
                         bldg.remove(i) 
                 # roof
@@ -165,16 +185,90 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS =
                         for Poly in multi.findall('.//gml:Polygon',_nameSpace):
                             Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
                             linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
-                            for Pt in linearRing.findall('.//gml:pos',_nameSpace):
-                                linearRing.remove(Pt)
-                            Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
-                        transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
-                        Pts.text = seperator.join(transformedList)
-                        wall_mark += 1
+                            Pts = linearRing.find('.//gml:posList',_nameSpace)
+                            if Pts == None:
+                                for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                    linearRing.remove(Pt)
+                                Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                            transformedList = ['{:.8f}'.format(x) for x in building.wall[wall_mark]]
+                            Pts.text = seperator.join(transformedList)
+                            wall_mark += 1
 
                 for i in range(1, 5):
-                    for inter in bldg.findall(f".//bldg:lod{i}TerrainIntersection", _nameSpace):
+                    for inter in bldg.findall(f".bldg:lod{i}TerrainIntersection", _nameSpace):
                         bldg.remove(inter)     
+
+                bps_in_bldg = bldg.findall('./bldg:consistsOfBuildingPart', _nameSpace)
+                for i, co_bp_E in enumerate(bps_in_bldg):
+                    buildPart = building.buildingParts[i]
+                    bp_E = co_bp_E.find('bldg:BuildingPart', _nameSpace)
+                    # anonymize data by adding uuid as building id and deleting address
+                    if anonymize:
+                        anonymized = baseName + str(uuid.uuid4())
+                        anonymizeDict[bp_E.attrib["{http://www.opengis.net/gml}id"]] = anonymized
+                        bp_E.attrib["{http://www.opengis.net/gml}id"] = anonymized
+                        addresses =  bp_E.findall(".bldg:address", _nameSpace)
+                        for i in addresses:
+                            bp_E.remove(i)
+                    
+                    # roof
+                    roof_mark = 0
+                    for roof in bp_E.findall('.//bldg:RoofSurface',_nameSpace):
+                        roof.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{roof.attrib['{http://www.opengis.net/gml}id']}")
+                        for multi in roof.findall('.//gml:MultiSurface', _nameSpace):
+                            multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                            for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                                Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
+                                linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                                linearRing.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{linearRing.attrib['{http://www.opengis.net/gml}id']}")
+                                Pts = linearRing.find('.//gml:posList',_nameSpace)
+                                if Pts == None:
+                                    for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                        linearRing.remove(Pt)
+                                    Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                                transformedList = ['{:.8f}'.format(x) for x in buildPart.roof[roof_mark]]
+                                Pts.text = seperator.join(transformedList)
+                                roof_mark += 1
+                    # foot
+                    foot_mark = 0
+                    for foot in bp_E.findall('.//bldg:GroundSurface',_nameSpace):
+                        foot.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{foot.attrib['{http://www.opengis.net/gml}id']}")
+                        for multi in foot.findall('.//gml:MultiSurface', _nameSpace):
+                            multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                            for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                                Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
+                                linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                                linearRing.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{linearRing.attrib['{http://www.opengis.net/gml}id']}")
+                                Pts = linearRing.find('.//gml:posList',_nameSpace)
+                                if Pts == None:
+                                    for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                        linearRing.remove(Pt)
+                                    Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                                transformedList = ['{:.8f}'.format(x) for x in buildPart.foot[foot_mark]]
+                                Pts.text = seperator.join(transformedList)
+                                foot_mark += 1
+                    # wall
+                    wall_mark = 0
+                    for wall in bp_E.findall('.//bldg:WallSurface',_nameSpace):
+                        wall.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{wall.attrib['{http://www.opengis.net/gml}id']}")
+                        for multi in wall.findall('.//gml:MultiSurface', _nameSpace):
+                            multi.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{multi.attrib['{http://www.opengis.net/gml}id']}")
+                            for Poly in multi.findall('.//gml:Polygon',_nameSpace):
+                                Poly.set(ET.QName(_nameSpace["gml"], "id"), f"CityGTV_{Poly.attrib['{http://www.opengis.net/gml}id']}")
+                                linearRing = Poly.find('.//gml:LinearRing',_nameSpace)
+                                Pts = linearRing.find('.//gml:posList',_nameSpace)
+                                if Pts == None:
+                                    for Pt in linearRing.findall('.//gml:pos',_nameSpace):
+                                        linearRing.remove(Pt)
+                                    Pts = ET.SubElement(linearRing, ET.QName(_nameSpace["gml"], "posList"))
+                                transformedList = ['{:.8f}'.format(x) for x in buildPart.wall[wall_mark]]
+                                Pts.text = seperator.join(transformedList)
+                                wall_mark += 1
+
+
+                    for i in range(1, 5):
+                        for inter in bp_E.findall(f".bldg:lod{i}TerrainIntersection", _nameSpace):
+                            bp_E.remove(inter)
 
         # end loop of searching for the building with same name, and go for the next building.
     # end loop of all buildings
@@ -307,6 +401,63 @@ def crsTransformPool(buildingList,buildingResult,loc,OFFSET,inProj,outProj,angle
             else:
                 proxy.wall[wj][3*k] = res_x
                 proxy.wall[wj][3*k+1] = res_y
+
+    for buildPart in proxy.buildingParts:
+        # pivot in the original CRS
+        pivot = getCenter(buildPart)
+        resX, resY = transform(inProj,outProj,pivot[0],pivot[1])
+        pivot = [resX+OFFSET[0], resY+OFFSET[1]]
+
+        # roof
+        for rj in range(len(buildPart.roof)):
+            # select the j_th roof in ".roof" 
+            posList = buildPart.roof[rj]
+            for k in range(int(len(posList)/3)):
+                res_x,res_y = transform(inProj,outProj,posList[3*k], posList[3*k+1])
+                res_x = res_x + OFFSET[0]
+                res_y = res_y + OFFSET[1]
+                if buildingName in selectionReference:
+                    dx = (res_x - pivot[0])*cos(angle)-(res_y - pivot[1])*sin(angle)
+                    dy = (res_x - pivot[0])*sin(angle)+(res_y - pivot[1])*cos(angle)
+                    buildPart.roof[rj][3*k] = dx+ pivot[0]
+                    buildPart.roof[rj][3*k+1] = dy + pivot[1]
+                    buildPart.roof[rj][3*k+2]+= elevation       
+                else:
+                    buildPart.roof[rj][3*k] = res_x
+                    buildPart.roof[rj][3*k+1] = res_y  
+        # foot
+        for fj in range(len(buildPart.foot)):
+            posList = buildPart.foot[fj]
+            for k in range(int(len(posList)/3)):
+                res_x,res_y = transform(inProj,outProj,posList[3*k], posList[3*k+1])
+                res_x = res_x + OFFSET[0]
+                res_y = res_y + OFFSET[1]
+                if buildingName in selectionReference:
+                    dx = (res_x - pivot[0])*cos(angle)-(res_y - pivot[1])*sin(angle)
+                    dy = (res_x - pivot[0])*sin(angle)+(res_y - pivot[1])*cos(angle)
+                    buildPart.foot[fj][3*k] = dx+ pivot[0]
+                    buildPart.foot[fj][3*k+1] = dy + pivot[1]
+                    buildPart.foot[fj][3*k+2]+= elevation
+                else:
+                    buildPart.foot[fj][3*k] = res_x
+                    buildPart.foot[fj][3*k+1] = res_y
+        # wall
+        for wj in range(len(buildPart.wall)): 
+            posList = buildPart.wall[wj]
+            for k in range(int(len(posList)/3)):
+                res_x,res_y = transform(inProj,outProj,posList[3*k], posList[3*k+1])
+                res_x = res_x + OFFSET[0]
+                res_y = res_y + OFFSET[1]
+                if buildingName in selectionReference:
+                    dx = (res_x - pivot[0])*cos(angle)-(res_y - pivot[1])*sin(angle)
+                    dy = (res_x - pivot[0])*sin(angle)+(res_y - pivot[1])*cos(angle)
+                    buildPart.wall[wj][3*k] = dx+ pivot[0]
+                    buildPart.wall[wj][3*k+1] = dy + pivot[1]
+                    buildPart.wall[wj][3*k+2]+= elevation
+                else:
+                    buildPart.wall[wj][3*k] = res_x
+                    buildPart.wall[wj][3*k+1] = res_y
+
     # save the transformed results 
     buildingResult.append(proxy)
     #print("---In a single loop: %s seconds ---" % (time.time() - single_start_time))
