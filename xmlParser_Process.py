@@ -103,7 +103,7 @@ def getCenter(building):
     return center
 
 # export the xml file
-def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
+def treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners, newCRS = None):
     root = tree.getroot()
     seperator = ' '
     for bldg in root.findall(".//bldg:Building",_nameSpace):
@@ -156,6 +156,16 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
         # end loop of searching for the building with same name, and go for the next building.
     # end loop of all buildings
 
+    # update CRS
+    if newCRS != None:
+        envelope_E = root.find('.//gml:Envelope',_nameSpace)
+        envelope_E.attrib["srsName"] = newCRS
+
+    lowerCorner_E = root.find('.//gml:Envelope/gml:lowerCorner',_nameSpace)
+    lowerCorner_E.text = " ".join(corners[0])
+    upperCorner_E = root.find('.//gml:Envelope/gml:upperCorner',_nameSpace)
+    upperCorner_E.text = " ".join(corners[1])
+
     # ElementTree has to register all the nameSpaces(xmlns) manually. Otherwise, the export'll be wrong.
     for key in _nameSpace.keys():
         ET.register_namespace(str(key),str(_nameSpace[key]))
@@ -163,6 +173,46 @@ def treeWriter(fileName_exported,tree,buildingList,_nameSpace):
     # change the output file name here:
     tree.write(fileName_exported,xml_declaration=True,encoding='utf-8', method="xml")
     return 0
+
+
+def getCorners(filename:str, _nameSpace: dict) -> list[list]:
+    """gets corners from filename"""
+    tree = ET.parse(filename)
+    root = tree.getroot()
+    lowerCorner_E = root.find('.//gml:Envelope/gml:lowerCorner',_nameSpace)
+    x_min, y_min, z_min = lowerCorner_E.text.split(" ")
+    upperCorner_E = root.find('.//gml:Envelope/gml:upperCorner',_nameSpace)
+    x_max, y_max, z_max = upperCorner_E.text.split(" ")
+    return [[x_min, y_min, z_min], [x_max, y_max, z_max]]
+
+
+def calculateNewCorners(lowerCorner: list, upperCorner: list, inProj, outProj, offset, angle: float, elevation: float) -> list[list]:
+    """transforms the coordinates of the input """
+    angle = angle/180*(np.pi)
+    x_min, y_min, z_min = lowerCorner
+    x_max, y_max, z_max = upperCorner
+    pivot = [(x_min + x_max) / 2, (y_min + y_max) / 2]
+    resX, resY = transform(inProj, outProj, pivot[0], pivot[1])
+    pivot = [resX+offset[0], resY+offset[1]]
+
+    x_s = []
+    y_s = []
+
+    for x_coor, y_coor in [[x_min, y_min], [x_max, y_min], [x_max, y_max], [x_min, y_max]]:
+        res_x,res_y = transform(inProj,outProj, x_coor, y_coor)
+        res_x = res_x + offset[0]
+        res_y = res_y + offset[1]
+
+        dx = (res_x - pivot[0])*cos(angle)-(res_y - pivot[1])*sin(angle)
+        dy = (res_x - pivot[0])*sin(angle)+(res_y - pivot[1])*cos(angle)
+        x_s.append(dx + pivot[0])
+        y_s.append(dy + pivot[1])
+
+    z_min += elevation
+    z_max += elevation
+    return [[min(x_s), min(y_s), z_min], [max(x_s), max(y_s), z_max]]
+
+
 
 def crsTransformPool(buildingList,buildingResult,loc,OFFSET,inProj,outProj,angle,elevation,selectionReference):
     print("process starts = ",loc)  
@@ -353,6 +403,8 @@ def main():
         selectionReference) for loc in range(len(buildingList))])
     pool.close()
     pool.join()
+    lowerCorner, upperCorner = getCorners(fileName, _nameSpace)
+    corners = calculateNewCorners(lowerCorner, upperCorner, inProj, outProj, OFFSET, angle, elevation)
     #'''
     # Update buildingList with the buildingResult, which contains the transformation results.
     print("number of results",len(buildingResult))
@@ -365,7 +417,7 @@ def main():
         buildingList[i].wall = building_transformed.wall
 
     # export the List to an XML
-    treeWriter(fileName_exported,tree,buildingList,_nameSpace)
+    treeWriter(fileName_exported,tree,buildingList,_nameSpace, corners)
 
 if __name__ == '__main__':
     start_time = time.time()
